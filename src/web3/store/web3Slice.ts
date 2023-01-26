@@ -1,0 +1,56 @@
+import { providers } from 'ethers';
+
+import {
+  createWeb3Slice as createWeb3BaseSlice,
+  Web3Slice as BaseWeb3Slice,
+} from '../../../packages/src/web3/store/walletSlice';
+import { StoreSlice } from '../../store/types';
+import { appConfig } from '../../utils/appConfig';
+import { chainInfoHelper } from '../../utils/chains';
+import { RescueService } from '../services/rescueService';
+
+/**
+ * web3Slice is required only to have a better control over providers state i.e
+ * change provider, trigger data refetch if provider changed and have globally available instances of rpcs and data providers
+ */
+export type IWeb3Slice = BaseWeb3Slice & {
+  provider: providers.JsonRpcBatchProvider;
+  rescueService: RescueService;
+
+  connectSigner: () => void;
+
+  connectWalletModalOpen: boolean;
+  setConnectWalletModalOpen: (value: boolean) => void;
+};
+
+export const initRescueService = (
+  govCoreProvider: providers.JsonRpcBatchProvider,
+) => {
+  return new RescueService(govCoreProvider);
+};
+
+export const createWeb3Slice: StoreSlice<IWeb3Slice> = (set, get) => ({
+  ...createWeb3BaseSlice({
+    walletConnected: () => {
+      get().connectSigner();
+    },
+    getChainParameters: chainInfoHelper.getChainParameters,
+    desiredChainID: appConfig.chainId,
+  })(set, get),
+  provider: appConfig.provider,
+  rescueService: initRescueService(appConfig.provider),
+
+  connectSigner() {
+    const activeWallet = get().activeWallet;
+    if (activeWallet?.signer) {
+      get().rescueService.connectSigner(activeWallet.signer);
+    }
+  },
+
+  connectWalletModalOpen: false,
+  setConnectWalletModalOpen(value) {
+    set({ connectWalletModalOpen: value });
+  },
+
+  _impersonatedAddress: '0x00Af54516A94D1aC9eed55721215C8DE9970CdeE', // TODO: maybe need remove
+});
