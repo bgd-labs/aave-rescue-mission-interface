@@ -19,16 +19,17 @@ export function AccountInfoModal({
   allTransactionModalOpen,
   setAllTransactionModalOpen,
 }: AccountInfoModalProps) {
-  const activeWallet = useStore((state) => state.activeWallet);
-  const getActiveAddress = useStore((state) => state.getActiveAddress);
-  const disconnectActiveWallet = useStore(
-    (state) => state.disconnectActiveWallet,
-  );
+  const {
+    activeWallet,
+    getActiveAddress,
+    disconnectActiveWallet,
+    setModalOpen,
+  } = useStore();
+
   const activeAddress = getActiveAddress() || '';
   const allTransactions = useStore((state) =>
     selectAllTransactionsByWallet(state, activeAddress),
   );
-  const setModalOpen = useStore((state) => state.setModalOpen);
 
   const handleDisconnectClick = async () => {
     await disconnectActiveWallet();

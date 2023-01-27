@@ -32,11 +32,7 @@ export function TransactionInfoItem({ tx }: TransactionInfoItemProps) {
               {dayjs.unix(tx.timestamp).format('MMM D, h:mm A')}
             </Typography>
           )}{' '}
-          {tx.type === 'test' && (
-            <>
-              You made test transaction <b>#{tx.nonce}</b>
-            </>
-          )}
+          {tx.type === 'claim' && <>You claimed {tx.payload.formattedAmount}</>}
         </Typography>
 
         <Box css={{ ml: 10, lineHeight: 0, background: '$paper' }}>

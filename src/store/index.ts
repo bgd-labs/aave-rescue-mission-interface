@@ -8,8 +8,13 @@ import {
 } from '../transactions/store/transactionsSlice';
 import { createUISlice, IUISlice } from '../ui/store/uiSlice';
 import { createWeb3Slice, IWeb3Slice } from '../web3/store/web3Slice';
+import { createAppSlice, IAppSlice } from './appSlice';
 
-type RootState = IWeb3Slice & TransactionsSlice & BaseWeb3Slice & IUISlice;
+type RootState = IWeb3Slice &
+  TransactionsSlice &
+  BaseWeb3Slice &
+  IUISlice &
+  IAppSlice;
 
 const createRootSlice = (
   set: SetState<RootState>,
@@ -18,6 +23,7 @@ const createRootSlice = (
   ...createWeb3Slice(set, get),
   ...createTransactionsSlice(set, get),
   ...createUISlice(set, get),
+  ...createAppSlice(set, get),
 });
 
 export const useStore = create(devtools(createRootSlice, { serialize: true }));

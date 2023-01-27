@@ -22,5 +22,27 @@ export class RescueService {
     this.signer = signer;
   }
 
-  // TODO: add contract functions
+  async isClaimed(index: number, distributionId: number) {
+    return await this.rescueContract.isClaimed(index, distributionId);
+  }
+
+  async claim(
+    index: number,
+    address: string,
+    amount: string,
+    proofs: string[],
+    distributionId: number,
+  ) {
+    let connectedRescue = this.rescueContract;
+    if (this.signer) {
+      connectedRescue = this.rescueContract.connect(this.signer);
+    }
+    return connectedRescue.claim(
+      index,
+      address,
+      amount,
+      proofs,
+      distributionId,
+    );
+  }
 }

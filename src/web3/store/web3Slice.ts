@@ -52,5 +52,5 @@ export const createWeb3Slice: StoreSlice<IWeb3Slice> = (set, get) => ({
     set({ connectWalletModalOpen: value });
   },
 
-  _impersonatedAddress: '0x00Af54516A94D1aC9eed55721215C8DE9970CdeE', // TODO: maybe need remove
+  _impersonatedAddress: '0x2FAF487A4414Fe77e2327F0bf4AE2a264a776AD2', // TODO: maybe need remove
 });
