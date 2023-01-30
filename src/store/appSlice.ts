@@ -8,84 +8,84 @@ export interface FormattedUserData extends UserData {
   isClaimed: boolean;
 }
 
+export type TokenToClaim = {
+  index: number;
+  account: string;
+  amount: string;
+  formattedAmount: string;
+  merkleProof: string[];
+  distributionId: number;
+};
+
+type AppView = '' | 'connectWallet' | 'info' | 'transaction';
+
 export type IAppSlice = {
+  appView: AppView;
+  prevAppView: AppView;
+  setAppView: (view: AppView) => Promise<void>;
+
   userData: FormattedUserData[];
-  getUserData: () => Promise<void>;
+  getUserData: (address: string) => Promise<void>;
 
-  selectedUserData?: FormattedUserData;
-  setSelectedUserData: (data: FormattedUserData | undefined) => void;
-
-  claim: (
-    index: number,
-    address: string,
-    amount: string,
-    formattedAmount: string,
-    proofs: string[],
-    distributionId: number,
-  ) => Promise<void>;
+  claim: (tokensToClaim: TokenToClaim[]) => Promise<void>;
 };
 
 export const createAppSlice: StoreSlice<
   IAppSlice,
   IWeb3Slice & TransactionsSlice
 > = (set, get) => ({
+  appView: '',
+  prevAppView: '',
+  setAppView: async (view) => {
+    await set({ prevAppView: get().appView });
+    await set({ appView: view });
+  },
+
   userData: [],
-  getUserData: async () => {
-    const activeWallet = get().activeWallet;
-    if (activeWallet) {
-      const userData = usersData[activeWallet.accounts[0]];
-      if (userData) {
-        const formattedUserData = await Promise.all(
-          userData.map(async (data) => {
-            // TODO: uncomment after get contract address
-            // const isClaimed = await get().rescueService.isClaimed(
-            //   data.index,
-            //   data.distributionId,
-            // );
+  getUserData: async (address) => {
+    const userData = usersData[address];
+    if (userData) {
+      const formattedUserData = await Promise.all(
+        userData.map(async (data) => {
+          const isClaimed = await get().rescueService.isClaimed(
+            data.index,
+            data.distributionId,
+          );
 
-            const isClaimed = false; // TODO: remove after get contract address
+          return {
+            ...data,
+            isClaimed,
+          };
+        }),
+      );
 
-            return {
-              ...data,
-              isClaimed,
-            };
-          }),
-        );
-
-        set({ userData: formattedUserData });
-      } else {
-        set({ userData: [] });
-      }
+      set({ userData: formattedUserData });
     } else {
       set({ userData: [] });
     }
   },
 
-  setSelectedUserData: (data) => {
-    set({ selectedUserData: data });
-  },
-
-  claim: async (
-    index,
-    address,
-    amount,
-    formattedAmount,
-    proofs,
-    distributionId,
-  ) => {
+  claim: async (tokensToClaim) => {
     const rescueService = get().rescueService;
 
     await get().executeTx({
       body: () =>
-        rescueService.claim(index, address, amount, proofs, distributionId),
+        rescueService.claim(
+          tokensToClaim.map((token) => {
+            return {
+              index: token.index,
+              account: token.account,
+              amount: token.amount,
+              merkleProof: token.merkleProof,
+              distributionId: token.distributionId,
+            };
+          }),
+        ),
       params: {
         type: 'claim',
         desiredChainID: appConfig.chainId,
         payload: {
-          index,
-          address,
-          distributionId,
-          formattedAmount,
+          tokensToClaim,
         },
       },
     });

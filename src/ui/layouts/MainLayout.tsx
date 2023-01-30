@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 
 import { Box } from '../primitives/Box';
+import { Flex } from '../primitives/Flex';
+import { AppFooter } from './AppFooter';
 import { AppHeader } from './AppHeader';
 
 interface MainLayoutProps {
@@ -9,31 +11,76 @@ interface MainLayoutProps {
 
 export function MainLayout({ children }: MainLayoutProps) {
   return (
-    <Box
+    <Flex
       css={{
         position: 'relative',
-        pb: 40,
-        '@lg': { pb: 60 },
+        p: '30px 10px 10px 30px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '$background',
+        backgroundImage: 'url(/images/background.svg)',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        minHeight: '100vh',
       }}>
-      <AppHeader />
-
-      <Box as="main" css={{ position: 'relative', zIndex: 2 }}>
-        {children}
-      </Box>
-
-      <Box
+      <Flex
+        as="main"
         css={{
-          background: '$main',
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          right: 0,
-          height: 148,
-          '@md': {
-            height: 162,
+          position: 'relative',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          '@sm': {
+            maxWidth: 540,
           },
-        }}
-      />
-    </Box>
+          '&:after, &:before': {
+            content: '',
+            position: 'absolute',
+            background: '$main',
+            borderRadius: '8px',
+          },
+          '&:before': {
+            width: 25,
+            height: '100%',
+            left: -44,
+            top: -10,
+            transform: 'translateX(100%) skewY(45deg)',
+          },
+          '&:after': {
+            width: '100%',
+            height: 25,
+            left: -10,
+            top: -44,
+            transform: 'translateY(100%) skewX(45deg)',
+          },
+        }}>
+        <Box
+          css={{
+            position: 'relative',
+            zIndex: 2,
+            border: '3px solid $main',
+            borderRadius: '8px',
+            p: '8px 8px 22px 8px',
+            backgroundColor: '$whiteBackground',
+            width: '100%',
+          }}>
+          <AppHeader />
+
+          <Flex
+            css={{
+              height: 414,
+              width: '100%',
+              alignItems: 'center',
+              justifyContent: 'center',
+              px: 60,
+            }}>
+            {children}
+          </Flex>
+
+          <AppFooter />
+        </Box>
+      </Flex>
+    </Flex>
   );
 }

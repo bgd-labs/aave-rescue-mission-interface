@@ -100,29 +100,36 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "index",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        internalType: "bytes32[]",
-        name: "merkleProof",
-        type: "bytes32[]",
-      },
-      {
-        internalType: "uint256",
-        name: "distributionId",
-        type: "uint256",
+        components: [
+          {
+            internalType: "uint256",
+            name: "index",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "account",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            internalType: "bytes32[]",
+            name: "merkleProof",
+            type: "bytes32[]",
+          },
+          {
+            internalType: "uint256",
+            name: "distributionId",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct IAaveMerkleDistributor.TokenClaim[]",
+        name: "claim",
+        type: "tuple[]",
       },
     ],
     name: "claim",

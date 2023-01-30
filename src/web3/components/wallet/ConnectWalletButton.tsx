@@ -1,18 +1,11 @@
 import makeBlockie from 'ethereum-blockies-base64';
 import React, { useEffect, useState } from 'react';
 
-import {
-  LocalStorageKeys,
-  selectAllTransactions,
-  selectPendingTransactions,
-  WalletType,
-} from '../../../../packages/src';
+import { LocalStorageKeys, WalletType } from '../../../../packages/src';
 import { useStore } from '../../../store';
-import { Box, Button, Flex, Image, Spinner, Typography } from '../../../ui';
+import { Box, Button, Flex, Image, Link, Typography } from '../../../ui';
 import { CustomSkeleton } from '../../../ui/components/CustomSkeleton';
 import { textCenterEllipsis } from '../../../ui/utils/text-center-ellipsis';
-import { media } from '../../../ui/utils/theme';
-import { useMediaQuery } from '../../../ui/utils/useMediaQuery';
 import { appConfig } from '../../../utils/appConfig';
 import { chainInfoHelper } from '../../../utils/chains';
 import { selectActiveWallet } from '../../store/web3Selectors';
@@ -23,20 +16,20 @@ interface ConnectWalletButtonProps {
 }
 
 export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
-  const lg = useMediaQuery(media.lg);
+  const {
+    walletActivating,
+    getActiveAddress,
+    disconnectActiveWallet,
+    setAppView,
+    prevAppView,
+  } = useStore();
+
   const [loading, setLoading] = useState(true);
 
-  const walletActivating = useStore((state) => state.walletActivating);
-  const getActiveAddress = useStore((state) => state.getActiveAddress);
-  const allTransactions = useStore((state) => selectAllTransactions(state));
-  const allPendingTransactions = useStore((state) =>
-    selectPendingTransactions(state),
-  );
   const activeWallet = useStore(selectActiveWallet);
 
   const isActive = activeWallet?.isActive;
   const activeAddress = getActiveAddress() || '';
-  const lastTransaction = allTransactions[allTransactions.length - 1];
 
   const { name: ensName, avatar: ensAvatar } = useGetEns(activeAddress);
   const ensNameAbbreviated = ensName
@@ -46,26 +39,12 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
     : undefined;
 
   const [useBlockie, setUseBlockie] = useState(false);
-  const [lastTransactionSuccess, setLastTransactionSuccess] = useState(false);
-  const [lastTransactionError, setLastTransactionError] = useState(false);
 
   useEffect(() => {
     if (ensAvatar) {
       setUseBlockie(false);
     }
   }, [ensAvatar]);
-
-  useEffect(() => {
-    if (lastTransaction?.status && activeWallet) {
-      if (lastTransaction.status === 1) {
-        setLastTransactionSuccess(true);
-        setTimeout(() => setLastTransactionSuccess(false), 1000);
-      } else if (lastTransaction.status === 0) {
-        setLastTransactionError(true);
-        setTimeout(() => setLastTransactionError(false), 1000);
-      }
-    }
-  }, [lastTransaction]);
 
   const lastConnectedWallet =
     typeof localStorage !== 'undefined' &&
@@ -79,16 +58,19 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
     }
   }, [lastConnectedWallet]);
 
+  useEffect(() => {
+    if (prevAppView !== 'connectWallet') {
+      setAppView(prevAppView);
+    }
+  }, [isActive]);
+
   return (
     <>
       {loading ? (
         <>
           <Box
             css={{
-              '.react-loading-skeleton': { width: 110, height: 23 },
-              '@lg': {
-                '.react-loading-skeleton': { width: 140, height: 31 },
-              },
+              '.react-loading-skeleton': { width: 150, height: 46 },
             }}>
             <CustomSkeleton />
           </Box>
@@ -96,95 +78,82 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
       ) : (
         <>
           {!isActive ? (
-            <Button onClick={onClick} loading={walletActivating}>
-              {walletActivating ? 'Connecting' : 'Connect wallet'}
-            </Button>
+            <>
+              {!walletActivating ? (
+                <Button
+                  color="white"
+                  onClick={onClick}
+                  loading={walletActivating}
+                  size="small">
+                  Connect wallet
+                </Button>
+              ) : (
+                <Typography
+                  css={{
+                    color: '$textWhite',
+                    whiteSpace: 'nowrap',
+                    fontSize: '15px',
+                    lineHeight: '18px',
+                    fontWeight: 600,
+                    letterSpacing: '0.03em',
+                  }}>
+                  Connecting
+                </Typography>
+              )}
+            </>
           ) : (
             <Flex css={{ alignItems: 'center', justifyContent: 'center' }}>
-              <Flex
-                css={{
-                  alignItems: 'center',
-                  mr: 10,
-                  display: 'none',
-                  '@xs': { display: 'flex' },
-                }}>
-                <Box
-                  css={{
-                    size: 6,
-                    borderRadius: '$4',
-                    mr: 4,
-                    background: '$main',
-                    '@lg': {
-                      size: 9,
-                    },
-                  }}
-                />
-                <Typography variant="buttonSmall">
-                  {
-                    chainInfoHelper.getChainParameters(
-                      activeWallet?.chainId || appConfig.chainId,
-                    ).chainName
-                  }
-                </Typography>
-              </Flex>
-
-              <Button
-                onClick={onClick}
-                error={lastTransactionError}
-                success={lastTransactionSuccess}
-                color={
-                  lastTransactionSuccess || lastTransactionError
-                    ? 'dark'
-                    : 'gray'
-                }
-                leftComponent={
-                  <Flex
+              <Box css={{ mr: 12, textAlign: 'right' }}>
+                <Link
+                  href={`${
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    chainInfoHelper.getChainParameters(appConfig.chainId)
+                      .blockExplorerUrls[0]
+                  }/address/${activeAddress}`}
+                  inNewWindow>
+                  <Typography
                     css={{
-                      position: 'relative',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      size: 22,
-                      background: 'inherit',
-                      backgroundImage: 'inherit',
-                      borderRadius: '$4',
-                      '@lg': {
-                        size: 26,
-                      },
+                      mb: 4,
+                      fontSize: 15,
+                      lineHeight: '18px',
+                      fontWeight: 600,
+                      color: '$textWhite',
                     }}>
-                    {!!allPendingTransactions.length && (
-                      <Spinner
-                        size={lg ? 26 : 22}
-                        loaderLineColor="$paper"
-                        loaderCss={{ background: '$main' }}
-                        css={{ position: 'absolute' }}
-                      />
-                    )}
-                    <Image
-                      src={
-                        useBlockie
-                          ? makeBlockie(
-                              activeAddress !== '' ? activeAddress : 'default',
-                            )
-                          : ensAvatar
-                      }
-                      alt=""
-                      onError={() => setUseBlockie(true)}
-                      css={{
-                        size: 16,
-                        borderRadius: '$4',
-                        '@lg': { size: 20 },
-                      }}
-                    />
-                  </Flex>
-                }>
-                {lastTransactionError
-                  ? 'Error'
-                  : lastTransactionSuccess
-                  ? 'Success'
-                  : ensNameAbbreviated
-                  ? ensNameAbbreviated
-                  : textCenterEllipsis(activeAddress, 4, 4)}
-              </Button>
+                    {ensNameAbbreviated
+                      ? ensNameAbbreviated
+                      : textCenterEllipsis(activeAddress, 4, 5)}
+                  </Typography>
+                </Link>
+
+                <Typography
+                  css={{
+                    fontSize: 12,
+                    lineHeight: '15px',
+                    color: '$textWhite',
+                    fontWeight: 300,
+                  }}
+                  as="button"
+                  onClick={async () => await disconnectActiveWallet()}>
+                  Disconnect
+                </Typography>
+              </Box>
+
+              <Image
+                src={
+                  useBlockie
+                    ? makeBlockie(
+                        activeAddress !== '' ? activeAddress : 'default',
+                      )
+                    : ensAvatar
+                }
+                alt=""
+                onError={() => setUseBlockie(true)}
+                css={{
+                  size: 46,
+                  borderRadius: '$4',
+                }}
+              />
             </Flex>
           )}
         </>

@@ -18,9 +18,6 @@ export type IWeb3Slice = BaseWeb3Slice & {
   rescueService: RescueService;
 
   connectSigner: () => void;
-
-  connectWalletModalOpen: boolean;
-  setConnectWalletModalOpen: (value: boolean) => void;
 };
 
 export const initRescueService = (
@@ -45,11 +42,6 @@ export const createWeb3Slice: StoreSlice<IWeb3Slice> = (set, get) => ({
     if (activeWallet?.signer) {
       get().rescueService.connectSigner(activeWallet.signer);
     }
-  },
-
-  connectWalletModalOpen: false,
-  setConnectWalletModalOpen(value) {
-    set({ connectWalletModalOpen: value });
   },
 
   _impersonatedAddress: '0x2FAF487A4414Fe77e2327F0bf4AE2a264a776AD2', // TODO: maybe need remove

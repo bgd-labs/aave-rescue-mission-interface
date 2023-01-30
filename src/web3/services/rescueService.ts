@@ -1,8 +1,17 @@
-import { providers } from 'ethers';
+import { BigNumberish, BytesLike, providers } from 'ethers';
 
+import { PromiseOrValue } from '../../contracts/common';
 import { IAaveMerkleDistributor } from '../../contracts/IAaveMerkleDistributor';
 import { IAaveMerkleDistributor__factory } from '../../contracts/IAaveMerkleDistributor__factory';
 import { appConfig } from '../../utils/appConfig';
+
+export type TokenClaimStruct = {
+  index: PromiseOrValue<BigNumberish>;
+  account: PromiseOrValue<string>;
+  amount: PromiseOrValue<BigNumberish>;
+  merkleProof: PromiseOrValue<BytesLike>[];
+  distributionId: PromiseOrValue<BigNumberish>;
+};
 
 export class RescueService {
   private rpcProvider: providers.JsonRpcBatchProvider;
@@ -26,23 +35,11 @@ export class RescueService {
     return await this.rescueContract.isClaimed(index, distributionId);
   }
 
-  async claim(
-    index: number,
-    address: string,
-    amount: string,
-    proofs: string[],
-    distributionId: number,
-  ) {
+  async claim(tokensForClaim: TokenClaimStruct[]) {
     let connectedRescue = this.rescueContract;
     if (this.signer) {
       connectedRescue = this.rescueContract.connect(this.signer);
     }
-    return connectedRescue.claim(
-      index,
-      address,
-      amount,
-      proofs,
-      distributionId,
-    );
+    return connectedRescue.claim(tokensForClaim);
   }
 }

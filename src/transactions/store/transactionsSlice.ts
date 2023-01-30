@@ -4,7 +4,7 @@ import {
   createTransactionsSlice as createBaseTransactionsSlice,
   ITransactionsSlice,
 } from '../../../packages/src/web3/store/transactionsSlice';
-import { IAppSlice } from '../../store/appSlice';
+import { IAppSlice, TokenToClaim } from '../../store/appSlice';
 import { appConfig } from '../../utils/appConfig';
 import { IWeb3Slice } from '../../web3/store/web3Slice';
 
@@ -17,10 +17,7 @@ type TestTx = BaseTx & {
   status?: number;
   pending: boolean;
   payload: {
-    index: number;
-    address: string;
-    distributionId: number;
-    formattedAmount: string;
+    tokensToClaim: TokenToClaim[];
   };
 };
 
@@ -36,7 +33,7 @@ export const createTransactionsSlice: StoreSlice<
     txStatusChangedCallback: async (data) => {
       switch (data.type) {
         case 'claim':
-          await get().getUserData();
+          await get().getUserData(data.payload.tokensToClaim[0].account);
           break;
       }
     },

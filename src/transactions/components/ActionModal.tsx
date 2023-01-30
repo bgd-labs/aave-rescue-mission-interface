@@ -75,7 +75,6 @@ export function ActionModal({
       <Flex css={{ alignItems: 'center', justifyContent: 'center' }}>
         {withCancelButton && (
           <Button
-            size="large"
             color="secondary"
             transparent
             onClick={() => setIsOpen(false)}
@@ -87,7 +86,6 @@ export function ActionModal({
           </Button>
         )}
         <Button
-          size="large"
           gradientLoader
           loadingColorType="pending"
           loading={loading}

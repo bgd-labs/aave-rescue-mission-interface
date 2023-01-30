@@ -5,14 +5,13 @@ import SuccessIcon from '/public/images/icons/check.svg';
 import ErrorIcon from '/public/images/icons/cross.svg';
 
 import { Typography } from '../primitives/Typography';
-import { media, styled } from '../utils/theme';
-import { useMediaQuery } from '../utils/useMediaQuery';
+import { styled } from '../utils/theme';
 import { Spinner } from './Spinner';
 
 export interface ButtonProps {
   type?: 'button' | 'submit';
-  size?: 'large' | 'medium' | 'small' | 'extraSmall';
-  color?: 'gray' | 'dark' | 'secondary';
+  size?: 'medium' | 'small';
+  color?: 'gray' | 'dark' | 'secondary' | 'white';
   activeColorType?: 'forVote' | 'againstVote' | 'gradient';
   loadingColorType?: 'pending' | 'disabled';
   children: string | ReactNode;
@@ -29,7 +28,7 @@ export interface ButtonProps {
 
 const ButtonWrapper = styled('button', {
   overflow: 'hidden',
-  borderRadius: '$1',
+  borderRadius: '10px',
   border: 'none',
   background: 'transparent',
   position: 'relative',
@@ -42,9 +41,10 @@ const ButtonWrapper = styled('button', {
     transform: 'scale(1)',
     zIndex: 1,
   },
-  '&.Button__gray .Button__title, &.Button__transparent .Button__title': {
-    color: '$text',
-  },
+  '&.Button__gray .Button__title, &.Button__transparent .Button__title, &.Button__white .Button__title':
+    {
+      color: '$text',
+    },
   '&.Button__secondary': {
     '&.Button__transparent .Button__title': {
       color: '$secondary',
@@ -125,47 +125,22 @@ const ButtonWrapper = styled('button', {
   },
   variants: {
     size: {
-      large: {
-        minWidth: 120,
-        height: 38,
-        p: 4,
-        '@sm': {
-          minWidth: 145,
-          height: 38,
-          p: 6,
-        },
-        '@md': {
-          minWidth: 145,
-          height: 38,
-          p: 10,
-        },
-      },
       medium: {
-        minWidth: 120,
-        height: 32,
-        p: 8,
+        minWidth: 176,
+        height: 46,
+        p: 4,
       },
       small: {
-        minWidth: 110,
-        height: 24,
-        p: '2px 4px',
-        '@lg': {
-          minWidth: 140,
-          height: 33,
-          p: 7,
-        },
-      },
-      extraSmall: {
-        minWidth: 102,
-        height: 22,
-        p: 2,
+        minWidth: 150,
+        height: 46,
+        p: 4,
       },
     },
   },
 });
 
 const ButtonInner = styled('div', {
-  borderRadius: '$1',
+  borderRadius: '10px',
   position: 'absolute',
   inset: 0,
   opacity: 0,
@@ -181,7 +156,7 @@ const ButtonInner = styled('div', {
         background: '$light',
       },
       grayActive: {
-        background: '$light',
+        background: '$background',
         boxShadow: '$buttonInsetBig',
       },
       secondary: {
@@ -197,8 +172,7 @@ const ButtonInner = styled('div', {
         border: '1px solid $main',
       },
       white: {
-        buttonGradientLight: '',
-        boxShadow: '$buttonInset',
+        background: '$textWhite',
       },
       whiteTransparent: {
         buttonGradientLight: '',
@@ -206,6 +180,10 @@ const ButtonInner = styled('div', {
       },
       hover: {
         buttonGradientHoverDark: '',
+        boxShadow: '$buttonInset',
+      },
+      whiteHover: {
+        buttonGradientLight: '',
         boxShadow: '$buttonInset',
       },
       forVote: {
@@ -261,7 +239,7 @@ const ButtonIcon = styled('img', {
 
 export function Button({
   type = 'button',
-  size = 'small',
+  size = 'medium',
   color = 'dark',
   activeColorType = 'gradient',
   loadingColorType = 'disabled',
@@ -276,22 +254,8 @@ export function Button({
   transparent,
   css,
 }: ButtonProps) {
-  const sm = useMediaQuery(media.sm);
-
-  const titleVariant =
-    size === 'large'
-      ? !sm
-        ? 'buttonMedium'
-        : 'buttonLarge'
-      : size === 'medium'
-      ? 'buttonMedium'
-      : 'buttonSmall';
-
-  const loaderSize = size === 'large' || size === 'small' ? 16 : 14;
-  const loaderLineSize = size === 'large' || size === 'medium' ? 3 : 2;
-
-  const extraSmallTitleStyle =
-    size === 'extraSmall' ? { fontSize: 11, lineHeight: '13px' } : {};
+  const loaderSize = 16;
+  const loaderLineSize = 3;
 
   return (
     <ButtonWrapper
@@ -323,7 +287,7 @@ export function Button({
       />
       <ButtonInner
         className="Button__hover"
-        color={transparent ? 'gray' : 'hover'}
+        color={color === 'white' || transparent ? 'whiteHover' : 'hover'}
       />
       <ButtonInner
         className="Button__active"
@@ -339,7 +303,6 @@ export function Button({
 
       <Typography
         className="Button__title"
-        variant={titleVariant}
         css={{
           position: 'relative',
           zIndex: 5,
@@ -347,7 +310,10 @@ export function Button({
           flex: loading ? 'unset' : 1,
           alignSelf: 'center',
           whiteSpace: 'nowrap',
-          ...extraSmallTitleStyle,
+          fontSize: '15px',
+          lineHeight: '18px',
+          fontWeight: 600,
+          letterSpacing: '0.03em',
         }}>
         {children}
       </Typography>

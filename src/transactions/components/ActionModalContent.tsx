@@ -131,14 +131,13 @@ export function ActionModalContent({
 
             <Flex css={{ alignItems: 'center', justifyContent: 'center' }}>
               {txSuccess && (
-                <Button size="large" onClick={() => setIsOpen(false)}>
+                <Button onClick={() => setIsOpen(false)}>
                   {closeButtonText || 'Close'}
                 </Button>
               )}
               {!!error && (
                 <>
                   <Button
-                    size="large"
                     css={{ mr: 20 }}
                     color="secondary"
                     transparent
@@ -146,7 +145,6 @@ export function ActionModalContent({
                     {closeButtonText || 'Close'}
                   </Button>
                   <Button
-                    size="large"
                     onClick={() => {
                       setIsTxStart(false);
                       setError('');

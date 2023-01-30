@@ -7,7 +7,6 @@ export type Wallet = {
   icon: string;
   title: string;
   setOpenImpersonatedForm?: (value: boolean) => void;
-  onClick?: () => void;
 };
 
 export function WalletItem({
@@ -15,7 +14,6 @@ export function WalletItem({
   title,
   icon,
   setOpenImpersonatedForm,
-  onClick,
 }: Wallet) {
   const connectWallet = useStore((state) => state.connectWallet);
 
@@ -29,27 +27,36 @@ export function WalletItem({
 
   return (
     <Flex
-      onClick={!!onClick ? onClick : handleWalletClick}
+      onClick={handleWalletClick}
       css={{
         width: '100%',
         alignItems: 'center',
         justifyContent: 'space-between',
         cursor: 'pointer',
         transition: 'all 0.2s ease',
-        mb: 10,
-        p: '10px 15px',
-        borderRadius: '$1',
-        background: '$light',
+        mb: 7,
+        p: '9px 15px',
+        borderRadius: '10px',
+        background: '$textWhite',
+        border: '1px solid $main',
         hover: {
           boxShadow: '$buttonInset',
           buttonGradientDisabled: '',
         },
         '&:active': {
           boxShadow: 'none',
-          background: '$disabled',
+          background: '$background',
         },
       }}>
-      <Typography variant="h3">{title}</Typography>
+      <Typography
+        css={{
+          color: '$main',
+          fontWeight: 500,
+          fontSize: 15,
+          lineHeight: '18px',
+        }}>
+        {title}
+      </Typography>
       <Image src={icon} css={{ size: 28 }} />
     </Flex>
   );

@@ -1,3 +1,5 @@
+// TODO: need update and than update all in components
+
 import { styled } from '../utils/theme';
 
 export const Typography = styled('p', {

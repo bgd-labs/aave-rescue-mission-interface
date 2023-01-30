@@ -21,6 +21,8 @@ export const {
 } = createStitches({
   theme: {
     colors: {
+      background: '#FDF5EB',
+      whiteBackground: '#FFFDFA',
       main: '#1B2030',
       secondary: '#5C6279',
       disabled: '#ABB1C5',
@@ -37,6 +39,7 @@ export const {
       textSecondary: '#5C6279',
       textDisabled: '#ABB1C5',
       textWhite: '#FFFFFF',
+      textGray: '#BDBDBD',
       // gradients
       mainGradientFirst: '#B6509E',
       mainGradientSecond: '#2EBAC6',
@@ -211,6 +214,8 @@ export const {
 // TODO: need change colors when dark colors will be available in design
 export const darkTheme = createTheme({
   colors: {
+    background: '#FDF5EB',
+    whiteBackground: '#FFFDFA',
     main: '#1B2030',
     secondary: '#5C6279',
     disabled: '#ABB1C5',
@@ -227,6 +232,7 @@ export const darkTheme = createTheme({
     textSecondary: '#5C6279',
     textDisabled: '#ABB1C5',
     textWhite: '#FFFFFF',
+    textGray: '#BDBDBD',
     // gradients
     mainGradientFirst: '#B6509E',
     mainGradientSecond: '#2EBAC6',

@@ -28,6 +28,28 @@ import type {
 } from "./common";
 
 export declare namespace IAaveMerkleDistributor {
+  export type TokenClaimStruct = {
+    index: PromiseOrValue<BigNumberish>;
+    account: PromiseOrValue<string>;
+    amount: PromiseOrValue<BigNumberish>;
+    merkleProof: PromiseOrValue<BytesLike>[];
+    distributionId: PromiseOrValue<BigNumberish>;
+  };
+
+  export type TokenClaimStructOutput = [
+    BigNumber,
+    string,
+    BigNumber,
+    string[],
+    BigNumber
+  ] & {
+    index: BigNumber;
+    account: string;
+    amount: BigNumber;
+    merkleProof: string[];
+    distributionId: BigNumber;
+  };
+
   export type DistributionWithoutClaimedStruct = {
     token: PromiseOrValue<string>;
     merkleRoot: PromiseOrValue<BytesLike>;
@@ -43,7 +65,7 @@ export interface IAaveMerkleDistributorInterface extends utils.Interface {
   functions: {
     "_nextDistributionId()": FunctionFragment;
     "addDistributions(address[],bytes32[])": FunctionFragment;
-    "claim(uint256,address,uint256,bytes32[],uint256)": FunctionFragment;
+    "claim((uint256,address,uint256,bytes32[],uint256)[])": FunctionFragment;
     "emergencyEtherTransfer(address,uint256)": FunctionFragment;
     "emergencyTokenTransfer(address,address,uint256)": FunctionFragment;
     "getDistribution(uint256)": FunctionFragment;
@@ -71,13 +93,7 @@ export interface IAaveMerkleDistributorInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "claim",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>[],
-      PromiseOrValue<BigNumberish>
-    ]
+    values: [IAaveMerkleDistributor.TokenClaimStruct[]]
   ): string;
   encodeFunctionData(
     functionFragment: "emergencyEtherTransfer",
@@ -194,11 +210,7 @@ export interface IAaveMerkleDistributor extends BaseContract {
     ): Promise<ContractTransaction>;
 
     claim(
-      index: PromiseOrValue<BigNumberish>,
-      account: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      merkleProof: PromiseOrValue<BytesLike>[],
-      distributionId: PromiseOrValue<BigNumberish>,
+      claim: IAaveMerkleDistributor.TokenClaimStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -236,11 +248,7 @@ export interface IAaveMerkleDistributor extends BaseContract {
   ): Promise<ContractTransaction>;
 
   claim(
-    index: PromiseOrValue<BigNumberish>,
-    account: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
-    merkleProof: PromiseOrValue<BytesLike>[],
-    distributionId: PromiseOrValue<BigNumberish>,
+    claim: IAaveMerkleDistributor.TokenClaimStruct[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -278,11 +286,7 @@ export interface IAaveMerkleDistributor extends BaseContract {
     ): Promise<void>;
 
     claim(
-      index: PromiseOrValue<BigNumberish>,
-      account: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      merkleProof: PromiseOrValue<BytesLike>[],
-      distributionId: PromiseOrValue<BigNumberish>,
+      claim: IAaveMerkleDistributor.TokenClaimStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -347,11 +351,7 @@ export interface IAaveMerkleDistributor extends BaseContract {
     ): Promise<BigNumber>;
 
     claim(
-      index: PromiseOrValue<BigNumberish>,
-      account: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      merkleProof: PromiseOrValue<BytesLike>[],
-      distributionId: PromiseOrValue<BigNumberish>,
+      claim: IAaveMerkleDistributor.TokenClaimStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -392,11 +392,7 @@ export interface IAaveMerkleDistributor extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     claim(
-      index: PromiseOrValue<BigNumberish>,
-      account: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
-      merkleProof: PromiseOrValue<BytesLike>[],
-      distributionId: PromiseOrValue<BigNumberish>,
+      claim: IAaveMerkleDistributor.TokenClaimStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
