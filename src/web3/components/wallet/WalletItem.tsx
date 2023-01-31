@@ -36,7 +36,7 @@ export function WalletItem({
         transition: 'all 0.2s ease',
         mb: 7,
         p: '9px 15px',
-        borderRadius: '10px',
+        borderRadius: '$1',
         background: '$textWhite',
         border: '1px solid $main',
         hover: {
@@ -45,18 +45,10 @@ export function WalletItem({
         },
         '&:active': {
           boxShadow: 'none',
-          background: '$background',
+          background: '$appBackground',
         },
       }}>
-      <Typography
-        css={{
-          color: '$main',
-          fontWeight: 500,
-          fontSize: 15,
-          lineHeight: '18px',
-        }}>
-        {title}
-      </Typography>
+      <Typography css={{ fontWeight: 500 }}>{title}</Typography>
       <Image src={icon} css={{ size: 28 }} />
     </Flex>
   );

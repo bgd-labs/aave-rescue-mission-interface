@@ -9,7 +9,6 @@ import { Box } from '../primitives/Box';
 import { Flex } from '../primitives/Flex';
 import { Image } from '../primitives/Image';
 import { keyframes } from '../utils/theme';
-import { BackButton } from './BackButton';
 
 export interface BasicModalProps {
   isOpen: boolean;
@@ -19,7 +18,6 @@ export interface BasicModalProps {
   withCloseButton?: boolean;
   withoutOverlap?: boolean;
   withoutAnimationWhenOpen?: boolean;
-  onBackButtonClick?: () => void;
   contentCss?: CSS;
 }
 
@@ -31,7 +29,6 @@ export function BasicModal({
   withCloseButton,
   withoutOverlap,
   withoutAnimationWhenOpen,
-  onBackButtonClick,
   contentCss,
 }: BasicModalProps) {
   const setModalOpen = useStore((state) => state.setModalOpen);
@@ -113,7 +110,7 @@ export function BasicModal({
             '@sm': {
               display: 'block',
               m: 12,
-              borderRadius: '$2',
+              borderRadius: '$1',
               maxHeight: 'calc(100vh - 20px)',
               height: 'unset',
               maxWidth: maxWidth || 432,
@@ -129,18 +126,6 @@ export function BasicModal({
             }}>
             {children}
           </Box>
-
-          {!!onBackButtonClick && (
-            <Box css={{ position: 'absolute', top: 10, left: 15 }}>
-              <Box css={{ position: 'fixed' }}>
-                <BackButton
-                  onClick={onBackButtonClick}
-                  variant="gray"
-                  withFlatArrow
-                />
-              </Box>
-            </Box>
-          )}
 
           {withCloseButton && (
             <Box

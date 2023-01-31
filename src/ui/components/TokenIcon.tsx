@@ -10,7 +10,7 @@ interface TokenIconProps {
 export function TokenIcon({ symbol, css }: TokenIconProps) {
   return (
     <Image
-      css={{ borderRadius: '$4', size: 12, ...css }}
+      css={{ borderRadius: '$2', size: 12, ...css }}
       src={`/images/tokens/${symbol.toLowerCase()}.svg`}
       alt={`${symbol} icon`}
     />

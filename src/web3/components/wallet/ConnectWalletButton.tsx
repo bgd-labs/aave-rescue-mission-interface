@@ -59,7 +59,7 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
   }, [lastConnectedWallet]);
 
   useEffect(() => {
-    if (prevAppView !== 'connectWallet') {
+    if (isActive && prevAppView !== 'connectWallet') {
       setAppView(prevAppView);
     }
   }, [isActive]);
@@ -89,12 +89,10 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
                 </Button>
               ) : (
                 <Typography
+                  variant="headline"
                   css={{
                     color: '$textWhite',
                     whiteSpace: 'nowrap',
-                    fontSize: '15px',
-                    lineHeight: '18px',
-                    fontWeight: 600,
                     letterSpacing: '0.03em',
                   }}>
                   Connecting
@@ -113,12 +111,12 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
                   }/address/${activeAddress}`}
                   inNewWindow>
                   <Typography
+                    variant="headline"
                     css={{
                       mb: 4,
-                      fontSize: 15,
-                      lineHeight: '18px',
-                      fontWeight: 600,
                       color: '$textWhite',
+                      transition: 'all 0.2s ease',
+                      hover: { opacity: '0.7' },
                     }}>
                     {ensNameAbbreviated
                       ? ensNameAbbreviated
@@ -127,11 +125,12 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
                 </Link>
 
                 <Typography
+                  variant="descriptor"
                   css={{
-                    fontSize: 12,
-                    lineHeight: '15px',
                     color: '$textWhite',
                     fontWeight: 300,
+                    transition: 'all 0.2s ease',
+                    hover: { opacity: '0.7' },
                   }}
                   as="button"
                   onClick={async () => await disconnectActiveWallet()}>
@@ -151,7 +150,7 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
                 onError={() => setUseBlockie(true)}
                 css={{
                   size: 46,
-                  borderRadius: '$4',
+                  borderRadius: '$2',
                 }}
               />
             </Flex>

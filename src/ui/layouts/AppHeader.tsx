@@ -21,8 +21,8 @@ export function AppHeader() {
         px: 32,
         pt: 30,
         pb: 25,
-        borderTopLeftRadius: '8px',
-        borderTopRightRadius: '8px',
+        borderTopLeftRadius: '$1',
+        borderTopRightRadius: '$1',
         background: '$main',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -36,8 +36,7 @@ export function AppHeader() {
           hover: { opacity: 0.7 },
         }}>
         <Image as={Logo} css={{ width: 140, height: 37, mb: 12 }} />
-        <Typography
-          css={{ color: '$textWhite', fontSize: '12px', lineHeight: '14px' }}>
+        <Typography variant="descriptor" css={{ color: '$textWhite' }}>
           Rescue Mission
         </Typography>
       </Link>

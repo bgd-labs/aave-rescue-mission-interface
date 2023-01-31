@@ -1,5 +1,6 @@
 import { Link } from '../components/Link';
 import { Flex } from '../primitives/Flex';
+import { Typography } from '../primitives/Typography';
 import { ROUTES } from '../utils/routes';
 
 export function AppFooter() {
@@ -7,32 +8,22 @@ export function AppFooter() {
     <Flex
       as="footer"
       css={{ mt: 37, alignItems: 'center', justifyContent: 'center' }}>
-      <Link
-        href={ROUTES.about}
-        css={{
-          transform: 'translate(0)',
-          color: '$textGray',
-          fontWeight: 500,
-          fontSize: 12,
-          lineHeight: '15px',
-          hover: { opacity: 0.7 },
-        }}
-        inNewWindow>
-        About
+      <Link href={ROUTES.about} css={{ hover: { opacity: 0.7 } }} inNewWindow>
+        <Typography
+          variant="descriptorAccent"
+          css={{ color: '$textSecondary' }}>
+          About
+        </Typography>
       </Link>
       <Link
         href={ROUTES.gitHub}
-        css={{
-          transform: 'translate(0)',
-          color: '$textGray',
-          fontWeight: 500,
-          fontSize: 12,
-          lineHeight: '15px',
-          ml: 15,
-          hover: { opacity: 0.7 },
-        }}
+        css={{ ml: 15, hover: { opacity: 0.7 } }}
         inNewWindow>
-        Github
+        <Typography
+          variant="descriptorAccent"
+          css={{ color: '$textSecondary' }}>
+          Github
+        </Typography>
       </Link>
     </Flex>
   );

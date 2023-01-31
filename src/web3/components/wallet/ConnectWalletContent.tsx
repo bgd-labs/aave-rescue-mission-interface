@@ -49,14 +49,7 @@ export function ConnectWalletContent() {
       }}>
       <Flex
         css={{ flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-        <Typography
-          css={{
-            mb: 44,
-            textAlign: 'center',
-            fontWeight: 500,
-            fontSize: 20,
-            lineHeight: '24px',
-          }}>
+        <Typography variant="h1" css={{ mb: 44, textAlign: 'center' }}>
           {walletActivating ? 'Connecting' : 'Connect a wallet'}
         </Typography>
 
@@ -72,7 +65,7 @@ export function ConnectWalletContent() {
           {walletActivating ? (
             <Flex
               css={{
-                background: '$paper',
+                background: '$whiteBackground',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'column',
@@ -109,13 +102,7 @@ export function ConnectWalletContent() {
         </Flex>
 
         {walletActivating ? (
-          <Typography
-            css={{
-              color: '$text',
-              fontSize: 15,
-              lineHeight: '18px',
-              letterSpacing: '0.03em',
-            }}>
+          <Typography css={{ letterSpacing: '0.03em' }}>
             Waiting confirmation from your wallet
           </Typography>
         ) : (

@@ -1,9 +1,6 @@
 import { CSS } from '@stitches/react';
 import { MouseEventHandler, ReactNode } from 'react';
 
-import SuccessIcon from '/public/images/icons/check.svg';
-import ErrorIcon from '/public/images/icons/cross.svg';
-
 import { Typography } from '../primitives/Typography';
 import { styled } from '../utils/theme';
 import { Spinner } from './Spinner';
@@ -12,7 +9,7 @@ export interface ButtonProps {
   type?: 'button' | 'submit';
   size?: 'medium' | 'small';
   color?: 'gray' | 'dark' | 'secondary' | 'white';
-  activeColorType?: 'forVote' | 'againstVote' | 'gradient';
+  activeColorType?: 'gradient';
   loadingColorType?: 'pending' | 'disabled';
   children: string | ReactNode;
   disabled?: boolean;
@@ -20,15 +17,13 @@ export interface ButtonProps {
   gradientLoader?: boolean;
   leftComponent?: ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  error?: boolean;
-  success?: boolean;
   transparent?: boolean;
   css?: CSS;
 }
 
 const ButtonWrapper = styled('button', {
   overflow: 'hidden',
-  borderRadius: '10px',
+  borderRadius: '$1',
   border: 'none',
   background: 'transparent',
   position: 'relative',
@@ -140,7 +135,7 @@ const ButtonWrapper = styled('button', {
 });
 
 const ButtonInner = styled('div', {
-  borderRadius: '10px',
+  borderRadius: '$1',
   position: 'absolute',
   inset: 0,
   opacity: 0,
@@ -156,7 +151,7 @@ const ButtonInner = styled('div', {
         background: '$light',
       },
       grayActive: {
-        background: '$background',
+        background: '$appBackground',
         boxShadow: '$buttonInsetBig',
       },
       secondary: {
@@ -202,12 +197,6 @@ const ButtonInner = styled('div', {
       disabled: {
         background: '$light',
       },
-      error: {
-        background: '$error',
-      },
-      success: {
-        background: '$mainFor',
-      },
     },
   },
 });
@@ -216,7 +205,7 @@ const ButtonLeftInner = styled('div', {
   position: 'relative',
   zIndex: 5,
   lineHeight: 0,
-  borderRadius: '$4',
+  borderRadius: '$1',
   variants: {
     color: {
       pending: {
@@ -227,14 +216,6 @@ const ButtonLeftInner = styled('div', {
       },
     },
   },
-});
-
-const ButtonIcon = styled('img', {
-  position: 'relative',
-  zIndex: 5,
-  size: 20,
-  mr: 5,
-  path: { stroke: '$textWhite', fill: '$textWhite' },
 });
 
 export function Button({
@@ -249,8 +230,6 @@ export function Button({
   gradientLoader,
   leftComponent,
   onClick,
-  error,
-  success,
   transparent,
   css,
 }: ButtonProps) {
@@ -264,26 +243,14 @@ export function Button({
       size={size}
       disabled={disabled || loading}
       css={{
-        justifyContent:
-          success || error || leftComponent ? 'space-between' : 'center',
-        boxShadow:
-          color === 'dark' && !error && !success && !transparent
-            ? '$button'
-            : 'unset',
+        justifyContent: leftComponent ? 'space-between' : 'center',
+        boxShadow: color === 'dark' && !transparent ? '$button' : 'unset',
         ...css,
       }}
       onClick={onClick}>
       <ButtonInner
         className="Button__regular"
-        color={
-          error
-            ? 'error'
-            : success
-            ? 'success'
-            : transparent
-            ? `${color}Transparent`
-            : color
-        }
+        color={transparent ? `${color}Transparent` : color}
       />
       <ButtonInner
         className="Button__hover"
@@ -298,11 +265,9 @@ export function Button({
         <ButtonInner className="Button__disabled" color={loadingColorType} />
       )}
 
-      {error && <ButtonIcon className="Button__icon" as={ErrorIcon} />}
-      {success && <ButtonIcon className="Button__icon" as={SuccessIcon} />}
-
       <Typography
         className="Button__title"
+        variant="button"
         css={{
           position: 'relative',
           zIndex: 5,
@@ -310,10 +275,6 @@ export function Button({
           flex: loading ? 'unset' : 1,
           alignSelf: 'center',
           whiteSpace: 'nowrap',
-          fontSize: '15px',
-          lineHeight: '18px',
-          fontWeight: 600,
-          letterSpacing: '0.03em',
         }}>
         {children}
       </Typography>

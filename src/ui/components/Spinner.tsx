@@ -29,7 +29,7 @@ export function Spinner({
     top: -1,
     width: size / 2 + 2,
     height: size + 2,
-    borderRadius: '$4',
+    borderRadius: '$2',
     zIndex: 3,
     ...loaderCss,
   });
@@ -37,7 +37,7 @@ export function Spinner({
   return (
     <Box
       css={{
-        borderRadius: '$4',
+        borderRadius: '$2',
         position: 'relative',
         size: size,
         transform: 'translateZ(0)',
@@ -50,7 +50,7 @@ export function Spinner({
         css={{
           position: 'absolute',
           inset: lineSize,
-          borderRadius: '$4',
+          borderRadius: '$2',
           background: 'inherit',
           backgroundImage: 'inherit',
           zIndex: 4,
@@ -61,7 +61,7 @@ export function Spinner({
           position: 'absolute',
           left: 0,
           top: 0,
-          borderRadius: '$4',
+          borderRadius: '$2',
           size: size,
           zIndex: 2,
           background: loaderLineColor,

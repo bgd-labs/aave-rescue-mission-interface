@@ -1,5 +1,3 @@
-// TODO: need hover for 'gray' variant
-
 import { CSS } from '@stitches/react';
 import React from 'react';
 
@@ -12,7 +10,7 @@ import { styled } from '../utils/theme';
 
 interface BackButtonProps {
   onClick: () => void;
-  variant?: 'flat' | 'normal' | 'gray';
+  variant?: 'flat';
   css?: CSS;
   withFlatArrow?: boolean;
 }
@@ -23,6 +21,12 @@ const ButtonWrapper = styled('button', {
   alignItems: 'center',
   color: '$textSecondary',
   lineHeight: 1,
+  '.BackButton__arrow': {
+    path: {
+      transition: 'all 0.2s ease',
+      fill: '$textSecondary',
+    },
+  },
   variants: {
     variant: {
       flat: {
@@ -33,33 +37,6 @@ const ButtonWrapper = styled('button', {
               fill: '$text',
             },
           },
-        },
-      },
-      normal: {
-        borderRadius: '$5',
-        minWidth: 81,
-        height: 22,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '$paper',
-        boxShadow: '$paper',
-        '.BackButton__arrow': {
-          width: 15,
-        },
-      },
-      gray: {
-        color: '$main',
-        borderRadius: '$5',
-        minWidth: 117,
-        height: 35,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '$light',
-        boxShadow: '$paper',
-        '.BackButton__arrow': {
-          display: 'none',
         },
       },
     },

@@ -54,12 +54,8 @@ export interface FormattedNumberProps {
     | 'headline'
     | 'body'
     | 'descriptor'
-    | 'descriptorAccent'
-    | 'buttonLarge'
-    | 'buttonMedium'
-    | 'buttonSmall';
+    | 'descriptorAccent';
   css?: CSS;
-  startValueForCountUp?: string | number;
 }
 
 export function FormattedNumber({

@@ -8,7 +8,7 @@ export default function Web3Provider() {
   return (
     <Web3BaseProvider
       connectorsInitProps={{
-        appName: 'Rescue', // TODO: maybe need change
+        appName: 'AAVE_Rescue',
         chains: Object.assign(CHAINS, initialChains),
         desiredChainId: appConfig.chainId,
         urls: chainInfoHelper.urls,
