@@ -4,11 +4,7 @@ import Logo from '/public/images/logo.svg';
 
 import { useStore } from '../../store';
 import { ConnectWalletButton } from '../../web3/components/wallet/ConnectWalletButton';
-import { Link } from '../components/Link';
-import { Flex } from '../primitives/Flex';
-import { Image } from '../primitives/Image';
-import { Typography } from '../primitives/Typography';
-import { ROUTES } from '../utils/routes';
+import { Box, Flex, Image, Typography } from '..';
 
 export function AppHeader() {
   const router = useRouter();
@@ -26,20 +22,14 @@ export function AppHeader() {
         background: '$main',
         alignItems: 'center',
         justifyContent: 'space-between',
-        mb: 20,
+        mb: 35,
       }}>
-      <Link
-        href={ROUTES.logo}
-        css={{
-          lineHeight: 0,
-          transform: 'translate(0)',
-          hover: { opacity: 0.7 },
-        }}>
+      <Box>
         <Image as={Logo} css={{ width: 140, height: 37, mb: 12 }} />
         <Typography variant="descriptor" css={{ color: '$textWhite' }}>
           Rescue Mission
         </Typography>
-      </Link>
+      </Box>
 
       {router.pathname === '/' && (
         <ConnectWalletButton onClick={() => setAppView('connectWallet')} />

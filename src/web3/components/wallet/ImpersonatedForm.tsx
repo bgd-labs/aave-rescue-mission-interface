@@ -1,7 +1,7 @@
 import { Field, Form } from 'react-final-form';
 
 import { useStore } from '../../../store';
-import { BackButton, Button, Flex, Input } from '../../../ui';
+import { BackButton, Box, Button, Flex, Input } from '../../../ui';
 import { InputWrapper } from '../../../ui/components/InputWrapper';
 import {
   addressValidator,
@@ -29,8 +29,11 @@ export function ImpersonatedForm({ closeClick }: ImpersonatedFormProps) {
   };
 
   return (
-    <Flex css={{ width: '100%', flex: 1, flexDirection: 'column' }}>
-      <BackButton onClick={() => closeClick(false)} css={{ mb: 40 }} />
+    <Flex css={{ width: '100%', flexDirection: 'column' }}>
+      <Box css={{ mb: 40 }}>
+        <BackButton onClick={() => closeClick(false)} />
+      </Box>
+
       <Flex css={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Form<{ impersonatedAddress: string }> onSubmit={handleFormSubmit}>
           {({ handleSubmit, values }) => (

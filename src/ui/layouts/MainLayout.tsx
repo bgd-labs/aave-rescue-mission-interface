@@ -73,6 +73,7 @@ export function MainLayout({ children }: MainLayoutProps) {
               width: '100%',
               alignItems: 'center',
               justifyContent: 'center',
+              flexDirection: 'column',
               px: 60,
             }}>
             {children}

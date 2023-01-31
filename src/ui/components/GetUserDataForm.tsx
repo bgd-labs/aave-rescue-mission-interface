@@ -12,11 +12,17 @@ import {
   required,
 } from '../utils/inputValidation';
 import { Button } from './Button';
+import { ContentWrapper } from './ContentWrapper';
 import { InputWrapper } from './InputWrapper';
 
 export function GetUserDataForm() {
-  const { getUserData, activeWallet, setAppView, setCheckedAddress } =
-    useStore();
+  const {
+    getUserData,
+    activeWallet,
+    setAppView,
+    setCheckedAddress,
+    checkedAddress,
+  } = useStore();
 
   const handleFormSubmit = ({ address }: { address: string }) => {
     setAppView('info');
@@ -25,79 +31,87 @@ export function GetUserDataForm() {
   };
 
   return (
-    <Box css={{ width: '100%' }}>
-      <Typography variant="h1" css={{ mb: 44, textAlign: 'center' }}>
-        Enter Wallet Address
-      </Typography>
-
-      <Form<{
-        address: string;
-      }>
-        onSubmit={handleFormSubmit}>
-        {({ handleSubmit }) => {
-          return (
-            <Flex
-              as="form"
-              onSubmit={handleSubmit}
-              css={{
-                width: '100%',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
+    <Form<{
+      address: string;
+    }>
+      onSubmit={handleFormSubmit}
+      initialValues={{ address: checkedAddress }}>
+      {({ handleSubmit }) => {
+        return (
+          <Flex
+            as="form"
+            onSubmit={handleSubmit}
+            css={{ width: '100%', flex: 1 }}>
+            <ContentWrapper
+              topBlock={
+                <Typography variant="h1">Enter Wallet Address</Typography>
+              }
+              bottomBlock={<Button type="submit">Check</Button>}>
               <Field
                 name="address"
                 validate={composeValidators(required, addressValidator)}>
                 {(props) => (
-                  <InputWrapper
-                    isError={props.meta.error && props.meta.touched}
-                    error={props.meta.error}>
-                    <Input type="text" placeholder="0x0..." {...props.input} />
-                  </InputWrapper>
+                  <>
+                    <InputWrapper
+                      onCrossClick={
+                        props.input.value !== ''
+                          ? () => {
+                              props.input.onChange('');
+                              setCheckedAddress('');
+                            }
+                          : undefined
+                      }
+                      isError={props.meta.error && props.meta.touched}
+                      error={props.meta.error}>
+                      <Input
+                        type="text"
+                        placeholder="0x0..."
+                        {...props.input}
+                        onChange={(e) => {
+                          props.input.onChange(e);
+                          setCheckedAddress(e.target.value);
+                        }}
+                      />
+                    </InputWrapper>
+
+                    <Box
+                      css={{
+                        width: '100%',
+                        textAlign: 'center',
+                        opacity:
+                          activeWallet &&
+                          props.input.value !== activeWallet.accounts[0]
+                            ? 1
+                            : 0,
+                        zIndex:
+                          activeWallet &&
+                          props.input.value !== activeWallet.accounts[0]
+                            ? 1
+                            : -1,
+                        mt: 15,
+                      }}>
+                      <Typography
+                        as="button"
+                        type="button"
+                        css={{
+                          color: '$textSecondary',
+                          textDecoration: 'underline',
+                          transition: 'all 0.2s ease',
+                          hover: { color: '$text' },
+                        }}
+                        onClick={() =>
+                          props.input.onChange(activeWallet?.accounts[0] || '')
+                        }>
+                        use address from wallet
+                      </Typography>
+                    </Box>
+                  </>
                 )}
               </Field>
-
-              <Flex
-                css={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  mt: 40,
-                }}>
-                <Button type="submit">Check</Button>
-                <Box
-                  css={{
-                    width: '100%',
-                    textAlign: 'center',
-                    opacity: activeWallet ? 1 : 0,
-                    zIndex: activeWallet ? 1 : -1,
-                  }}>
-                  <Typography
-                    variant="descriptor"
-                    css={{ color: '$textSecondary', my: 10 }}>
-                    or
-                  </Typography>
-                  <Typography
-                    as="button"
-                    css={{
-                      color: '$textSecondary',
-                      textDecoration: 'underline',
-                      transition: 'all 0.2s ease',
-                      hover: { color: '$text' },
-                    }}
-                    onClick={() =>
-                      handleFormSubmit({
-                        address: activeWallet?.accounts[0] || '',
-                      })
-                    }>
-                    check wallet address
-                  </Typography>
-                </Box>
-              </Flex>
-            </Flex>
-          );
-        }}
-      </Form>
-    </Box>
+            </ContentWrapper>
+          </Flex>
+        );
+      }}
+    </Form>
   );
 }

@@ -42,7 +42,9 @@ export const createAppSlice: StoreSlice<
   appView: '',
   prevAppView: '',
   setAppView: async (view) => {
-    await set({ prevAppView: get().appView });
+    if (get().appView !== 'connectWallet') {
+      await set({ prevAppView: get().appView });
+    }
     await set({ appView: view });
   },
 

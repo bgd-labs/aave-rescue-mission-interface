@@ -1,11 +1,11 @@
 import { styled } from '../utils/theme';
 
 export const Input = styled('input', {
-  width: 'calc(100% + 60px)',
+  width: '100%',
   fontWeight: '500',
   fontSize: 15,
   lineHeight: '18px',
-  p: '20px 30px',
+  p: '20px 45px 20px 30px',
   border: '1px solid $main',
   color: '$text',
   borderRadius: '$1',

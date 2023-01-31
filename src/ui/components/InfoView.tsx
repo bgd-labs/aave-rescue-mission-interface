@@ -16,6 +16,7 @@ import { Image } from '../primitives/Image';
 import { Typography } from '../primitives/Typography';
 import { textCenterEllipsis } from '../utils/text-center-ellipsis';
 import { Button } from './Button';
+import { ContentWrapper } from './ContentWrapper';
 import { FormattedNumber } from './FormattedNumber';
 import { GradientLoader } from './GradientLoader';
 import { Link } from './Link';
@@ -80,27 +81,56 @@ export function InfoView() {
   const filteredUserData = userData.filter((data) => !data.isClaimed);
 
   return (
-    <Flex
-      css={{ width: '100%', flexDirection: 'column', alignItems: 'center' }}>
+    <>
       {isTxStart ? (
-        <Flex
-          css={{
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Typography variant="h1">
-            {txPending && 'Pending'}
-            {txSuccess && 'Success'}
-            {!!error && 'Error'}
-          </Typography>
-
+        <ContentWrapper
+          topBlock={
+            <Typography variant="h1">
+              {txPending && 'Pending'}
+              {txSuccess && 'Success'}
+              {!!error && 'Error'}
+            </Typography>
+          }
+          bottomBlock={
+            <>
+              {txSuccess && (
+                <Button
+                  onClick={() => {
+                    setIsTxStart(false);
+                    handleCheckAnotherClick();
+                  }}>
+                  Close
+                </Button>
+              )}
+              {!!error && (
+                <>
+                  <Button
+                    css={{ mr: 24 }}
+                    transparent
+                    onClick={() => {
+                      setIsTxStart(false);
+                      setError('');
+                      handleCheckAnotherClick();
+                    }}>
+                    Close
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setIsTxStart(false);
+                      setError('');
+                    }}>
+                    Try again
+                  </Button>
+                </>
+              )}
+            </>
+          }>
           <Flex
             css={{
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'column',
-              minHeight: 240,
+              minHeight: 200,
             }}>
             {txPending && (
               <Flex
@@ -187,167 +217,115 @@ export function InfoView() {
               />
             </Link>
           )}
-
-          <Flex
-            css={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              mt: 30,
-              minHeight: 50,
-            }}>
-            {txSuccess && (
-              <Button
-                onClick={() => {
-                  setIsTxStart(false);
-                  handleCheckAnotherClick();
-                }}>
-                Close
-              </Button>
-            )}
-            {!!error && (
-              <>
-                <Button
-                  css={{ mr: 24 }}
-                  transparent
-                  onClick={() => {
-                    setIsTxStart(false);
-                    setError('');
-                    handleCheckAnotherClick();
-                  }}>
-                  Close
-                </Button>
-                <Button
-                  onClick={() => {
-                    setIsTxStart(false);
-                    setError('');
-                  }}>
-                  Try again
-                </Button>
-              </>
-            )}
-          </Flex>
-        </Flex>
+        </ContentWrapper>
       ) : (
-        <>
-          <Typography css={{ mb: 12 }}>
-            <b>{textCenterEllipsis(checkedAddress, 4, 5)}</b> Checked
-          </Typography>
+        <ContentWrapper
+          topBlock={
+            <>
+              <Typography css={{ mb: 12 }}>
+                <b>{textCenterEllipsis(checkedAddress, 4, 5)}</b> Checked
+              </Typography>
+              {userDataLoading && <Typography variant="h1">Loading</Typography>}
+              {!!filteredUserData.length && (
+                <Typography variant="h1">Assets available to claim</Typography>
+              )}
+            </>
+          }
+          bottomBlock={
+            !userDataLoading && (
+              <Flex css={{ alignItems: 'center' }}>
+                <Button onClick={handleCheckAnotherClick}>Check another</Button>
+                {activeWallet?.isActive && !!filteredUserData.length && (
+                  <Button
+                    onClick={handleClaimClick}
+                    css={{ ml: 24 }}
+                    loading={loading}>
+                    Claim
+                  </Button>
+                )}
+              </Flex>
+            )
+          }>
           {userDataLoading ? (
             <Flex
               css={{
-                width: '100%',
-                flexDirection: 'column',
+                background: '$whiteBackground',
                 alignItems: 'center',
                 justifyContent: 'center',
+                flexDirection: 'column',
               }}>
-              <Typography variant="h1" css={{ mb: 28 }}>
-                Loading
-              </Typography>
-              <Flex
-                css={{
-                  background: '$whiteBackground',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  mb: 60,
-                }}>
-                <GradientLoader size={160} />
-              </Flex>
+              <GradientLoader size={160} />
             </Flex>
           ) : (
             <>
               {!!filteredUserData.length ? (
-                <Flex
-                  css={{
-                    width: '100%',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  <Typography variant="h1" css={{ mb: 28 }}>
-                    Assets available to claim
-                  </Typography>
-                  <Box css={{ width: '100%' }}>
-                    <Flex
-                      css={{
-                        mb: 12,
-                        alignItems: 'flex-end',
-                        justifyContent: 'space-between',
-                        px: 18,
-                        width: '100%',
-                      }}>
-                      <Typography>Asset</Typography>
-                      <Typography>Amount to claim</Typography>
-                    </Flex>
-                    <Box css={{ minHeight: 200, mb: 24 }}>
-                      {filteredUserData.map((data) => {
-                        const assetSymbol = data.tokenAmount.split(' ')[1];
-                        const assetAmount = data.tokenAmount.split(' ')[0];
+                <Box css={{ width: '100%' }}>
+                  <Flex
+                    css={{
+                      mb: 12,
+                      alignItems: 'flex-end',
+                      justifyContent: 'space-between',
+                      px: 18,
+                      width: '100%',
+                    }}>
+                    <Typography>Asset</Typography>
+                    <Typography>Amount to claim</Typography>
+                  </Flex>
+                  <Box css={{ minHeight: 200 }}>
+                    {filteredUserData.map((data) => {
+                      const assetSymbol = data.tokenAmount.split(' ')[1];
+                      const assetAmount = data.tokenAmount.split(' ')[0];
 
-                        return (
-                          <Flex
-                            css={{
-                              mb: 7,
-                              px: 18,
-                              py: 8,
-                              background: '$paper',
-                              borderRadius: '$1',
-                              border: '1px solid $main',
-                              alignItems: 'center',
-                              justifyContent: 'space-between',
-                            }}
-                            key={`${data.index}-${data.distributionId}`}>
-                            <Flex css={{ alignItems: 'center' }}>
-                              <TokenIcon
-                                symbol={assetSymbol}
-                                css={{ mr: 12, size: 30 }}
-                              />
-                              <Typography>{assetSymbol}</Typography>
-                            </Flex>
-                            <FormattedNumber
-                              value={assetAmount}
-                              variant="h1"
-                              visibleDecimals={4}
+                      return (
+                        <Flex
+                          css={{
+                            mb: 7,
+                            px: 18,
+                            py: 8,
+                            background: '$paper',
+                            borderRadius: '$1',
+                            border: '1px solid $main',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                          }}
+                          key={`${data.index}-${data.distributionId}`}>
+                          <Flex css={{ alignItems: 'center' }}>
+                            <TokenIcon
+                              symbol={assetSymbol}
+                              css={{ mr: 12, size: 30 }}
                             />
+                            <Typography>{assetSymbol}</Typography>
                           </Flex>
-                        );
-                      })}
-                    </Box>
+                          <FormattedNumber
+                            value={assetAmount}
+                            variant="h1"
+                            visibleDecimals={4}
+                          />
+                        </Flex>
+                      );
+                    })}
                   </Box>
-                </Flex>
+                </Box>
               ) : (
                 <Flex
                   css={{
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    mb: 48,
                   }}>
                   <Image
                     as={NoAssetsImage}
                     css={{ my: 30, width: 160, height: 180 }}
                   />
-                  <Typography variant="h1" css={{ mb: 28 }}>
+                  <Typography variant="h1">
                     Oh no! Nothing available to claim!
                   </Typography>
                 </Flex>
               )}
             </>
           )}
-
-          <Flex css={{ alignItems: 'center' }}>
-            <Button onClick={handleCheckAnotherClick}>Check another</Button>
-            {activeWallet?.isActive && !!filteredUserData.length && (
-              <Button
-                onClick={handleClaimClick}
-                css={{ ml: 24 }}
-                loading={loading}>
-                Claim
-              </Button>
-            )}
-          </Flex>
-        </>
+        </ContentWrapper>
       )}
-    </Flex>
+    </>
   );
 }

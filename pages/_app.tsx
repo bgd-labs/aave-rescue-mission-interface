@@ -2,7 +2,8 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 
 import { AppGlobalStyles, MainLayout } from '../src/ui';
 import Web3Provider from '../src/web3/components/Web3Provider';
@@ -16,7 +17,15 @@ interface MyAppProps extends AppProps {
 }
 
 function MyApp({ Component, pageProps }: MyAppProps) {
+  const router = useRouter();
+
   const getLayout = Component.getLayout ?? ((page: React.ReactNode) => page);
+
+  useEffect(() => {
+    if (router.pathname !== '/') {
+      router.replace('/');
+    }
+  }, [router.pathname]);
 
   return (
     <AppGlobalStyles>
