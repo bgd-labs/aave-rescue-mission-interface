@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import { Box } from '../primitives/Box';
-import { Flex } from '../primitives/Flex';
+import { Box, Flex } from '..';
+import { keyframes } from '../utils/theme';
 import { AppFooter } from './AppFooter';
 import { AppHeader } from './AppHeader';
 
@@ -10,20 +10,49 @@ interface MainLayoutProps {
 }
 
 export function MainLayout({ children }: MainLayoutProps) {
+  const transformValue = 200;
+
+  const floating = keyframes({
+    '0%': {
+      transform: `translate(0px, -0px)`,
+    },
+    '25%': {
+      transform: `translate(${transformValue}px, -${transformValue}px)`,
+    },
+    '50%': {
+      transform: `translate(0px, -0)`,
+    },
+    '75%': {
+      transform: `translate(${transformValue}px, -${transformValue}px)`,
+    },
+    '100%': {
+      transform: `translate(0px, -0px)`,
+    },
+  });
+
   return (
     <Flex
       css={{
         position: 'relative',
-        p: '30px 10px 10px 30px',
+        p: '40px 10px 10px 40px',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '$appBackground',
-        backgroundImage: 'url(/images/background.svg)',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
         minHeight: '100vh',
+        overflow: 'hidden',
       }}>
+      <Box
+        css={{
+          position: 'absolute',
+          inset: -transformValue,
+          backgroundImage: 'url(/images/background.svg)',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          animation: `${floating} 60s linear infinite`,
+        }}
+      />
+
       <Flex
         as="main"
         css={{
@@ -38,29 +67,38 @@ export function MainLayout({ children }: MainLayoutProps) {
             content: '',
             position: 'absolute',
             background: '$main',
-            borderRadius: '$1',
           },
           '&:before': {
-            width: 25,
+            width: 30,
             height: '100%',
-            left: -42,
-            top: -10,
+            left: -60,
+            top: -15,
             transform: 'translateX(100%) skewY(45deg)',
           },
           '&:after': {
             width: '100%',
-            height: 25,
-            left: -10,
-            top: -42,
+            height: 30,
+            left: -15,
+            top: -60,
             transform: 'translateY(100%) skewX(45deg)',
           },
         }}>
         <Box
           css={{
+            background: '$main',
+            width: 35,
+            height: 35,
+            position: 'absolute',
+            top: -30,
+            left: -30,
+          }}
+        />
+
+        <Box
+          css={{
             position: 'relative',
             zIndex: 2,
             border: '3px solid $main',
-            borderRadius: '$1',
             p: '8px 8px 22px 8px',
             backgroundColor: '$whiteBackground',
             width: '100%',

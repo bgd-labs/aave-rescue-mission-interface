@@ -192,7 +192,6 @@ const ButtonInner = styled('div', {
       },
       pending: {
         buttonGradientDisabled: '',
-        boxShadow: '$buttonInset',
       },
       disabled: {
         background: '$light',
@@ -244,7 +243,7 @@ export function Button({
       disabled={disabled || loading}
       css={{
         justifyContent: leftComponent ? 'space-between' : 'center',
-        boxShadow: color === 'dark' && !transparent ? '$button' : 'unset',
+        boxShadow: 'unset',
         ...css,
       }}
       onClick={onClick}>

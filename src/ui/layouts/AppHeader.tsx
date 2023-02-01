@@ -17,8 +17,6 @@ export function AppHeader() {
         px: 32,
         pt: 30,
         pb: 25,
-        borderTopLeftRadius: '$1',
-        borderTopRightRadius: '$1',
         background: '$main',
         alignItems: 'center',
         justifyContent: 'space-between',

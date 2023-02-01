@@ -52,10 +52,8 @@ export const {
     shadows: {
       paper: '0px 2px 5px rgba(0, 0, 0, 0.2)',
       paperHover: '0px 1px 1px rgba(0, 0, 0, 0.35)',
-      button: '0px 3px 4px rgba(0, 0, 0, 0.15)',
       buttonInset: 'inset 0px 2px 1px rgba(0, 0, 0, 0.2)',
       buttonInsetBig: 'inset 0px 3px 4px rgba(0, 0, 0, 0.15)',
-      barInset: 'inset 2px 0px 2px rgba(0, 0, 0, 0.11)',
     },
     radii: {
       1: '10px',
