@@ -209,8 +209,16 @@ export const globalStyles = globalCss({
     minWidth: 365,
     color: '$text',
     background: '$appBackground',
-    fontSize: 15,
-    lineHeight: '18px',
+    fontSize: 10,
+    lineHeight: '12px',
+    '@sm': {
+      fontSize: 12,
+      lineHeight: '15px',
+    },
+    '@md': {
+      fontSize: 15,
+      lineHeight: '18px',
+    },
   },
 
   '#root': {

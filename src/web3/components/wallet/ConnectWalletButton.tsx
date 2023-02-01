@@ -70,7 +70,11 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
         <>
           <Box
             css={{
-              '.react-loading-skeleton': { width: 150, height: 46 },
+              '.react-loading-skeleton': {
+                minWidth: 120,
+                height: 36,
+                '@sm': { minWidth: 150, height: 46 },
+              },
             }}>
             <CustomSkeleton />
           </Box>
@@ -101,7 +105,7 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
             </>
           ) : (
             <Flex css={{ alignItems: 'center', justifyContent: 'center' }}>
-              <Box css={{ mr: 12, textAlign: 'right' }}>
+              <Box css={{ mr: 9, textAlign: 'right', '@sm': { mr: 12 } }}>
                 <Link
                   href={`${
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -113,10 +117,13 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
                   <Typography
                     variant="headline"
                     css={{
-                      mb: 4,
+                      mb: 3,
                       color: '$textWhite',
                       transition: 'all 0.2s ease',
                       hover: { opacity: '0.7' },
+                      '@md': {
+                        mb: 4,
+                      },
                     }}>
                     {ensNameAbbreviated
                       ? ensNameAbbreviated
@@ -149,8 +156,11 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
                 alt=""
                 onError={() => setUseBlockie(true)}
                 css={{
-                  size: 46,
+                  size: 38,
                   borderRadius: '$2',
+                  '@sm': {
+                    size: 46,
+                  },
                 }}
               />
             </Flex>

@@ -121,14 +121,28 @@ const ButtonWrapper = styled('button', {
   variants: {
     size: {
       medium: {
-        minWidth: 176,
-        height: 46,
-        p: 4,
+        minWidth: 135,
+        height: 36,
+        p: 2,
+        '@sm': {
+          minWidth: 140,
+          height: 36,
+        },
+        '@md': {
+          minWidth: 176,
+          height: 46,
+          p: 4,
+        },
       },
       small: {
-        minWidth: 150,
-        height: 46,
-        p: 4,
+        minWidth: 120,
+        height: 36,
+        p: 2,
+        '@md': {
+          minWidth: 150,
+          height: 46,
+          p: 4,
+        },
       },
     },
   },

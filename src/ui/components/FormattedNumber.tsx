@@ -47,14 +47,7 @@ export interface FormattedNumberProps {
   value: string | number;
   visibleDecimals?: number;
   compact?: boolean;
-  variant?:
-    | 'h1'
-    | 'h2'
-    | 'h3'
-    | 'headline'
-    | 'body'
-    | 'descriptor'
-    | 'descriptorAccent';
+  variant?: 'h1' | 'headline' | 'body' | 'descriptor' | 'descriptorAccent';
   css?: CSS;
 }
 
