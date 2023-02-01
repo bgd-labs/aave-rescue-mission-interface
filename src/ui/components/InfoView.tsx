@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import LinkIcon from '/public/images/icons/link.svg';
 import NoAssetsImage from '/public/images/noAssets.svg';
@@ -34,7 +34,16 @@ export function InfoView() {
     claim,
   } = useStore();
 
+  const [wrongAddressError, setWrongAddressError] = useState('');
+
+  useEffect(() => {
+    if (!activeWallet?.isActive) {
+      setWrongAddressError('');
+    }
+  }, [activeWallet]);
+
   const handleCheckAnotherClick = () => {
+    setWrongAddressError('');
     resetUserData();
     setAppView('');
     setCheckedAddress('');
@@ -43,9 +52,7 @@ export function InfoView() {
   const tokensToClaim = userData.map((data) => {
     return {
       index: data.index,
-      account: checkedAddress,
       amount: data.tokenAmountInWei,
-      formattedAmount: data.tokenAmount,
       merkleProof: data.proof,
       distributionId: data.distributionId,
     };
@@ -69,14 +76,29 @@ export function InfoView() {
     },
   });
 
-  const handleClaimClick = async () =>
-    await generateTxFunction({
-      setError,
-      setLoading,
-      errorMessage:
-        'Error during the claim assets, check console for more details',
-      callbackFunction: async () => await claim(tokensToClaim),
-    });
+  const handleClaimClick = async () => {
+    if (activeWallet) {
+      if (
+        activeWallet.accounts[0].toLowerCase() === checkedAddress.toLowerCase()
+      ) {
+        setWrongAddressError('');
+        await generateTxFunction({
+          setError,
+          setLoading,
+          errorMessage:
+            'Error during the claim assets, check console for more details',
+          callbackFunction: async () => await claim(tokensToClaim),
+        });
+      } else {
+        setWrongAddressError(
+          'The connected wallet address does not match the checked address. Please connect a wallet that will match the checked wallet.',
+        );
+      }
+    } else {
+      setWrongAddressError('');
+      setAppView('connectWallet');
+    }
+  };
 
   const filteredUserData = userData.filter((data) => !data.isClaimed);
 
@@ -103,7 +125,7 @@ export function InfoView() {
                 </Button>
               )}
               {!!error && (
-                <>
+                <Flex>
                   <Button
                     css={{ mr: 24 }}
                     transparent
@@ -121,7 +143,7 @@ export function InfoView() {
                     }}>
                     Try again
                   </Button>
-                </>
+                </Flex>
               )}
             </>
           }>
@@ -235,7 +257,7 @@ export function InfoView() {
             !userDataLoading && (
               <Flex css={{ alignItems: 'center' }}>
                 <Button onClick={handleCheckAnotherClick}>Check another</Button>
-                {activeWallet?.isActive && !!filteredUserData.length && (
+                {!!filteredUserData.length && (
                   <Button
                     onClick={handleClaimClick}
                     css={{ ml: 24 }}
@@ -271,7 +293,7 @@ export function InfoView() {
                     <Typography>Asset</Typography>
                     <Typography>Amount to claim</Typography>
                   </Flex>
-                  <Box css={{ minHeight: 200 }}>
+                  <Box css={{ minHeight: 160 }}>
                     {filteredUserData.map((data) => {
                       const assetSymbol = data.tokenAmount.split(' ')[1];
                       const assetAmount = data.tokenAmount.split(' ')[0];
@@ -305,6 +327,17 @@ export function InfoView() {
                       );
                     })}
                   </Box>
+
+                  <Typography
+                    variant="descriptor"
+                    css={{
+                      color: '$error',
+                      mt: 12,
+                      minHeight: 30,
+                      textAlign: 'center',
+                    }}>
+                    {wrongAddressError}
+                  </Typography>
                 </Box>
               ) : (
                 <Flex

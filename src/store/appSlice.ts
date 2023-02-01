@@ -10,9 +10,7 @@ export interface FormattedUserData extends UserData {
 
 export type TokenToClaim = {
   index: number;
-  account: string;
   amount: string;
-  formattedAmount: string;
   merkleProof: string[];
   distributionId: number;
 };
@@ -87,18 +85,7 @@ export const createAppSlice: StoreSlice<
     const rescueService = get().rescueService;
 
     await get().executeTx({
-      body: () =>
-        rescueService.claim(
-          tokensToClaim.map((token) => {
-            return {
-              index: token.index,
-              account: token.account,
-              amount: token.amount,
-              merkleProof: token.merkleProof,
-              distributionId: token.distributionId,
-            };
-          }),
-        ),
+      body: () => rescueService.claim(tokensToClaim),
       params: {
         type: 'claim',
         desiredChainID: appConfig.chainId,

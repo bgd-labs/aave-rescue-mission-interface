@@ -7,7 +7,6 @@ import { appConfig } from '../../utils/appConfig';
 
 export type TokenClaimStruct = {
   index: PromiseOrValue<BigNumberish>;
-  account: PromiseOrValue<string>;
   amount: PromiseOrValue<BigNumberish>;
   merkleProof: PromiseOrValue<BytesLike>[];
   distributionId: PromiseOrValue<BigNumberish>;

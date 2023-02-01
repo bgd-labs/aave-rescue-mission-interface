@@ -9,7 +9,7 @@ export const CHAINS: {
   [chainId: number]: ChainInformation;
 } = {
   3030: {
-    urls: ['https://rpc.tenderly.co/fork/94803b9a-e072-4e7f-a812-3baaa8a529c8'], // TODO: need change
+    urls: ['https://rpc.tenderly.co/fork/d40140cd-47b0-45aa-b614-8d8e381a61b3'], // TODO: need change
     nativeCurrency: ETH,
     name: 'Tenderly mainnet fork',
     blockExplorerUrls: ['https://etherscan.io'],

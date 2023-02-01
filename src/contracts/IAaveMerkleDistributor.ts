@@ -30,7 +30,6 @@ import type {
 export declare namespace IAaveMerkleDistributor {
   export type TokenClaimStruct = {
     index: PromiseOrValue<BigNumberish>;
-    account: PromiseOrValue<string>;
     amount: PromiseOrValue<BigNumberish>;
     merkleProof: PromiseOrValue<BytesLike>[];
     distributionId: PromiseOrValue<BigNumberish>;
@@ -38,13 +37,11 @@ export declare namespace IAaveMerkleDistributor {
 
   export type TokenClaimStructOutput = [
     BigNumber,
-    string,
     BigNumber,
     string[],
     BigNumber
   ] & {
     index: BigNumber;
-    account: string;
     amount: BigNumber;
     merkleProof: string[];
     distributionId: BigNumber;
@@ -65,7 +62,7 @@ export interface IAaveMerkleDistributorInterface extends utils.Interface {
   functions: {
     "_nextDistributionId()": FunctionFragment;
     "addDistributions(address[],bytes32[])": FunctionFragment;
-    "claim((uint256,address,uint256,bytes32[],uint256)[])": FunctionFragment;
+    "claim((uint256,uint256,bytes32[],uint256)[])": FunctionFragment;
     "emergencyEtherTransfer(address,uint256)": FunctionFragment;
     "emergencyTokenTransfer(address,address,uint256)": FunctionFragment;
     "getDistribution(uint256)": FunctionFragment;
