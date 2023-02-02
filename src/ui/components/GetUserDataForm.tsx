@@ -35,7 +35,7 @@ export function GetUserDataForm() {
       address: string;
     }>
       onSubmit={handleFormSubmit}
-      initialValues={{ address: checkedAddress }}>
+      initialValues={{ address: checkedAddress || activeWallet?.accounts[0] }}>
       {({ handleSubmit }) => {
         return (
           <Flex

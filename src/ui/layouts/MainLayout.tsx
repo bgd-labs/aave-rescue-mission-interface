@@ -48,14 +48,14 @@ export function MainLayout({ children }: MainLayoutProps) {
           inset: 0,
           backgroundRepeat: 'repeat',
           backgroundImage: 'url(/images/backgroundSM.svg)',
-          animation: `${floatingSM} 40s linear infinite`,
+          animation: `${floatingSM} 300s linear infinite`,
           '@sm': {
             backgroundImage: 'url(/images/backgroundMD.svg)',
-            animation: `${floatingMD} 40s linear infinite`,
+            animation: `${floatingMD} 300s linear infinite`,
           },
           '@lg': {
             backgroundImage: 'url(/images/backgroundLG.svg)',
-            animation: `${floatingLG} 40s linear infinite`,
+            animation: `${floatingLG} 300s linear infinite`,
           },
         }}
       />
