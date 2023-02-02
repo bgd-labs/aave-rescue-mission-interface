@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Field, Form } from 'react-final-form';
 
 import { useStore } from '../../store';
@@ -22,6 +22,7 @@ export function GetUserDataForm() {
     setAppView,
     setCheckedAddress,
     checkedAddress,
+    appView,
   } = useStore();
 
   const handleFormSubmit = ({ address }: { address: string }) => {
@@ -30,12 +31,18 @@ export function GetUserDataForm() {
     setCheckedAddress(address);
   };
 
+  useEffect(() => {
+    if (activeWallet && !checkedAddress) {
+      setCheckedAddress(activeWallet.accounts[0]);
+    }
+  }, []);
+
   return (
     <Form<{
       address: string;
     }>
       onSubmit={handleFormSubmit}
-      initialValues={{ address: checkedAddress || activeWallet?.accounts[0] }}>
+      initialValues={{ address: checkedAddress }}>
       {({ handleSubmit }) => {
         return (
           <Flex
