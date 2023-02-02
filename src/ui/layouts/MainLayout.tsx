@@ -10,23 +10,12 @@ interface MainLayoutProps {
 }
 
 export function MainLayout({ children }: MainLayoutProps) {
-  const transformValue = 200;
-
   const floating = keyframes({
-    '0%': {
-      transform: `translate(0px, -0px)`,
+    from: {
+      backgroundPosition: '0 0',
     },
-    '25%': {
-      transform: `translate(${transformValue}px, -${transformValue}px)`,
-    },
-    '50%': {
-      transform: `translate(0px, -0)`,
-    },
-    '75%': {
-      transform: `translate(${transformValue}px, -${transformValue}px)`,
-    },
-    '100%': {
-      transform: `translate(0px, -0px)`,
+    to: {
+      backgroundPosition: '1920px -1346px',
     },
   });
 
@@ -44,12 +33,10 @@ export function MainLayout({ children }: MainLayoutProps) {
       <Box
         css={{
           position: 'absolute',
-          inset: -transformValue,
+          inset: 0,
           backgroundImage: 'url(/images/background.svg)',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          animation: `${floating} 60s linear infinite`,
+          backgroundRepeat: 'repeat',
+          animation: `${floating} 40s linear infinite`,
         }}
       />
 
