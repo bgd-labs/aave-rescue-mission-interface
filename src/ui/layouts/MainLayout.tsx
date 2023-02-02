@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
 import { Box, Flex } from '..';
-import { keyframes } from '../utils/theme';
 import { AppFooter } from './AppFooter';
 import { AppHeader } from './AppHeader';
 
@@ -10,24 +9,6 @@ interface MainLayoutProps {
 }
 
 export function MainLayout({ children }: MainLayoutProps) {
-  const floatingSM = keyframes({
-    to: {
-      backgroundPosition: '1257px -1009px',
-    },
-  });
-
-  const floatingMD = keyframes({
-    to: {
-      backgroundPosition: '1504px -1009px',
-    },
-  });
-
-  const floatingLG = keyframes({
-    to: {
-      backgroundPosition: '2304px -1541px',
-    },
-  });
-
   return (
     <Flex
       css={{
@@ -36,7 +17,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '$appBackground',
-        minHeight: '100vh',
+        minHeight: '100dvh',
         overflow: 'hidden',
         '@sm': {
           p: '40px 10px 10px 40px',
@@ -48,14 +29,11 @@ export function MainLayout({ children }: MainLayoutProps) {
           inset: 0,
           backgroundRepeat: 'repeat',
           backgroundImage: 'url(/images/backgroundSM.svg)',
-          animation: `${floatingSM} 300s linear infinite`,
           '@sm': {
             backgroundImage: 'url(/images/backgroundMD.svg)',
-            animation: `${floatingMD} 300s linear infinite`,
           },
           '@lg': {
             backgroundImage: 'url(/images/backgroundLG.svg)',
-            animation: `${floatingLG} 300s linear infinite`,
           },
         }}
       />
