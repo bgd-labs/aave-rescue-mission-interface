@@ -15,7 +15,7 @@ export type TokenToClaim = {
   distributionId: number;
 };
 
-type AppView = '' | 'connectWallet' | 'info';
+type AppView = '' | 'checkAddress' | 'connectWallet' | 'info';
 
 export type IAppSlice = {
   appView: AppView;

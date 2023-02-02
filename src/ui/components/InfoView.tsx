@@ -45,7 +45,7 @@ export function InfoView() {
   const handleCheckAnotherClick = () => {
     setWrongAddressError('');
     resetUserData();
-    setAppView('');
+    setAppView('checkAddress');
     setCheckedAddress('');
   };
 
@@ -268,7 +268,7 @@ export function InfoView() {
                 <b>{textCenterEllipsis(checkedAddress, 4, 5)}</b> Checked
               </Typography>
               {userDataLoading && <Typography variant="h1">Loading</Typography>}
-              {!!filteredUserData.length && (
+              {!!filteredUserData.length && !userDataLoading && (
                 <Typography variant="h1">Assets available to claim</Typography>
               )}
             </>

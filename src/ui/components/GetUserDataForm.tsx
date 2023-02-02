@@ -22,7 +22,6 @@ export function GetUserDataForm() {
     setAppView,
     setCheckedAddress,
     checkedAddress,
-    appView,
   } = useStore();
 
   const handleFormSubmit = ({ address }: { address: string }) => {
@@ -31,16 +30,8 @@ export function GetUserDataForm() {
     setCheckedAddress(address);
   };
 
-  useEffect(() => {
-    if (activeWallet && !checkedAddress) {
-      setCheckedAddress(activeWallet.accounts[0]);
-    }
-  }, []);
-
   return (
-    <Form<{
-      address: string;
-    }>
+    <Form<{ address: string }>
       onSubmit={handleFormSubmit}
       initialValues={{ address: checkedAddress }}>
       {({ handleSubmit }) => {
@@ -53,7 +44,23 @@ export function GetUserDataForm() {
               topBlock={
                 <Typography variant="h1">Enter Wallet Address</Typography>
               }
-              bottomBlock={<Button type="submit">Check</Button>}>
+              bottomBlock={
+                <Flex>
+                  {!activeWallet?.isActive && (
+                    <Button
+                      type="button"
+                      css={{ mr: 18, '@lg': { mr: 24 } }}
+                      transparent
+                      onClick={() => {
+                        setAppView('');
+                        setCheckedAddress('');
+                      }}>
+                      Go to home screen
+                    </Button>
+                  )}
+                  <Button type="submit">Check</Button>
+                </Flex>
+              }>
               <Field
                 name="address"
                 validate={composeValidators(required, addressValidator)}>
