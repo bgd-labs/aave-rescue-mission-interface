@@ -32,6 +32,7 @@ export function InfoView() {
     setCheckedAddress,
     userDataLoading,
     claim,
+    prevAppView,
   } = useStore();
 
   const [wrongAddressError, setWrongAddressError] = useState('');
@@ -103,6 +104,8 @@ export function InfoView() {
   };
 
   const filteredUserData = userData.filter((data) => !data.isClaimed);
+  const isCheckAnotherButtonAvailable =
+    prevAppView === 'checkAddress' || !filteredUserData.length;
 
   return (
     <>
@@ -276,11 +279,18 @@ export function InfoView() {
           bottomBlock={
             !userDataLoading && (
               <Flex css={{ alignItems: 'center' }}>
-                <Button onClick={handleCheckAnotherClick}>Check another</Button>
+                {isCheckAnotherButtonAvailable && (
+                  <Button onClick={handleCheckAnotherClick}>
+                    Check another
+                  </Button>
+                )}
                 {!!filteredUserData.length && (
                   <Button
                     onClick={handleClaimClick}
-                    css={{ ml: 18, '@lg': { ml: 24 } }}
+                    css={{
+                      ml: isCheckAnotherButtonAvailable ? 18 : 0,
+                      '@lg': { ml: isCheckAnotherButtonAvailable ? 24 : 0 },
+                    }}
                     loading={loading}>
                     Claim
                   </Button>
