@@ -30,7 +30,7 @@ export type IAppSlice = {
   resetUserData: () => void;
   getUserData: (address: string) => Promise<void>;
 
-  claim: (tokensToClaim: TokenToClaim[]) => Promise<void>;
+  claim: (address: string, tokensToClaim: TokenToClaim[]) => Promise<void>;
 };
 
 export const createAppSlice: StoreSlice<
@@ -81,7 +81,7 @@ export const createAppSlice: StoreSlice<
     set({ userDataLoading: false });
   },
 
-  claim: async (tokensToClaim) => {
+  claim: async (address, tokensToClaim) => {
     const rescueService = get().rescueService;
 
     await get().executeTx({
@@ -90,6 +90,7 @@ export const createAppSlice: StoreSlice<
         type: 'claim',
         desiredChainID: appConfig.chainId,
         payload: {
+          address,
           tokensToClaim,
         },
       },

@@ -17,6 +17,7 @@ type TestTx = BaseTx & {
   status?: number;
   pending: boolean;
   payload: {
+    address: string;
     tokensToClaim: TokenToClaim[];
   };
 };
@@ -33,7 +34,7 @@ export const createTransactionsSlice: StoreSlice<
     txStatusChangedCallback: async (data) => {
       switch (data.type) {
         case 'claim':
-          await get().getUserData(data.payload.tokensToClaim[0].account);
+          await get().getUserData(data.payload.address);
           break;
       }
     },

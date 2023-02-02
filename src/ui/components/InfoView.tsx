@@ -72,6 +72,7 @@ export function InfoView() {
   } = useTxStatuses({
     type: 'claim',
     payload: {
+      address: checkedAddress,
       tokensToClaim,
     },
   });
@@ -87,7 +88,8 @@ export function InfoView() {
           setLoading,
           errorMessage:
             'Error during the claim assets, check console for more details',
-          callbackFunction: async () => await claim(tokensToClaim),
+          callbackFunction: async () =>
+            await claim(checkedAddress, tokensToClaim),
         });
       } else {
         setWrongAddressError(
