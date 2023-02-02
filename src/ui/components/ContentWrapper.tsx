@@ -17,12 +17,15 @@ export function ContentWrapper({
     <Flex css={{ flexDirection: 'column', flex: 1, width: '100%' }}>
       <Flex
         css={{
-          mb: 28,
           width: '100%',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
+          mb: 20,
+          '@lg': {
+            mb: 28,
+          },
         }}>
         {topBlock}
       </Flex>
@@ -40,13 +43,17 @@ export function ContentWrapper({
 
       <Flex
         css={{
-          mt: 28,
           width: '100%',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          minHeight: 50,
+          minHeight: 40,
+          mt: 20,
+          '@lg': {
+            minHeight: 50,
+            mt: 28,
+          },
         }}>
         {bottomBlock}
       </Flex>

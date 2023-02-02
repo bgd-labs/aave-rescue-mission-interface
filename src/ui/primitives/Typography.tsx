@@ -11,7 +11,7 @@ export const Typography = styled('p', {
           fontSize: 16,
           lineHeight: '19px',
         },
-        '@md': {
+        '@lg': {
           letterSpacing: '0.03em',
           fontSize: 20,
           lineHeight: '24px',
@@ -25,7 +25,7 @@ export const Typography = styled('p', {
           fontSize: 13,
           lineHeight: '16px',
         },
-        '@md': {
+        '@lg': {
           fontSize: 15,
           lineHeight: '18px',
         },
@@ -38,7 +38,7 @@ export const Typography = styled('p', {
           fontSize: 12,
           lineHeight: '15px',
         },
-        '@md': {
+        '@lg': {
           fontSize: 15,
           lineHeight: '18px',
         },
@@ -51,7 +51,7 @@ export const Typography = styled('p', {
           fontSize: 11,
           lineHeight: '13px',
         },
-        '@md': {
+        '@lg': {
           fontSize: 12,
           lineHeight: '15px',
         },
@@ -70,7 +70,7 @@ export const Typography = styled('p', {
           fontSize: 13,
           lineHeight: '16px',
         },
-        '@md': {
+        '@lg': {
           fontSize: 15,
           lineHeight: '18px',
         },

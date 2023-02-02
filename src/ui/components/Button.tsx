@@ -128,7 +128,7 @@ const ButtonWrapper = styled('button', {
           minWidth: 140,
           height: 36,
         },
-        '@md': {
+        '@lg': {
           minWidth: 176,
           height: 46,
           p: 4,
@@ -138,7 +138,7 @@ const ButtonWrapper = styled('button', {
         minWidth: 120,
         height: 36,
         p: 2,
-        '@md': {
+        '@lg': {
           minWidth: 150,
           height: 46,
           p: 4,

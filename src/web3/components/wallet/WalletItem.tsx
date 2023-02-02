@@ -34,8 +34,6 @@ export function WalletItem({
         justifyContent: 'space-between',
         cursor: 'pointer',
         transition: 'all 0.2s ease',
-        mb: 7,
-        p: '9px 15px',
         borderRadius: '$1',
         background: '$textWhite',
         border: '1px solid $main',
@@ -47,9 +45,27 @@ export function WalletItem({
           boxShadow: 'none',
           background: '$appBackground',
         },
+        mb: 5,
+        p: '7px 10px',
+        '@sm': {
+          mb: 6,
+          p: '8px 12px',
+        },
+        '@lg': {
+          mb: 7,
+          p: '9px 15px',
+        },
       }}>
-      <Typography css={{ fontWeight: 500 }}>{title}</Typography>
-      <Image src={icon} css={{ size: 28 }} />
+      <Typography
+        css={{
+          fontWeight: 500,
+          fontSize: 12,
+          lineHeight: '15px',
+          '@sm': { fontSize: 15, lineHeight: '18px' },
+        }}>
+        {title}
+      </Typography>
+      <Image src={icon} css={{ size: 22, '@lg': { size: 28 } }} />
     </Flex>
   );
 }

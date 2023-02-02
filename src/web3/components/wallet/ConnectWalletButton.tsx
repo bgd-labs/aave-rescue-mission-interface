@@ -121,7 +121,7 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
                       color: '$textWhite',
                       transition: 'all 0.2s ease',
                       hover: { opacity: '0.7' },
-                      '@md': {
+                      '@lg': {
                         mb: 4,
                       },
                     }}>

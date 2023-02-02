@@ -7,7 +7,12 @@ export function AppFooter() {
   return (
     <Flex
       as="footer"
-      css={{ mt: 37, alignItems: 'center', justifyContent: 'center' }}>
+      css={{
+        mt: 24,
+        alignItems: 'center',
+        justifyContent: 'center',
+        '@lg': { mt: 37 },
+      }}>
       <Link href={ROUTES.about} css={{ hover: { opacity: 0.7 } }} inNewWindow>
         <Typography
           variant="descriptorAccent"

@@ -28,7 +28,7 @@ export function AppHeader() {
           pb: 17,
           mb: 25,
         },
-        '@md': {
+        '@lg': {
           px: 32,
           pt: 30,
           pb: 25,
@@ -43,7 +43,7 @@ export function AppHeader() {
             height: 24,
             mb: 8,
             '@sm': { width: 110, height: 29, mb: 10 },
-            '@md': { width: 140, height: 37, mb: 12 },
+            '@lg': { width: 140, height: 37, mb: 12 },
           }}
         />
         <Typography variant="descriptor" css={{ color: '$textWhite' }}>

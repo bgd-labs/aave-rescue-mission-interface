@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useStore } from '../../../store';
-import { Button, Flex, Typography } from '../../../ui';
+import { Button, Typography } from '../../../ui';
 import { ContentWrapper } from '../../../ui/components/ContentWrapper';
 import { GradientLoader } from '../../../ui/components/GradientLoader';
 import { ImpersonatedForm } from './ImpersonatedForm';
@@ -55,15 +55,7 @@ export function ConnectWalletContent() {
         )
       }>
       {walletActivating ? (
-        <Flex
-          css={{
-            background: '$whiteBackground',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-          }}>
-          <GradientLoader size={160} />
-        </Flex>
+        <GradientLoader />
       ) : (
         <>
           {impersonatedFormOpen && !!setImpersonatedFormOpen ? (

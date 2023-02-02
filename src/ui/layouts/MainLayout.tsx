@@ -53,7 +53,7 @@ export function MainLayout({ children }: MainLayoutProps) {
             backgroundImage: 'url(/images/backgroundMD.svg)',
             animation: `${floatingMD} 40s linear infinite`,
           },
-          '@md': {
+          '@lg': {
             backgroundImage: 'url(/images/backgroundLG.svg)',
             animation: `${floatingLG} 40s linear infinite`,
           },
@@ -69,7 +69,10 @@ export function MainLayout({ children }: MainLayoutProps) {
           width: '100%',
           maxWidth: 400,
           '@sm': {
-            maxWidth: 540,
+            maxWidth: 420,
+          },
+          '@lg': {
+            maxWidth: 520,
           },
           '&:after, &:before': {
             content: '',
@@ -126,7 +129,7 @@ export function MainLayout({ children }: MainLayoutProps) {
             p: '8px 8px 22px 8px',
             backgroundColor: '$whiteBackground',
             width: '100%',
-            '@md': {
+            '@lg': {
               border: '3px solid $main',
             },
           }}>
@@ -138,13 +141,13 @@ export function MainLayout({ children }: MainLayoutProps) {
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'column',
-              height: 414,
+              height: 325,
               px: 25,
               '@sm': {
-                height: 414,
+                height: 350,
                 px: 50,
               },
-              '@md': {
+              '@lg': {
                 px: 60,
                 height: 414,
               },

@@ -23,11 +23,17 @@ export function InputWrapper({
     <Flex
       css={{
         flexDirection: 'column',
-        width: 'calc(100% + 60px)',
         pb: 8,
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
+        width: '100%',
+        '@sm': {
+          width: 'calc(100% + 40px)',
+        },
+        '@lg': {
+          width: 'calc(100% + 60px)',
+        },
       }}>
       {children}
 
@@ -40,11 +46,14 @@ export function InputWrapper({
             alignItems: 'center',
             justifyContent: 'center',
             position: 'absolute',
-            right: 18,
             lineHeight: 0,
             transition: 'all 0.2s ease',
             hover: {
               opacity: 0.7,
+            },
+            right: 10,
+            '@lg': {
+              right: 18,
             },
           }}>
           <Image as={CrossIcon} css={{ size: 18, path: { stroke: '$main' } }} />
@@ -61,7 +70,10 @@ export function InputWrapper({
             alignSelf: 'flex-start',
             textAlign: 'left',
             width: '100%',
-            left: 30,
+            left: 20,
+            '@lg': {
+              left: 25,
+            },
           }}>
           {error}
         </Typography>

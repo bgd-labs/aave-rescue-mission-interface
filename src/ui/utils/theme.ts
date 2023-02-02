@@ -215,7 +215,7 @@ export const globalStyles = globalCss({
       fontSize: 12,
       lineHeight: '15px',
     },
-    '@md': {
+    '@lg': {
       fontSize: 15,
       lineHeight: '18px',
     },

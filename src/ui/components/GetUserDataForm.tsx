@@ -93,7 +93,9 @@ export function GetUserDataForm() {
                       <Typography
                         as="button"
                         type="button"
+                        variant="button"
                         css={{
+                          fontWeight: 500,
                           color: '$textSecondary',
                           textDecoration: 'underline',
                           transition: 'all 0.2s ease',

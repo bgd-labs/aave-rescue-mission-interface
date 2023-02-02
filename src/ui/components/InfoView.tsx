@@ -129,7 +129,7 @@ export function InfoView() {
               {!!error && (
                 <Flex>
                   <Button
-                    css={{ mr: 24 }}
+                    css={{ mr: 18, '@lg': { mr: 24 } }}
                     transparent
                     onClick={() => {
                       setIsTxStart(false);
@@ -154,19 +154,12 @@ export function InfoView() {
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'column',
-              minHeight: 200,
+              minHeight: 160,
+              '@lg': {
+                minHeight: 180,
+              },
             }}>
-            {txPending && (
-              <Flex
-                css={{
-                  background: '$whiteBackground',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                }}>
-                <GradientLoader size={160} />
-              </Flex>
-            )}
+            {txPending && <GradientLoader />}
             {txSuccess && (
               <Flex
                 css={{
@@ -174,7 +167,7 @@ export function InfoView() {
                   justifyContent: 'center',
                   flexDirection: 'column',
                 }}>
-                <Box css={{ mb: -40 }}>
+                <Box css={{ mb: -30, '@lg': { mb: -40 } }}>
                   {userData.map((data, index) => {
                     const assetSymbol = data.tokenAmount.split(' ')[1];
                     return (
@@ -183,23 +176,44 @@ export function InfoView() {
                         css={{
                           position: 'relative',
                           zIndex: 2,
-                          size: userData.length > 1 ? 70 : 100,
-                          ml: index > 0 ? -30 : 0,
+                          size: userData.length > 1 ? 50 : 70,
+                          ml: index > 0 ? -20 : 0,
+                          '@lg': {
+                            size: userData.length > 1 ? 70 : 100,
+                            ml: index > 0 ? -30 : 0,
+                          },
                         }}
                         key={`${data.index}-${data.distributionId}`}
                       />
                     );
                   })}
                 </Box>
-                <Image as={TxSuccessImage} css={{ width: 121, height: 81 }} />
+                <Image
+                  as={TxSuccessImage}
+                  css={{
+                    width: 100,
+                    height: 60,
+                    '@lg': { width: 121, height: 81 },
+                  }}
+                />
               </Flex>
             )}
             {!!error && (
-              <Image as={TxErrorImage} css={{ width: 148, height: 146 }} />
+              <Image
+                as={TxErrorImage}
+                css={{ size: 120, '@lg': { size: 148 } }}
+              />
             )}
           </Flex>
 
-          <Typography css={{ mb: 20, textAlign: 'center' }}>
+          <Typography
+            css={{
+              mb: 12,
+              textAlign: 'center',
+              fontSize: 12,
+              lineHeight: '15px',
+              '@lg': { mb: 20, fontSize: 15, lineHeight: '18px' },
+            }}>
             {txPending && 'Waiting while transaction executing'}
             {txSuccess && 'Transaction executed'}
             {!!error && error}
@@ -227,8 +241,12 @@ export function InfoView() {
               inNewWindow>
               <Typography
                 css={{
-                  fontSize: 13,
-                  lineHeight: '16px',
+                  fontSize: 12,
+                  lineHeight: '15px',
+                  '@lg': {
+                    fontSize: 13,
+                    lineHeight: '16px',
+                  },
                 }}>
                 View in Explorer
               </Typography>
@@ -262,7 +280,7 @@ export function InfoView() {
                 {!!filteredUserData.length && (
                   <Button
                     onClick={handleClaimClick}
-                    css={{ ml: 24 }}
+                    css={{ ml: 18, '@lg': { ml: 24 } }}
                     loading={loading}>
                     Claim
                   </Button>
@@ -271,31 +289,32 @@ export function InfoView() {
             )
           }>
           {userDataLoading ? (
-            <Flex
-              css={{
-                background: '$whiteBackground',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-              }}>
-              <GradientLoader size={160} />
-            </Flex>
+            <GradientLoader />
           ) : (
             <>
               {!!filteredUserData.length ? (
                 <Box css={{ width: '100%' }}>
                   <Flex
                     css={{
-                      mb: 12,
                       alignItems: 'flex-end',
                       justifyContent: 'space-between',
-                      px: 18,
                       width: '100%',
+                      px: 12,
+                      mb: 10,
+                      '@lg': {
+                        px: 18,
+                        mb: 12,
+                      },
                     }}>
                     <Typography>Asset</Typography>
                     <Typography>Amount to claim</Typography>
                   </Flex>
-                  <Box css={{ minHeight: 160 }}>
+                  <Box
+                    css={{
+                      minHeight: 120,
+                      '@sm': { minHeight: 140 },
+                      '@lg': { minHeight: 160 },
+                    }}>
                     {filteredUserData.map((data) => {
                       const assetSymbol = data.tokenAmount.split(' ')[1];
                       const assetAmount = data.tokenAmount.split(' ')[0];
@@ -303,20 +322,34 @@ export function InfoView() {
                       return (
                         <Flex
                           css={{
-                            mb: 7,
-                            px: 18,
-                            py: 8,
                             background: '$paper',
                             borderRadius: '$1',
                             border: '1px solid $main',
                             alignItems: 'center',
                             justifyContent: 'space-between',
+                            mb: 5,
+                            px: 12,
+                            py: 6,
+                            '@sm': {
+                              mb: 6,
+                              py: 7,
+                            },
+                            '@lg': {
+                              mb: 7,
+                              px: 18,
+                              py: 8,
+                            },
                           }}
                           key={`${data.index}-${data.distributionId}`}>
                           <Flex css={{ alignItems: 'center' }}>
                             <TokenIcon
                               symbol={assetSymbol}
-                              css={{ mr: 12, size: 30 }}
+                              css={{
+                                mr: 8,
+                                size: 20,
+                                '@sm': { size: 24, mr: 12 },
+                                '@lg': { size: 30 },
+                              }}
                             />
                             <Typography>{assetSymbol}</Typography>
                           </Flex>
@@ -335,7 +368,7 @@ export function InfoView() {
                     css={{
                       color: '$error',
                       mt: 12,
-                      minHeight: 30,
+                      minHeight: 45,
                       textAlign: 'center',
                     }}>
                     {wrongAddressError}
@@ -350,7 +383,17 @@ export function InfoView() {
                   }}>
                   <Image
                     as={NoAssetsImage}
-                    css={{ my: 30, width: 160, height: 180 }}
+                    css={{
+                      mb: 20,
+                      width: 120,
+                      height: 140,
+                      '@sm': {
+                        mb: 25,
+                        width: 140,
+                        height: 160,
+                      },
+                      '@lg': { mb: 30, width: 160, height: 180 },
+                    }}
                   />
                   <Typography variant="h1">
                     Oh no! Nothing available to claim!
