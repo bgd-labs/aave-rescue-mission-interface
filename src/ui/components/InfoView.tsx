@@ -267,9 +267,23 @@ export function InfoView() {
         <ContentWrapper
           topBlock={
             <>
-              <Typography css={{ mb: 12 }}>
-                <b>{textCenterEllipsis(checkedAddress, 4, 5)}</b> Checked
-              </Typography>
+              <Link
+                href={`${
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  chainInfoHelper.getChainParameters(appConfig.chainId)
+                    .blockExplorerUrls[0]
+                }/address/${checkedAddress}`}
+                inNewWindow>
+                <Typography
+                  css={{
+                    mb: 12,
+                    transition: 'all 0.2s ease',
+                    hover: { opacity: '0.7' },
+                  }}>
+                  <b>{textCenterEllipsis(checkedAddress, 4, 5)}</b> Checked
+                </Typography>
+              </Link>
               {userDataLoading && <Typography variant="h1">Loading</Typography>}
               {!!filteredUserData.length && !userDataLoading && (
                 <Typography variant="h1">Assets available to claim</Typography>
