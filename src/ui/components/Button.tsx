@@ -121,13 +121,9 @@ const ButtonWrapper = styled('button', {
   variants: {
     size: {
       medium: {
-        minWidth: 135,
+        minWidth: 140,
         height: 36,
         p: 2,
-        '@sm': {
-          minWidth: 140,
-          height: 36,
-        },
         '@lg': {
           minWidth: 176,
           height: 46,

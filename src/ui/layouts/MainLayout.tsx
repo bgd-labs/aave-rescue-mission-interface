@@ -29,8 +29,10 @@ export function MainLayout({ children }: MainLayoutProps) {
           inset: 0,
           backgroundRepeat: 'repeat',
           backgroundPosition: 'center',
+          backgroundSize: 'cover',
           backgroundImage: 'url(/images/backgroundSM.svg)',
           '@sm': {
+            backgroundSize: 'auto',
             backgroundImage: 'url(/images/backgroundMD.svg)',
           },
           '@lg': {
@@ -114,11 +116,12 @@ export function MainLayout({ children }: MainLayoutProps) {
             position: 'relative',
             zIndex: 2,
             border: '2px solid $main',
-            p: '8px 8px 22px 8px',
+            p: '5px 5px 18px 5px',
             backgroundColor: '$whiteBackground',
             width: '100%',
             '@lg': {
               border: '3px solid $main',
+              p: '8px 8px 22px 8px',
             },
           }}>
           <AppHeader />
@@ -129,7 +132,7 @@ export function MainLayout({ children }: MainLayoutProps) {
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'column',
-              height: 325,
+              height: 330,
               px: 25,
               '@sm': {
                 height: 350,
