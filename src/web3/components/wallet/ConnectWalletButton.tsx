@@ -16,13 +16,8 @@ interface ConnectWalletButtonProps {
 }
 
 export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
-  const {
-    walletActivating,
-    getActiveAddress,
-    disconnectActiveWallet,
-    setAppView,
-    prevAppView,
-  } = useStore();
+  const { walletActivating, getActiveAddress, disconnectActiveWallet } =
+    useStore();
 
   const [loading, setLoading] = useState(true);
 
@@ -57,12 +52,6 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
       setLoading(false);
     }
   }, [lastConnectedWallet]);
-
-  useEffect(() => {
-    if (isActive && prevAppView !== 'connectWallet') {
-      setAppView(prevAppView);
-    }
-  }, [isActive]);
 
   return (
     <>

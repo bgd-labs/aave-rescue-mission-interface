@@ -32,6 +32,7 @@ export function InfoView() {
     setCheckedAddress,
     userDataLoading,
     claim,
+    prevAppView,
   } = useStore();
 
   const [wrongAddressError, setWrongAddressError] = useState('');
@@ -45,7 +46,7 @@ export function InfoView() {
   const handleCheckAnotherClick = () => {
     setWrongAddressError('');
     resetUserData();
-    setAppView('');
+    setAppView('checkAddress');
     setCheckedAddress('');
   };
 
@@ -103,6 +104,8 @@ export function InfoView() {
   };
 
   const filteredUserData = userData.filter((data) => !data.isClaimed);
+  const isCheckAnotherButtonAvailable =
+    prevAppView === 'checkAddress' || !filteredUserData.length;
 
   return (
     <>
@@ -264,11 +267,25 @@ export function InfoView() {
         <ContentWrapper
           topBlock={
             <>
-              <Typography css={{ mb: 12 }}>
-                <b>{textCenterEllipsis(checkedAddress, 4, 5)}</b> Checked
-              </Typography>
+              <Link
+                href={`${
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  chainInfoHelper.getChainParameters(appConfig.chainId)
+                    .blockExplorerUrls[0]
+                }/address/${checkedAddress}`}
+                inNewWindow>
+                <Typography
+                  css={{
+                    mb: 12,
+                    transition: 'all 0.2s ease',
+                    hover: { opacity: '0.7' },
+                  }}>
+                  <b>{textCenterEllipsis(checkedAddress, 4, 5)}</b> Checked
+                </Typography>
+              </Link>
               {userDataLoading && <Typography variant="h1">Loading</Typography>}
-              {!!filteredUserData.length && (
+              {!!filteredUserData.length && !userDataLoading && (
                 <Typography variant="h1">Assets available to claim</Typography>
               )}
             </>
@@ -276,11 +293,18 @@ export function InfoView() {
           bottomBlock={
             !userDataLoading && (
               <Flex css={{ alignItems: 'center' }}>
-                <Button onClick={handleCheckAnotherClick}>Check another</Button>
+                {isCheckAnotherButtonAvailable && (
+                  <Button onClick={handleCheckAnotherClick}>
+                    Check another
+                  </Button>
+                )}
                 {!!filteredUserData.length && (
                   <Button
                     onClick={handleClaimClick}
-                    css={{ ml: 18, '@lg': { ml: 24 } }}
+                    css={{
+                      ml: isCheckAnotherButtonAvailable ? 18 : 0,
+                      '@lg': { ml: isCheckAnotherButtonAvailable ? 24 : 0 },
+                    }}
                     loading={loading}>
                     Claim
                   </Button>
