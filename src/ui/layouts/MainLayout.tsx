@@ -28,6 +28,7 @@ export function MainLayout({ children }: MainLayoutProps) {
           position: 'absolute',
           inset: 0,
           backgroundRepeat: 'repeat',
+          backgroundPosition: 'center',
           backgroundImage: 'url(/images/backgroundSM.svg)',
           '@sm': {
             backgroundImage: 'url(/images/backgroundMD.svg)',
@@ -64,21 +65,30 @@ export function MainLayout({ children }: MainLayoutProps) {
             left: -40,
             top: -10,
             '@sm': {
-              width: 30,
-              left: -60,
-              top: -15,
+              width: 40,
+              left: -80,
+              top: -20,
             },
           },
           '&:after': {
+            backgroundColor: '#5C6279',
             width: '100%',
             transform: 'translateY(100%) skewX(45deg)',
             height: 20,
             left: -10,
             top: -40,
+            border: '2px solid $main',
+            borderRight: '3px solid $main',
+            borderBottom: 'unset',
             '@sm': {
-              height: 30,
-              left: -15,
-              top: -60,
+              height: 40,
+              left: -20,
+              top: -80,
+            },
+            '@lg': {
+              border: '3px solid $main',
+              borderRight: '4px solid $main',
+              borderBottom: 'unset',
             },
           },
         }}>
@@ -91,10 +101,10 @@ export function MainLayout({ children }: MainLayoutProps) {
             top: -20,
             left: -20,
             '@sm': {
-              width: 35,
-              height: 35,
-              top: -30,
-              left: -30,
+              width: 45,
+              height: 45,
+              top: -40,
+              left: -40,
             },
           }}
         />
