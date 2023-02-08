@@ -35,7 +35,13 @@ export function AppHeader() {
           mb: 35,
         },
       }}>
-      <Box>
+      <Box
+        onClick={() => setAppView('')}
+        css={{
+          transition: 'all 0.2s ease',
+          cursor: 'pointer',
+          hover: { opacity: 0.7 },
+        }}>
         <Image
           as={Logo}
           css={{

@@ -10,7 +10,7 @@ import { Button } from './Button';
 import { ContentWrapper } from './ContentWrapper';
 
 export function InitialView() {
-  const { setAppView, connectWallet } = useStore();
+  const { setAppView, connectWallet, activeWallet } = useStore();
 
   return (
     <ContentWrapper
@@ -43,17 +43,21 @@ export function InitialView() {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Button
-            onClick={() =>
-              typeof window !== 'undefined' && window !== window.parent
-                ? connectWallet('GnosisSafe')
-                : setAppView('connectWallet')
-            }>
-            Connect wallet
-          </Button>
-          <Typography variant="h1" css={{ my: 12 }}>
-            or
-          </Typography>
+          {!activeWallet?.isActive && (
+            <>
+              <Button
+                onClick={() =>
+                  typeof window !== 'undefined' && window !== window.parent
+                    ? connectWallet('GnosisSafe')
+                    : setAppView('connectWallet')
+                }>
+                Connect wallet
+              </Button>
+              <Typography variant="h1" css={{ my: 12 }}>
+                or
+              </Typography>
+            </>
+          )}
           <Button onClick={() => setAppView('checkAddress')}>
             Check address
           </Button>

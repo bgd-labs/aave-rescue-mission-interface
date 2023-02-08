@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <>
-      {appView === '' && !activeWallet?.isActive && <InitialView />}
+      {appView === '' && <InitialView />}
       {appView === 'checkAddress' && <GetUserDataForm />}
       {appView === 'connectWallet' && <ConnectWalletContent />}
       {appView === 'info' && <InfoView />}
