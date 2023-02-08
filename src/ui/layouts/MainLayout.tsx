@@ -29,8 +29,10 @@ export function MainLayout({ children }: MainLayoutProps) {
           inset: 0,
           backgroundRepeat: 'repeat',
           backgroundPosition: 'center',
+          backgroundSize: 'cover',
           backgroundImage: 'url(/images/backgroundSM.svg)',
           '@sm': {
+            backgroundSize: 'auto',
             backgroundImage: 'url(/images/backgroundMD.svg)',
           },
           '@lg': {
@@ -65,9 +67,9 @@ export function MainLayout({ children }: MainLayoutProps) {
             left: -40,
             top: -10,
             '@sm': {
-              width: 40,
-              left: -80,
-              top: -20,
+              width: 30,
+              left: -60,
+              top: -15,
             },
           },
           '&:after': {
@@ -81,9 +83,9 @@ export function MainLayout({ children }: MainLayoutProps) {
             borderRight: '3px solid $main',
             borderBottom: 'unset',
             '@sm': {
-              height: 40,
-              left: -20,
-              top: -80,
+              height: 30,
+              left: -15,
+              top: -60,
             },
             '@lg': {
               border: '3px solid $main',
@@ -101,10 +103,10 @@ export function MainLayout({ children }: MainLayoutProps) {
             top: -20,
             left: -20,
             '@sm': {
-              width: 45,
-              height: 45,
-              top: -40,
-              left: -40,
+              width: 35,
+              height: 35,
+              top: -30,
+              left: -30,
             },
           }}
         />
@@ -114,11 +116,12 @@ export function MainLayout({ children }: MainLayoutProps) {
             position: 'relative',
             zIndex: 2,
             border: '2px solid $main',
-            p: '8px 8px 22px 8px',
+            p: '5px 5px 18px 5px',
             backgroundColor: '$whiteBackground',
             width: '100%',
             '@lg': {
               border: '3px solid $main',
+              p: '8px 8px 22px 8px',
             },
           }}>
           <AppHeader />
@@ -129,7 +132,7 @@ export function MainLayout({ children }: MainLayoutProps) {
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'column',
-              height: 325,
+              height: 330,
               px: 25,
               '@sm': {
                 height: 350,

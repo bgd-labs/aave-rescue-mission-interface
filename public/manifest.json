@@ -1,0 +1,17 @@
+{
+  "short_name": "Rescue",
+  "name": "Aave rescue",
+  "description": "Rescuing misplaced tokens in the Aave ecosystem.",
+  "iconPath": "aave.svg",
+  "icons": [
+    {
+      "src": "aave.svg",
+      "sizes": "32x32",
+      "type": "image/svg"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

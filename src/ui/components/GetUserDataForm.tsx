@@ -49,7 +49,7 @@ export function GetUserDataForm() {
                   {!activeWallet?.isActive && (
                     <Button
                       type="button"
-                      css={{ mr: 18, '@lg': { mr: 24 } }}
+                      css={{ mr: 14, '@lg': { mr: 24 } }}
                       transparent
                       onClick={() => {
                         setAppView('');

@@ -32,7 +32,7 @@ export function Meta({ title, description }: MetaProps) {
       <meta
         name="keywords"
         key="keywords"
-        content="Decentralized Finance, DeFi, lending, borrowing, stablecoins, Ethereum, assets, erc-20, smart contracts, open finance, trustless"
+        content="Decentralized Finance, DeFi, rescue, Ethereum, assets, erc-20, smart contracts, open finance, trustless, Aave"
       />
     </Head>
   );

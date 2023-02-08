@@ -5,9 +5,9 @@ import NoAssetsImage from '/public/images/noAssets.svg';
 import TxErrorImage from '/public/images/txError.svg';
 import TxSuccessImage from '/public/images/txSuccess.svg';
 
+import { generateTxFunction } from '../../../packages/src';
 import { useStore } from '../../store';
 import { useTxStatuses } from '../../transactions/hooks/useTxStatuses';
-import { generateTxFunction } from '../../transactions/utils/generateTxFunction';
 import { appConfig } from '../../utils/appConfig';
 import { chainInfoHelper } from '../../utils/chains';
 import { Box } from '../primitives/Box';
@@ -132,7 +132,7 @@ export function InfoView() {
               {!!error && (
                 <Flex>
                   <Button
-                    css={{ mr: 18, '@lg': { mr: 24 } }}
+                    css={{ mr: 14, '@lg': { mr: 24 } }}
                     transparent
                     onClick={() => {
                       setIsTxStart(false);
@@ -302,7 +302,7 @@ export function InfoView() {
                   <Button
                     onClick={handleClaimClick}
                     css={{
-                      ml: isCheckAnotherButtonAvailable ? 18 : 0,
+                      ml: isCheckAnotherButtonAvailable ? 14 : 0,
                       '@lg': { ml: isCheckAnotherButtonAvailable ? 24 : 0 },
                     }}
                     loading={loading}>
@@ -324,7 +324,7 @@ export function InfoView() {
                       justifyContent: 'space-between',
                       width: '100%',
                       px: 12,
-                      mb: 10,
+                      mb: 8,
                       '@lg': {
                         px: 18,
                         mb: 12,
@@ -370,8 +370,8 @@ export function InfoView() {
                               symbol={assetSymbol}
                               css={{
                                 mr: 8,
-                                size: 20,
-                                '@sm': { size: 24, mr: 12 },
+                                size: 24,
+                                '@sm': { mr: 12 },
                                 '@lg': { size: 30 },
                               }}
                             />
@@ -419,7 +419,7 @@ export function InfoView() {
                       '@lg': { mb: 30, width: 160, height: 180 },
                     }}
                   />
-                  <Typography variant="h1">
+                  <Typography variant="h1" css={{ textAlign: 'center' }}>
                     Oh no! Nothing available to claim!
                   </Typography>
                 </Flex>

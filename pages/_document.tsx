@@ -9,6 +9,7 @@ export default function Document() {
         <meta charSet="utf-8" />
 
         <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
 
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"

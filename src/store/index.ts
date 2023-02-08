@@ -1,7 +1,7 @@
 import { create, GetState, SetState } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-import { Web3Slice as BaseWeb3Slice } from '../../packages/src/web3/store/walletSlice';
+import { IWalletSlice } from '../../packages/src';
 import {
   createTransactionsSlice,
   TransactionsSlice,
@@ -12,7 +12,7 @@ import { createAppSlice, IAppSlice } from './appSlice';
 
 type RootState = IWeb3Slice &
   TransactionsSlice &
-  BaseWeb3Slice &
+  IWalletSlice &
   IUISlice &
   IAppSlice;
 

@@ -12,7 +12,7 @@ const providers = {
   [appConfig.chainId]: appConfig.provider,
 };
 
-type TestTx = BaseTx & {
+type ClaimTx = BaseTx & {
   type: 'claim';
   status?: number;
   pending: boolean;
@@ -22,7 +22,7 @@ type TestTx = BaseTx & {
   };
 };
 
-export type TransactionUnion = TestTx;
+export type TransactionUnion = ClaimTx;
 
 export type TransactionsSlice = ITransactionsSlice<TransactionUnion>;
 
@@ -38,6 +38,6 @@ export const createTransactionsSlice: StoreSlice<
           break;
       }
     },
-    providers,
+    defaultProviders: providers,
   })(set, get),
 });

@@ -1,4 +1,3 @@
-import { initialChains } from '../../../packages/src/utils/chainInfoHelpers';
 import { Web3Provider as Web3BaseProvider } from '../../../packages/src/web3/providers/Web3Provider';
 import { useStore } from '../../store';
 import { appConfig } from '../../utils/appConfig';
@@ -9,7 +8,7 @@ export default function Web3Provider() {
     <Web3BaseProvider
       connectorsInitProps={{
         appName: 'AAVE_Rescue',
-        chains: Object.assign(CHAINS, initialChains),
+        chains: CHAINS,
         desiredChainId: appConfig.chainId,
         urls: chainInfoHelper.urls,
       }}

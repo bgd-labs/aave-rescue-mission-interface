@@ -46,7 +46,10 @@ Home.getLayout = function getLayout(page: React.ReactElement) {
   // TODO: need fix meta description
   return (
     <>
-      <Meta title="Rescue" description="Rescue" />
+      <Meta
+        title="Rescue"
+        description="Rescuing misplaced tokens in the Aave ecosystem."
+      />
 
       <>{page}</>
     </>
