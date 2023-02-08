@@ -7,6 +7,7 @@ export type Wallet = {
   icon: string;
   title: string;
   setOpenImpersonatedForm?: (value: boolean) => void;
+  isVisible?: boolean;
 };
 
 export function WalletItem({

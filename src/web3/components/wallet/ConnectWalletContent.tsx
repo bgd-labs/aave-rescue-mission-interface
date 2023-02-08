@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useStore } from '../../../store';
 import { Button, Typography } from '../../../ui';
@@ -12,21 +12,31 @@ export const wallets: Wallet[] = [
     walletType: 'Metamask',
     icon: '/images/wallets/browserWallet.svg',
     title: 'Browser wallet',
+    isVisible: true,
   },
   {
     walletType: 'Coinbase',
     icon: '/images/wallets/coinbase.svg',
     title: 'Coinbase',
+    isVisible: true,
   },
   {
     walletType: 'WalletConnect',
     icon: '/images/wallets/walletConnect.svg',
     title: 'WalletConnect',
+    isVisible: true,
+  },
+  {
+    walletType: 'GnosisSafe',
+    icon: '/images/wallets/gnosisSafe.svg',
+    title: 'Gnosis safe',
+    isVisible: typeof window !== 'undefined' && window !== window.parent,
   },
   {
     walletType: 'Impersonated',
     icon: '/images/wallets/impersonated.svg',
     title: 'Impersonated',
+    isVisible: false,
   },
 ];
 
@@ -63,13 +73,16 @@ export function ConnectWalletContent() {
           ) : (
             <>
               {wallets.map((wallet) => (
-                <WalletItem
-                  walletType={wallet.walletType}
-                  icon={wallet.icon}
-                  title={wallet.title}
-                  key={wallet.walletType}
-                  setOpenImpersonatedForm={setImpersonatedFormOpen}
-                />
+                <React.Fragment key={wallet.walletType}>
+                  {wallet.isVisible && (
+                    <WalletItem
+                      walletType={wallet.walletType}
+                      icon={wallet.icon}
+                      title={wallet.title}
+                      setOpenImpersonatedForm={setImpersonatedFormOpen}
+                    />
+                  )}
+                </React.Fragment>
               ))}
             </>
           )}

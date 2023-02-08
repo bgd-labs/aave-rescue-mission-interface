@@ -2,6 +2,13 @@
   "name": "rescue-interface",
   "version": "0.1.0",
   "private": true,
+  "author": "BGD labs",
+  "contributors": [
+    {
+      "name": "Oleksandr Tkach",
+      "url": "https://github.com/Argeare5"
+    }
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,11 +22,12 @@
     "@headlessui/react": "^1.7.4",
     "@stitches/react": "^1.2.8",
     "@walletconnect/ethereum-provider": "^1.7.8",
-    "@web3-react/coinbase-wallet": "^8.0.33-beta.0",
-    "@web3-react/core": "^8.0.33-beta.0",
-    "@web3-react/metamask": "^8.0.26-beta.0",
-    "@web3-react/walletconnect": "^8.0.34-beta.0",
-    "async-wait-until": "^2.0.12",
+    "@web3-react/coinbase-wallet": "8.0.34-beta.0",
+    "@web3-react/core": "8.0.35-beta.0",
+    "@web3-react/gnosis-safe": "8.0.7-beta.0",
+    "@web3-react/metamask": "8.0.29-beta.0",
+    "@web3-react/types": "8.0.20-beta.0",
+    "@web3-react/walletconnect": "8.0.36-beta.0",
     "bignumber.js": "^9.1.0",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.6",

@@ -5,9 +5,9 @@ import NoAssetsImage from '/public/images/noAssets.svg';
 import TxErrorImage from '/public/images/txError.svg';
 import TxSuccessImage from '/public/images/txSuccess.svg';
 
+import { generateTxFunction } from '../../../packages/src';
 import { useStore } from '../../store';
 import { useTxStatuses } from '../../transactions/hooks/useTxStatuses';
-import { generateTxFunction } from '../../transactions/utils/generateTxFunction';
 import { appConfig } from '../../utils/appConfig';
 import { chainInfoHelper } from '../../utils/chains';
 import { Box } from '../primitives/Box';

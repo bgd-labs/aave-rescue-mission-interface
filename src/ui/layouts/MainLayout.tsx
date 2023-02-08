@@ -67,9 +67,9 @@ export function MainLayout({ children }: MainLayoutProps) {
             left: -40,
             top: -10,
             '@sm': {
-              width: 40,
-              left: -80,
-              top: -20,
+              width: 30,
+              left: -60,
+              top: -15,
             },
           },
           '&:after': {
@@ -83,9 +83,9 @@ export function MainLayout({ children }: MainLayoutProps) {
             borderRight: '3px solid $main',
             borderBottom: 'unset',
             '@sm': {
-              height: 40,
-              left: -20,
-              top: -80,
+              height: 30,
+              left: -15,
+              top: -60,
             },
             '@lg': {
               border: '3px solid $main',
@@ -103,10 +103,10 @@ export function MainLayout({ children }: MainLayoutProps) {
             top: -20,
             left: -20,
             '@sm': {
-              width: 45,
-              height: 45,
-              top: -40,
-              left: -40,
+              width: 35,
+              height: 35,
+              top: -30,
+              left: -30,
             },
           }}
         />
