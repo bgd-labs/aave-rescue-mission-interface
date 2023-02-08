@@ -25,6 +25,10 @@ export default function Home() {
           getUserData(activeWallet.accounts[0]);
           setAppView('info');
           setCheckedAddress(activeWallet.accounts[0]);
+        } else if (typeof window !== 'undefined' && window !== window.parent) {
+          getUserData(activeWallet.accounts[0]);
+          setAppView('info');
+          setCheckedAddress(activeWallet.accounts[0]);
         } else {
           setAppView(prevAppView);
         }

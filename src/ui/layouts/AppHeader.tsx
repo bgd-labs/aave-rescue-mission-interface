@@ -8,7 +8,7 @@ import { Box, Flex, Image, Typography } from '..';
 
 export function AppHeader() {
   const router = useRouter();
-  const { setAppView, appView, activeWallet } = useStore();
+  const { setAppView, appView, activeWallet, connectWallet } = useStore();
 
   return (
     <Flex
@@ -54,7 +54,13 @@ export function AppHeader() {
       {router.pathname === '/' &&
         ((appView !== '' && appView !== 'connectWallet') ||
           activeWallet?.isActive) && (
-          <ConnectWalletButton onClick={() => setAppView('connectWallet')} />
+          <ConnectWalletButton
+            onClick={() =>
+              typeof window !== 'undefined' && window !== window.parent
+                ? connectWallet('GnosisSafe')
+                : setAppView('connectWallet')
+            }
+          />
         )}
     </Flex>
   );

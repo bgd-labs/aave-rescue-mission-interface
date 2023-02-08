@@ -10,7 +10,7 @@ import { Button } from './Button';
 import { ContentWrapper } from './ContentWrapper';
 
 export function InitialView() {
-  const { setAppView } = useStore();
+  const { setAppView, connectWallet } = useStore();
 
   return (
     <ContentWrapper
@@ -43,7 +43,12 @@ export function InitialView() {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Button onClick={() => setAppView('connectWallet')}>
+          <Button
+            onClick={() =>
+              typeof window !== 'undefined' && window !== window.parent
+                ? connectWallet('GnosisSafe')
+                : setAppView('connectWallet')
+            }>
             Connect wallet
           </Button>
           <Typography variant="h1" css={{ my: 12 }}>

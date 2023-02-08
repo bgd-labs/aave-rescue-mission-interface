@@ -2,10 +2,10 @@
   "short_name": "Rescue",
   "name": "Aave rescue",
   "description": "Rescuing misplaced tokens in the Aave ecosystem.",
-  "iconPath": "aave.svg",
+  "iconPath": "rescue.svg",
   "icons": [
     {
-      "src": "aave.svg",
+      "src": "rescue.svg",
       "sizes": "32x32",
       "type": "image/svg"
     }
