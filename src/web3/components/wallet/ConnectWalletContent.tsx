@@ -36,7 +36,7 @@ export const wallets: Wallet[] = [
     walletType: 'Impersonated',
     icon: '/images/wallets/impersonated.svg',
     title: 'Impersonated',
-    isVisible: false,
+    isVisible: true,
   },
 ];
 
