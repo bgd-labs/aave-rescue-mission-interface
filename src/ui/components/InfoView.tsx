@@ -5,7 +5,10 @@ import NoAssetsImage from '/public/images/noAssets.svg';
 import TxErrorImage from '/public/images/txError.svg';
 import TxSuccessImage from '/public/images/txSuccess.svg';
 
-import { generateTxFunction } from '../../../packages/src';
+import {
+  generateExplorerLink,
+  generateTxFunction,
+} from '../../../packages/src';
 import { useStore } from '../../store';
 import { useTxStatuses } from '../../transactions/hooks/useTxStatuses';
 import { appConfig } from '../../utils/appConfig';
@@ -70,6 +73,7 @@ export function InfoView() {
     txSuccess,
     setIsTxStart,
     txChainId,
+    txWalletType,
   } = useTxStatuses({
     type: 'claim',
     payload: {
@@ -222,15 +226,15 @@ export function InfoView() {
             {!!error && error}
           </Typography>
 
-          {txHash && (
+          {txHash && txWalletType && (
             <Link
-              href={`${
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                chainInfoHelper.getChainParameters(
-                  txChainId || appConfig.chainId,
-                ).blockExplorerUrls[0]
-              }/tx/${txHash}`}
+              href={generateExplorerLink(
+                chainInfoHelper.getChainParameters,
+                txWalletType,
+                txChainId || appConfig.chainId,
+                txHash,
+                activeWallet?.accounts[0],
+              )}
               css={{
                 display: 'inline-flex',
                 alignItems: 'center',

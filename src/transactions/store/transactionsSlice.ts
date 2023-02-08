@@ -1,4 +1,4 @@
-import { StoreSlice } from '../../../packages/src';
+import { StoreSlice, WalletType } from '../../../packages/src';
 import {
   BaseTx,
   createTransactionsSlice as createBaseTransactionsSlice,
@@ -16,6 +16,7 @@ type ClaimTx = BaseTx & {
   type: 'claim';
   status?: number;
   pending: boolean;
+  walletType: WalletType;
   payload: {
     address: string;
     tokensToClaim: TokenToClaim[];
