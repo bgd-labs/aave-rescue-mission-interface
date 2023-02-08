@@ -51,7 +51,7 @@ export function InputWrapper({
             hover: {
               opacity: 0.7,
             },
-            right: 10,
+            right: 5,
             '@lg': {
               right: 18,
             },
@@ -70,7 +70,7 @@ export function InputWrapper({
             alignSelf: 'flex-start',
             textAlign: 'left',
             width: '100%',
-            left: 20,
+            left: 10,
             '@lg': {
               left: 25,
             },

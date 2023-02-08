@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
+import BrowserWalletIcon from '/public/images/wallets/browserWallet.svg';
+import CoinbaseIcon from '/public/images/wallets/coinbase.svg';
+import GnosisSafeIcon from '/public/images/wallets/gnosisSafe.svg';
+import ImpersonatedIcon from '/public/images/wallets/impersonated.svg';
+import WalletConnectIcon from '/public/images/wallets/walletConnect.svg';
+
 import { useStore } from '../../../store';
 import { Button, Typography } from '../../../ui';
 import { ContentWrapper } from '../../../ui/components/ContentWrapper';
@@ -10,31 +16,31 @@ import { Wallet, WalletItem } from './WalletItem';
 export const wallets: Wallet[] = [
   {
     walletType: 'Metamask',
-    icon: '/images/wallets/browserWallet.svg',
+    icon: BrowserWalletIcon,
     title: 'Browser wallet',
     isVisible: true,
   },
   {
     walletType: 'Coinbase',
-    icon: '/images/wallets/coinbase.svg',
+    icon: CoinbaseIcon,
     title: 'Coinbase',
     isVisible: true,
   },
   {
     walletType: 'WalletConnect',
-    icon: '/images/wallets/walletConnect.svg',
+    icon: WalletConnectIcon,
     title: 'WalletConnect',
     isVisible: true,
   },
   {
     walletType: 'GnosisSafe',
-    icon: '/images/wallets/gnosisSafe.svg',
+    icon: GnosisSafeIcon,
     title: 'Gnosis safe',
     isVisible: typeof window !== 'undefined' && window !== window.parent,
   },
   {
     walletType: 'Impersonated',
-    icon: '/images/wallets/impersonated.svg',
+    icon: ImpersonatedIcon,
     title: 'Impersonated',
     isVisible: true,
   },
@@ -59,7 +65,7 @@ export function ConnectWalletContent() {
       }
       bottomBlock={
         !walletActivating && (
-          <Button onClick={() => setAppView(prevAppView)} transparent>
+          <Button onClick={() => setAppView(prevAppView)} color="transparent">
             Cancel
           </Button>
         )

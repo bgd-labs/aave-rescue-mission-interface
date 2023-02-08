@@ -56,7 +56,7 @@ export const {
       buttonInsetBig: 'inset 0px 3px 4px rgba(0, 0, 0, 0.15)',
     },
     radii: {
-      1: '10px',
+      1: '8px',
       2: '50%',
     },
   },

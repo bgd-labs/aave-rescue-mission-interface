@@ -1,6 +1,7 @@
 import { CSS } from '@stitches/react';
 import { MouseEventHandler, ReactNode } from 'react';
 
+import { Box } from '..';
 import { Typography } from '../primitives/Typography';
 import { styled } from '../utils/theme';
 import { Spinner } from './Spinner';
@@ -8,115 +9,37 @@ import { Spinner } from './Spinner';
 export interface ButtonProps {
   type?: 'button' | 'submit';
   size?: 'medium' | 'small';
-  color?: 'gray' | 'dark' | 'secondary' | 'white';
-  activeColorType?: 'gradient';
-  loadingColorType?: 'pending' | 'disabled';
+  color?: 'transparent' | 'white' | 'dark';
   children: string | ReactNode;
   disabled?: boolean;
   loading?: boolean;
-  gradientLoader?: boolean;
-  leftComponent?: ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  transparent?: boolean;
   css?: CSS;
 }
 
 const ButtonWrapper = styled('button', {
   overflow: 'hidden',
   borderRadius: '$1',
-  border: 'none',
-  background: 'transparent',
+  border: '1px solid $main',
+  background: '$main',
   position: 'relative',
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
   transition: 'all 0.2s ease',
-  '.Button__regular': {
-    opacity: 1,
-    transform: 'scale(1)',
-    zIndex: 1,
-  },
-  '&.Button__gray .Button__title, &.Button__transparent .Button__title, &.Button__white .Button__title':
-    {
-      color: '$text',
-    },
-  '&.Button__secondary': {
-    '&.Button__transparent .Button__title': {
-      color: '$secondary',
-    },
-  },
-  '.Button__title': {
-    color: '$textWhite',
-  },
-  '&.Button__transparent .Button__hover': {
-    transform: 'scale(1)',
-  },
+  color: '$textWhite',
   hover: {
-    boxShadow: 'unset',
-    '&.Button__gray .Button__title': {
-      color: '$textWhite',
-    },
-    '&.Button__secondary': {
-      '&.Button__transparent .Button__title': {
-        color: '$text',
-      },
-    },
-    '&.Button__transparent .Button__title': {
-      color: '$text',
-    },
-    '.Button__regular': {
-      zIndex: 0,
-    },
-    '.Button__hover': {
-      opacity: 1,
-      transform: 'scale(1)',
-      zIndex: 1,
-    },
+    background: '$secondary',
   },
   '&:active': {
-    '.Button__title': {
-      transition: 'unset',
-      color: '$textWhite',
-    },
-    '&.Button__secondary': {
-      '&.Button__transparent .Button__title': {
-        color: '$text',
-      },
-    },
-    '&.Button__transparent .Button__title': {
-      color: '$text',
-    },
-    '.Button__icon': {
-      path: { stroke: '$textWhite', fill: '$textWhite' },
-    },
-    '.Button__regular, .Button__hover': {
-      zIndex: 0,
-    },
-    '.Button__hover': {
-      transform: 'scale(0.95)',
-    },
-    '.Button__active': {
-      opacity: 1,
-      transition: 'unset',
-      transform: 'scale(1)',
-      zIndex: 1,
-    },
+    boxShadow: 'inset -2px 6px 3px 2px rgba(27, 32, 48, 0.7)',
   },
   '&:disabled': {
     cursor: 'not-allowed',
     boxShadow: 'unset',
-    '.Button__title': {
-      color: '$text',
-    },
-    '.Button__regular, .Button__hover, .Button__active': {
-      opacity: 0,
-      zIndex: 0,
-    },
-    '.Button__disabled': {
-      opacity: 1,
-      transform: 'scale(1)',
-      zIndex: 1,
-    },
+    border: '1px solid $light',
+    background: '$light',
+    color: '$text !important',
   },
   variants: {
     size: {
@@ -141,87 +64,23 @@ const ButtonWrapper = styled('button', {
         },
       },
     },
-  },
-});
-
-const ButtonInner = styled('div', {
-  borderRadius: '$1',
-  position: 'absolute',
-  inset: 0,
-  opacity: 0,
-  transform: 'scale(0.8)',
-  zIndex: 0,
-  transition: 'all 0.2s ease',
-  variants: {
     color: {
-      gray: {
-        background: '$light',
-      },
-      grayTransparent: {
-        background: '$light',
-      },
-      grayActive: {
-        background: '$appBackground',
-        boxShadow: '$buttonInsetBig',
-      },
-      secondary: {
-        background: '$secondary',
-      },
-      secondaryTransparent: {
-        border: '1px solid $secondary',
-      },
-      dark: {
-        buttonGradientDark: '',
-      },
-      darkTransparent: {
-        border: '1px solid $main',
+      transparent: {
+        background: 'transparent',
+        color: '$text',
+        hover: {
+          color: '$textWhite',
+        },
       },
       white: {
         background: '$textWhite',
+        color: '$text',
+        hover: {
+          color: '$textWhite',
+        },
       },
-      whiteTransparent: {
-        buttonGradientLight: '',
-        boxShadow: '$buttonInset',
-      },
-      hover: {
-        buttonGradientHoverDark: '',
-        boxShadow: '$buttonInset',
-      },
-      whiteHover: {
-        buttonGradientLight: '',
-        boxShadow: '$buttonInset',
-      },
-      forVote: {
-        forGradientFlat: '',
-      },
-      againstVote: {
-        againstGradientFlat: '',
-      },
-      gradient: {
-        mainGradient: '',
-      },
-      pending: {
-        buttonGradientDisabled: '',
-      },
-      disabled: {
-        background: '$light',
-      },
-    },
-  },
-});
-
-const ButtonLeftInner = styled('div', {
-  position: 'relative',
-  zIndex: 5,
-  lineHeight: 0,
-  borderRadius: '$1',
-  variants: {
-    color: {
-      pending: {
-        buttonGradientDisabled: '',
-      },
-      disabled: {
-        background: '$light',
+      dark: {
+        background: '$main',
       },
     },
   },
@@ -231,15 +90,10 @@ export function Button({
   type = 'button',
   size = 'medium',
   color = 'dark',
-  activeColorType = 'gradient',
-  loadingColorType = 'disabled',
   children,
   disabled,
   loading,
-  gradientLoader,
-  leftComponent,
   onClick,
-  transparent,
   css,
 }: ButtonProps) {
   const loaderSize = 16;
@@ -247,40 +101,18 @@ export function Button({
 
   return (
     <ButtonWrapper
-      className={`Button__${color} ${transparent ? `Button__transparent` : ''}`}
       type={type}
       size={size}
+      color={color}
       disabled={disabled || loading}
-      css={{
-        justifyContent: leftComponent ? 'space-between' : 'center',
-        boxShadow: 'unset',
-        ...css,
-      }}
+      css={{ ...css }}
       onClick={onClick}>
-      <ButtonInner
-        className="Button__regular"
-        color={transparent ? `${color}Transparent` : color}
-      />
-      <ButtonInner
-        className="Button__hover"
-        color={color === 'white' || transparent ? 'whiteHover' : 'hover'}
-      />
-      <ButtonInner
-        className="Button__active"
-        color={transparent ? 'grayActive' : activeColorType}
-        css={{ transform: 'scale(0.1)', transition: 'all 0.4s ease' }}
-      />
-      {(disabled || loading) && (
-        <ButtonInner className="Button__disabled" color={loadingColorType} />
-      )}
-
       <Typography
         className="Button__title"
         variant="button"
         css={{
           position: 'relative',
           zIndex: 5,
-          transition: 'all 0.2s ease',
           flex: loading ? 'unset' : 1,
           alignSelf: 'center',
           whiteSpace: 'nowrap',
@@ -288,25 +120,15 @@ export function Button({
         {children}
       </Typography>
 
-      {(loading || leftComponent) && (
-        <ButtonLeftInner
-          color={loadingColorType}
-          css={{
-            ml: leftComponent ? 4 : 5,
-          }}>
-          {loading && (
-            <Spinner
-              size={loaderSize}
-              loaderLineColor="$paper"
-              loaderCss={
-                gradientLoader ? { mainGradient: '' } : { background: '$main' }
-              }
-              lineSize={loaderLineSize}
-            />
-          )}
-
-          {leftComponent && leftComponent}
-        </ButtonLeftInner>
+      {loading && (
+        <Box css={{ ml: 5, background: '$light' }}>
+          <Spinner
+            size={loaderSize}
+            loaderLineColor="$paper"
+            loaderCss={{ background: '$main' }}
+            lineSize={loaderLineSize}
+          />
+        </Box>
       )}
     </ButtonWrapper>
   );

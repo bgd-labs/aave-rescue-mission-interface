@@ -4,7 +4,7 @@ import { Flex, Image, Typography } from '../../../ui';
 
 export type Wallet = {
   walletType: WalletType;
-  icon: string;
+  icon: any;
   title: string;
   setOpenImpersonatedForm?: (value: boolean) => void;
   isVisible?: boolean;
@@ -38,13 +38,20 @@ export function WalletItem({
         borderRadius: '$1',
         background: '$textWhite',
         border: '1px solid $main',
+        path: {
+          transition: 'all 0.2s ease',
+        },
         hover: {
-          boxShadow: '$buttonInset',
-          buttonGradientDisabled: '',
+          background: '$secondary',
+          color: '$textWhite',
+          '.WalletItem__icon': {
+            path: {
+              fill: walletType === 'Impersonated' ? '$textWhite' : '',
+            },
+          },
         },
         '&:active': {
-          boxShadow: 'none',
-          background: '$appBackground',
+          boxShadow: 'inset -2px 6px 3px 2px rgba(27, 32, 48, 0.7)',
         },
         mb: 5,
         p: '7px 10px',
@@ -66,7 +73,11 @@ export function WalletItem({
         }}>
         {title}
       </Typography>
-      <Image src={icon} css={{ size: 22, '@lg': { size: 28 } }} />
+      <Image
+        className="WalletItem__icon"
+        as={icon}
+        css={{ size: 22, '@lg': { size: 28 } }}
+      />
     </Flex>
   );
 }

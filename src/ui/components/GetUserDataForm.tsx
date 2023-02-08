@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Field, Form } from 'react-final-form';
 
 import { useStore } from '../../store';
@@ -50,7 +50,7 @@ export function GetUserDataForm() {
                     <Button
                       type="button"
                       css={{ mr: 14, '@lg': { mr: 24 } }}
-                      transparent
+                      color="transparent"
                       onClick={() => {
                         setAppView('');
                         setCheckedAddress('');

@@ -137,7 +137,7 @@ export function InfoView() {
                 <Flex>
                   <Button
                     css={{ mr: 14, '@lg': { mr: 24 } }}
-                    transparent
+                    color="transparent"
                     onClick={() => {
                       setIsTxStart(false);
                       setError('');
