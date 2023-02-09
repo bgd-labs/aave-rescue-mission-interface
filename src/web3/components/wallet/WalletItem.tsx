@@ -1,6 +1,6 @@
 import { WalletType } from '../../../../packages/src';
 import { useStore } from '../../../store';
-import { Flex, Image, Typography } from '../../../ui';
+import { Box, Flex, Image, Typography } from '../../../ui';
 
 export type Wallet = {
   walletType: WalletType;
@@ -73,11 +73,19 @@ export function WalletItem({
         }}>
         {title}
       </Typography>
-      <Image
-        className="WalletItem__icon"
-        as={icon}
-        css={{ size: 22, '@lg': { size: 28 } }}
-      />
+      {walletType === 'Metamask' ? (
+        <Box
+          className="WalletItem__icon"
+          css={{ size: 22, '@lg': { size: 28 } }}
+          dangerouslySetInnerHTML={{ __html: icon }}
+        />
+      ) : (
+        <Image
+          className="WalletItem__icon"
+          as={icon}
+          css={{ size: 22, '@lg': { size: 28 } }}
+        />
+      )}
     </Flex>
   );
 }

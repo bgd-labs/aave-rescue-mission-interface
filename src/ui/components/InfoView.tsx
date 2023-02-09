@@ -5,12 +5,9 @@ import NoAssetsImage from '/public/images/noAssets.svg';
 import TxErrorImage from '/public/images/txError.svg';
 import TxSuccessImage from '/public/images/txSuccess.svg';
 
-import {
-  generateExplorerLink,
-  generateTxFunction,
-} from '../../../packages/src';
+import { selectTxExplorerLink } from '../../../packages/src';
 import { useStore } from '../../store';
-import { useTxStatuses } from '../../transactions/hooks/useTxStatuses';
+import { useLastTxLocalStatus } from '../../transactions/hooks/useLastTxLocalStatus';
 import { appConfig } from '../../utils/appConfig';
 import { chainInfoHelper } from '../../utils/chains';
 import { Box } from '../primitives/Box';
@@ -26,6 +23,7 @@ import { Link } from './Link';
 import { TokenIcon } from './TokenIcon';
 
 export function InfoView() {
+  const state = useStore();
   const {
     checkedAddress,
     userData,
@@ -66,15 +64,14 @@ export function InfoView() {
     error,
     setError,
     loading,
-    setLoading,
     isTxStart,
     txHash,
     txPending,
     txSuccess,
     setIsTxStart,
-    txChainId,
     txWalletType,
-  } = useTxStatuses({
+    executeTxWithLocalStatuses,
+  } = useLastTxLocalStatus({
     type: 'claim',
     payload: {
       address: checkedAddress,
@@ -88,9 +85,7 @@ export function InfoView() {
         activeWallet.accounts[0].toLowerCase() === checkedAddress.toLowerCase()
       ) {
         setWrongAddressError('');
-        await generateTxFunction({
-          setError,
-          setLoading,
+        await executeTxWithLocalStatuses({
           errorMessage:
             'Error during the claim assets, check console for more details',
           callbackFunction: async () =>
@@ -228,12 +223,10 @@ export function InfoView() {
 
           {txHash && txWalletType && (
             <Link
-              href={generateExplorerLink(
+              href={selectTxExplorerLink(
+                state,
                 chainInfoHelper.getChainParameters,
-                txWalletType,
-                txChainId || appConfig.chainId,
                 txHash,
-                activeWallet?.accounts[0],
               )}
               css={{
                 display: 'inline-flex',

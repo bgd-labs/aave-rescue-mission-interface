@@ -2,7 +2,7 @@ import {
   ChainInformation,
   ETH,
   initChainInformationConfig,
-} from '../../packages/src/utils/chainInfoHelpers';
+} from '../../packages/src';
 
 // TODO: remove after mainnet connect
 export const CHAINS: {

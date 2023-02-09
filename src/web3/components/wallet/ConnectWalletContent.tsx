@@ -1,50 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-import BrowserWalletIcon from '/public/images/wallets/browserWallet.svg';
 import CoinbaseIcon from '/public/images/wallets/coinbase.svg';
 import GnosisSafeIcon from '/public/images/wallets/gnosisSafe.svg';
 import ImpersonatedIcon from '/public/images/wallets/impersonated.svg';
 import WalletConnectIcon from '/public/images/wallets/walletConnect.svg';
 
+import { getBrowserWalletInfo } from '../../../../packages/src/utils/wallets/getBrowserWalletInfo';
 import { useStore } from '../../../store';
 import { Button, Typography } from '../../../ui';
 import { ContentWrapper } from '../../../ui/components/ContentWrapper';
 import { GradientLoader } from '../../../ui/components/GradientLoader';
 import { ImpersonatedForm } from './ImpersonatedForm';
 import { Wallet, WalletItem } from './WalletItem';
-
-export const wallets: Wallet[] = [
-  {
-    walletType: 'Metamask',
-    icon: BrowserWalletIcon,
-    title: 'Browser wallet',
-    isVisible: true,
-  },
-  {
-    walletType: 'Coinbase',
-    icon: CoinbaseIcon,
-    title: 'Coinbase',
-    isVisible: true,
-  },
-  {
-    walletType: 'WalletConnect',
-    icon: WalletConnectIcon,
-    title: 'WalletConnect',
-    isVisible: true,
-  },
-  {
-    walletType: 'GnosisSafe',
-    icon: GnosisSafeIcon,
-    title: 'Gnosis safe',
-    isVisible: typeof window !== 'undefined' && window !== window.parent,
-  },
-  {
-    walletType: 'Impersonated',
-    icon: ImpersonatedIcon,
-    title: 'Impersonated',
-    isVisible: true,
-  },
-];
 
 export function ConnectWalletContent() {
   const { walletActivating, walletConnectionError, setAppView, prevAppView } =
@@ -55,6 +22,44 @@ export function ConnectWalletContent() {
   useEffect(() => {
     setImpersonatedFormOpen(false);
   }, []);
+
+  const browserWalletInfo = getBrowserWalletInfo();
+
+  const wallets: Wallet[] = [
+    {
+      walletType: 'Coinbase',
+      icon: CoinbaseIcon,
+      title: 'Coinbase',
+      isVisible: true,
+    },
+    {
+      walletType: 'WalletConnect',
+      icon: WalletConnectIcon,
+      title: 'WalletConnect',
+      isVisible: true,
+    },
+    {
+      walletType: 'GnosisSafe',
+      icon: GnosisSafeIcon,
+      title: 'Gnosis safe',
+      isVisible: typeof window !== 'undefined' && window !== window.parent,
+    },
+    {
+      walletType: 'Impersonated',
+      icon: ImpersonatedIcon,
+      title: 'Impersonated',
+      isVisible: true,
+    },
+  ];
+
+  if (!!browserWalletInfo) {
+    wallets.unshift({
+      walletType: 'Metamask',
+      icon: browserWalletInfo.icon,
+      title: browserWalletInfo.label,
+      isVisible: true,
+    });
+  }
 
   return (
     <ContentWrapper
