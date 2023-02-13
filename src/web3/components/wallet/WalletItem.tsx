@@ -42,13 +42,8 @@ export function WalletItem({
           transition: 'all 0.2s ease',
         },
         hover: {
-          background: '$secondary',
-          color: '$textWhite',
-          '.WalletItem__icon': {
-            path: {
-              fill: walletType === 'Impersonated' ? '$textWhite' : '',
-            },
-          },
+          borderColor: '$gray',
+          background: '$gray',
         },
         '&:active': {
           boxShadow: 'inset -2px 6px 3px 2px rgba(27, 32, 48, 0.7)',
@@ -75,16 +70,11 @@ export function WalletItem({
       </Typography>
       {walletType === 'Metamask' ? (
         <Box
-          className="WalletItem__icon"
           css={{ size: 22, '@lg': { size: 28 } }}
           dangerouslySetInnerHTML={{ __html: icon }}
         />
       ) : (
-        <Image
-          className="WalletItem__icon"
-          as={icon}
-          css={{ size: 22, '@lg': { size: 28 } }}
-        />
+        <Image as={icon} css={{ size: 22, '@lg': { size: 28 } }} />
       )}
     </Flex>
   );

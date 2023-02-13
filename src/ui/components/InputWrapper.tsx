@@ -23,11 +23,11 @@ export function InputWrapper({
     <Flex
       css={{
         flexDirection: 'column',
-        pb: 8,
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
+        mb: 20,
         '@sm': {
           width: 'calc(100% + 40px)',
         },
@@ -64,15 +64,18 @@ export function InputWrapper({
         <Typography
           variant="descriptor"
           css={{
-            color: '$error',
+            color: '$textWhite',
             position: 'absolute',
             top: '100%',
             alignSelf: 'flex-start',
             textAlign: 'left',
             width: '100%',
-            left: 10,
+            p: '5px 10px',
+            background: '$error',
+            borderBottomLeftRadius: '$1',
+            borderBottomRightRadius: '$1',
             '@lg': {
-              left: 25,
+              p: '5px 25px',
             },
           }}>
           {error}

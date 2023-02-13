@@ -23,6 +23,7 @@ export const {
     colors: {
       main: '#1B2030',
       secondary: '#5C6279',
+      gray: '#D9D9D9',
       disabled: '#ABB1C5',
       light: '#E2E5F0',
       error: '#FF607B',
@@ -37,14 +38,6 @@ export const {
       // gradients
       mainGradientFirst: '#B6509E',
       mainGradientSecond: '#2EBAC6',
-      forGradientFirst: '#2CC09C',
-      forGradientSecond: '#12C89C',
-      againstGradientFirst: '#F43C94',
-      buttonDarkSecond: '#292E41',
-      buttonHoverDarkFirst: '#323950',
-      buttonHoverDarkSecond: '#424864',
-      buttonLightSecond: '#DFDFDF',
-      buttonDisabledSecond: '#F4F4F4',
     },
     fonts: {
       inter: "'Inter', sans-serif",
@@ -141,25 +134,6 @@ export const {
       linearGradient:
         '92.22deg, $mainGradientFirst 12.43%, $mainGradientSecond 89.01%',
     }),
-    forGradientFlat: () => ({
-      linearGradient: '180deg, $forGradientFirst 0%, $forGradientSecond 100%',
-    }),
-    againstGradientFlat: () => ({
-      linearGradient: '180deg, $againstGradientFirst 0%, $mainAgainst 100%',
-    }),
-    buttonGradientDark: () => ({
-      linearGradient: '180deg, $main 0%, $buttonDarkSecond 89.58%',
-    }),
-    buttonGradientHoverDark: () => ({
-      linearGradient:
-        '180deg, $buttonHoverDarkFirst 0%, $buttonHoverDarkSecond 81.25%',
-    }),
-    buttonGradientLight: () => ({
-      linearGradient: '180deg, $paper 0%, $buttonLightSecond 91.67%',
-    }),
-    buttonGradientDisabled: () => ({
-      linearGradient: '180deg, $paper 0%, $buttonDisabledSecond 100%',
-    }),
   },
 });
 
@@ -168,6 +142,7 @@ export const darkTheme = createTheme({
   colors: {
     main: '#1B2030',
     secondary: '#5C6279',
+    gray: '#D9D9D9',
     disabled: '#ABB1C5',
     light: '#E2E5F0',
     error: '#FF607B',
@@ -182,14 +157,6 @@ export const darkTheme = createTheme({
     // gradients
     mainGradientFirst: '#B6509E',
     mainGradientSecond: '#2EBAC6',
-    forGradientFirst: '#2CC09C',
-    forGradientSecond: '#12C89C',
-    againstGradientFirst: '#F43C94',
-    buttonDarkSecond: '#292E41',
-    buttonHoverDarkFirst: '#323950',
-    buttonHoverDarkSecond: '#424864',
-    buttonLightSecond: '#DFDFDF',
-    buttonDisabledSecond: '#F4F4F4',
   },
 });
 

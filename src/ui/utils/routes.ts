@@ -1,5 +1,3 @@
-// TODO: need change routes
-
 export const ROUTES = {
   main: '/',
   logo: '/',

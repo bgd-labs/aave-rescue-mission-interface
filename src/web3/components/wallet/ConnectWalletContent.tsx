@@ -5,7 +5,7 @@ import GnosisSafeIcon from '/public/images/wallets/gnosisSafe.svg';
 import ImpersonatedIcon from '/public/images/wallets/impersonated.svg';
 import WalletConnectIcon from '/public/images/wallets/walletConnect.svg';
 
-import { getBrowserWalletInfo } from '../../../../packages/src/utils/wallets/getBrowserWalletInfo';
+import { getBrowserWalletLabelAndIcon } from '../../../../packages/src';
 import { useStore } from '../../../store';
 import { Button, Typography } from '../../../ui';
 import { ContentWrapper } from '../../../ui/components/ContentWrapper';
@@ -23,7 +23,7 @@ export function ConnectWalletContent() {
     setImpersonatedFormOpen(false);
   }, []);
 
-  const browserWalletInfo = getBrowserWalletInfo();
+  const browserWalletInfo = getBrowserWalletLabelAndIcon();
 
   const wallets: Wallet[] = [
     {
