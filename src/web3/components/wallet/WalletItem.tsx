@@ -1,6 +1,6 @@
 import { WalletType } from '../../../../packages/src';
 import { useStore } from '../../../store';
-import { Flex, Image, Typography } from '../../../ui';
+import { Box, Flex, Image, Typography } from '../../../ui';
 
 export type Wallet = {
   walletType: WalletType;
@@ -42,13 +42,8 @@ export function WalletItem({
           transition: 'all 0.2s ease',
         },
         hover: {
-          background: '$secondary',
-          color: '$textWhite',
-          '.WalletItem__icon': {
-            path: {
-              fill: walletType === 'Impersonated' ? '$textWhite' : '',
-            },
-          },
+          borderColor: '$gray',
+          background: '$gray',
         },
         '&:active': {
           boxShadow: 'inset -2px 6px 3px 2px rgba(27, 32, 48, 0.7)',
@@ -73,11 +68,14 @@ export function WalletItem({
         }}>
         {title}
       </Typography>
-      <Image
-        className="WalletItem__icon"
-        as={icon}
-        css={{ size: 22, '@lg': { size: 28 } }}
-      />
+      {walletType === 'Metamask' ? (
+        <Box
+          css={{ size: 22, '@lg': { size: 28 } }}
+          dangerouslySetInnerHTML={{ __html: icon }}
+        />
+      ) : (
+        <Image as={icon} css={{ size: 22, '@lg': { size: 28 } }} />
+      )}
     </Flex>
   );
 }

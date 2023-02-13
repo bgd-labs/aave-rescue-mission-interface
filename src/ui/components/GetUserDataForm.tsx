@@ -78,6 +78,20 @@ export function GetUserDataForm() {
                       isError={props.meta.error && props.meta.touched}
                       error={props.meta.error}>
                       <Input
+                        css={{
+                          borderColor:
+                            props.meta.error && props.meta.touched
+                              ? '$error'
+                              : '$main',
+                          borderBottomLeftRadius:
+                            props.meta.error && props.meta.touched
+                              ? 'unset'
+                              : '$1',
+                          borderBottomRightRadius:
+                            props.meta.error && props.meta.touched
+                              ? 'unset'
+                              : '$1',
+                        }}
                         type="text"
                         placeholder="0x0..."
                         {...props.input}
@@ -102,7 +116,7 @@ export function GetUserDataForm() {
                           props.input.value !== activeWallet.accounts[0]
                             ? 1
                             : -1,
-                        mt: 15,
+                        mt: 20,
                       }}>
                       <Typography
                         as="button"

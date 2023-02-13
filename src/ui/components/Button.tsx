@@ -29,6 +29,7 @@ const ButtonWrapper = styled('button', {
   transition: 'all 0.2s ease',
   color: '$textWhite',
   hover: {
+    borderColor: '$secondary',
     background: '$secondary',
   },
   '&:active': {
@@ -69,7 +70,8 @@ const ButtonWrapper = styled('button', {
         background: 'transparent',
         color: '$text',
         hover: {
-          color: '$textWhite',
+          borderColor: '$gray',
+          background: '$gray',
         },
       },
       white: {

@@ -154,7 +154,7 @@ export interface ClaimedEventObject {
 export type ClaimedEvent = TypedEvent<
   [BigNumber, string, BigNumber, BigNumber],
   ClaimedEventObject
->;
+  >;
 
 export type ClaimedEventFilter = TypedEventFilter<ClaimedEvent>;
 
@@ -166,7 +166,7 @@ export interface DistributionAddedEventObject {
 export type DistributionAddedEvent = TypedEvent<
   [string, string, BigNumber],
   DistributionAddedEventObject
->;
+  >;
 
 export type DistributionAddedEventFilter =
   TypedEventFilter<DistributionAddedEvent>;

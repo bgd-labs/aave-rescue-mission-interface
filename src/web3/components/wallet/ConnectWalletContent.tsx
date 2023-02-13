@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import BrowserWalletIcon from '/public/images/wallets/browserWallet.svg';
 import CoinbaseIcon from '/public/images/wallets/coinbase.svg';
 import GnosisSafeIcon from '/public/images/wallets/gnosisSafe.svg';
 import ImpersonatedIcon from '/public/images/wallets/impersonated.svg';
 import WalletConnectIcon from '/public/images/wallets/walletConnect.svg';
 
+import { getBrowserWalletLabelAndIcon } from '../../../../packages/src';
 import { useStore } from '../../../store';
 import { Button, Typography } from '../../../ui';
 import { ContentWrapper } from '../../../ui/components/ContentWrapper';
@@ -13,11 +13,13 @@ import { GradientLoader } from '../../../ui/components/GradientLoader';
 import { ImpersonatedForm } from './ImpersonatedForm';
 import { Wallet, WalletItem } from './WalletItem';
 
-export const wallets: Wallet[] = [
+const browserWalletInfo = getBrowserWalletLabelAndIcon();
+
+const wallets: Wallet[] = [
   {
     walletType: 'Metamask',
-    icon: BrowserWalletIcon,
-    title: 'Browser wallet',
+    icon: browserWalletInfo.icon,
+    title: browserWalletInfo.label,
     isVisible: true,
   },
   {

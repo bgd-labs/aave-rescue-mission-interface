@@ -53,7 +53,25 @@ export function ImpersonatedForm({ closeClick }: ImpersonatedFormProps) {
                   <InputWrapper
                     isError={props.meta.error && props.meta.touched}
                     error={props.meta.error}>
-                    <Input type="text" placeholder="0x0..." {...props.input} />
+                    <Input
+                      css={{
+                        borderColor:
+                          props.meta.error && props.meta.touched
+                            ? '$error'
+                            : '$main',
+                        borderBottomLeftRadius:
+                          props.meta.error && props.meta.touched
+                            ? 'unset'
+                            : '$1',
+                        borderBottomRightRadius:
+                          props.meta.error && props.meta.touched
+                            ? 'unset'
+                            : '$1',
+                      }}
+                      type="text"
+                      placeholder="0x0..."
+                      {...props.input}
+                    />
                   </InputWrapper>
                 )}
               </Field>
