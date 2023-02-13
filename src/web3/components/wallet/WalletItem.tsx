@@ -70,7 +70,13 @@ export function WalletItem({
       </Typography>
       {walletType === 'Metamask' ? (
         <Box
-          css={{ size: 22, '@lg': { size: 28 } }}
+          css={{
+            size: 22,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            '@lg': { size: 28 },
+          }}
           dangerouslySetInnerHTML={{ __html: icon }}
         />
       ) : (
