@@ -13,6 +13,41 @@ import { GradientLoader } from '../../../ui/components/GradientLoader';
 import { ImpersonatedForm } from './ImpersonatedForm';
 import { Wallet, WalletItem } from './WalletItem';
 
+const browserWalletInfo = getBrowserWalletLabelAndIcon();
+
+const wallets: Wallet[] = [
+  {
+    walletType: 'Metamask',
+    icon: browserWalletInfo.icon,
+    title: browserWalletInfo.label,
+    isVisible: true,
+  },
+  {
+    walletType: 'Coinbase',
+    icon: CoinbaseIcon,
+    title: 'Coinbase',
+    isVisible: true,
+  },
+  {
+    walletType: 'WalletConnect',
+    icon: WalletConnectIcon,
+    title: 'WalletConnect',
+    isVisible: true,
+  },
+  {
+    walletType: 'GnosisSafe',
+    icon: GnosisSafeIcon,
+    title: 'Gnosis safe',
+    isVisible: typeof window !== 'undefined' && window !== window.parent,
+  },
+  {
+    walletType: 'Impersonated',
+    icon: ImpersonatedIcon,
+    title: 'Impersonated',
+    isVisible: true,
+  },
+];
+
 export function ConnectWalletContent() {
   const { walletActivating, walletConnectionError, setAppView, prevAppView } =
     useStore();
@@ -22,44 +57,6 @@ export function ConnectWalletContent() {
   useEffect(() => {
     setImpersonatedFormOpen(false);
   }, []);
-
-  const browserWalletInfo = getBrowserWalletLabelAndIcon();
-
-  const wallets: Wallet[] = [
-    {
-      walletType: 'Coinbase',
-      icon: CoinbaseIcon,
-      title: 'Coinbase',
-      isVisible: true,
-    },
-    {
-      walletType: 'WalletConnect',
-      icon: WalletConnectIcon,
-      title: 'WalletConnect',
-      isVisible: true,
-    },
-    {
-      walletType: 'GnosisSafe',
-      icon: GnosisSafeIcon,
-      title: 'Gnosis safe',
-      isVisible: typeof window !== 'undefined' && window !== window.parent,
-    },
-    {
-      walletType: 'Impersonated',
-      icon: ImpersonatedIcon,
-      title: 'Impersonated',
-      isVisible: true,
-    },
-  ];
-
-  if (!!browserWalletInfo) {
-    wallets.unshift({
-      walletType: 'Metamask',
-      icon: browserWalletInfo.icon,
-      title: browserWalletInfo.label,
-      isVisible: true,
-    });
-  }
 
   return (
     <ContentWrapper
