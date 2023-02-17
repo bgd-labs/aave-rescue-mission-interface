@@ -2,10 +2,9 @@ import makeBlockie from 'ethereum-blockies-base64';
 import { utils } from 'ethers';
 import { useEffect, useState } from 'react';
 
-import { StaticJsonRpcBatchProvider } from '../../../packages/src/utils/StaticJsonRpcBatchProvider';
+import { appConfig } from '../../utils/appConfig';
 
-const mainnetRpcURL = 'https://cloudflare-eth.com';
-const mainnetProvider = new StaticJsonRpcBatchProvider(mainnetRpcURL);
+const mainnetProvider = appConfig.provider;
 
 interface EnsResponse {
   name?: string;
