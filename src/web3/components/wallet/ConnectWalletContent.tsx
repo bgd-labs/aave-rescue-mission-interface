@@ -44,7 +44,7 @@ const wallets: Wallet[] = [
     walletType: 'Impersonated',
     icon: ImpersonatedIcon,
     title: 'Impersonated',
-    isVisible: true,
+    isVisible: false,
   },
 ];
 
