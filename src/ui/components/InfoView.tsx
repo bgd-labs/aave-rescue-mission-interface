@@ -70,6 +70,7 @@ export function InfoView() {
     txSuccess,
     setIsTxStart,
     txWalletType,
+    isError,
     executeTxWithLocalStatuses,
   } = useLastTxLocalStatus({
     type: 'claim',
@@ -114,7 +115,7 @@ export function InfoView() {
             <Typography variant="h1">
               {txPending && 'Pending'}
               {txSuccess && 'Success'}
-              {!!error && 'Error'}
+              {isError && 'Error'}
             </Typography>
           }
           bottomBlock={
@@ -128,7 +129,7 @@ export function InfoView() {
                   Close
                 </Button>
               )}
-              {!!error && (
+              {isError && (
                 <Flex>
                   <Button
                     css={{ mr: 14, '@lg': { mr: 24 } }}
@@ -200,7 +201,7 @@ export function InfoView() {
                 />
               </Flex>
             )}
-            {!!error && (
+            {isError && (
               <Image
                 as={TxErrorImage}
                 css={{ size: 120, '@lg': { size: 148 } }}
@@ -218,7 +219,7 @@ export function InfoView() {
             }}>
             {txPending && 'Waiting while transaction executing'}
             {txSuccess && 'Transaction executed'}
-            {!!error && error}
+            {isError && error}
           </Typography>
 
           {txHash && txWalletType && (
