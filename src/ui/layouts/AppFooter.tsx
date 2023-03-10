@@ -1,9 +1,12 @@
+import { useStore } from '../../store';
 import { Link } from '../components/Link';
 import { Flex } from '../primitives/Flex';
 import { Typography } from '../primitives/Typography';
 import { ROUTES } from '../utils/routes';
 
 export function AppFooter() {
+  const { setModalOpen } = useStore();
+
   return (
     <Flex
       as="footer"
@@ -30,6 +33,19 @@ export function AppFooter() {
           Github
         </Typography>
       </Link>
+      <Typography
+        as="button"
+        type="button"
+        variant="descriptorAccent"
+        onClick={() => setModalOpen(true)}
+        css={{
+          color: '$textSecondary',
+          ml: 15,
+          cursor: 'pointer',
+          hover: { opacity: 0.7 },
+        }}>
+        Terms and Conditions
+      </Typography>
     </Flex>
   );
 }

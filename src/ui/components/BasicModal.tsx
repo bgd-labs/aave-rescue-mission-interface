@@ -1,14 +1,14 @@
 import { Dialog } from '@headlessui/react';
 import { CSS } from '@stitches/react';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 
 import CloseIcon from '/public/images/icons/cross.svg';
 
-import { useStore } from '../../store';
 import { Box } from '../primitives/Box';
 import { Flex } from '../primitives/Flex';
 import { Image } from '../primitives/Image';
 import { keyframes } from '../utils/theme';
+import { BoxWith3D } from './BoxWith3D';
 
 export interface BasicModalProps {
   isOpen: boolean;
@@ -31,14 +31,6 @@ export function BasicModal({
   withoutAnimationWhenOpen,
   contentCss,
 }: BasicModalProps) {
-  const setModalOpen = useStore((state) => state.setModalOpen);
-
-  useEffect(() => {
-    if (isOpen) {
-      setModalOpen(true);
-    }
-  }, [isOpen]);
-
   const modalOpen = keyframes({
     '0%': {
       opacity: withoutAnimationWhenOpen ? 1 : 0.5,
@@ -62,7 +54,6 @@ export function BasicModal({
       open={isOpen}
       onClose={() => {
         setIsOpen(false);
-        setModalOpen(false);
       }}>
       {!withoutOverlap && (
         <Box
@@ -81,7 +72,7 @@ export function BasicModal({
       <Flex
         css={{
           position: 'fixed',
-          top: 76,
+          top: 12,
           left: 0,
           right: 0,
           bottom: 0,
@@ -94,71 +85,85 @@ export function BasicModal({
         <Dialog.Panel
           as={Box}
           css={{
-            background: '$paper',
-            boxShadow: '$paper',
-            position: 'relative',
-            overflowX: 'hidden',
-            overflowY: 'auto',
             width: '100%',
             height: '100%',
-            display: 'flex',
+            m: 8,
             '@media (hover: hover) and (pointer: fine)': {
               animation: `${modalOpen} 0.3s`,
             },
-            p: '32px 24px 24px',
-            ...contentCss,
-            '@sm': {
-              display: 'block',
-              m: 12,
-              borderRadius: '$1',
-              maxHeight: 'calc(100vh - 20px)',
-              height: 'unset',
-              maxWidth: maxWidth || 432,
-              p: '44px 32px 32px',
-            },
+            '@sm': { maxWidth: maxWidth || 900, height: 'unset' },
           }}>
-          <Box
-            css={{
-              margin: 'auto',
+          <BoxWith3D
+            borderSize={20}
+            alwaysWithBorders
+            wrapperCss={{
+              display: 'flex',
               width: '100%',
-              maxWidth: maxWidth || 432,
-              '@sm': { margin: '0 auto', maxWidth: 'unset' },
+              height: 'calc(100% - 8px)',
+              '@sm': {
+                height: '100%',
+              },
+              '> div': { width: '100%', height: '100%', display: 'flex' },
+            }}
+            css={{
+              position: 'relative',
+              overflowX: 'hidden',
+              overflowY: 'auto',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              p: '30px 15px 15px',
+              ...contentCss,
+              '@sm': {
+                display: 'block',
+                maxHeight: 'calc(100vh - 20px)',
+                height: 'unset',
+                maxWidth: maxWidth || 900,
+                p: '50px 30px 30px',
+              },
             }}>
-            {children}
-          </Box>
-
-          {withCloseButton && (
             <Box
               css={{
-                position: 'absolute',
-                size: 20,
-                right: 24,
-                top: 0,
-                border: 'none',
-                background: 'none',
-                hover: {
-                  opacity: '0.7',
-                },
-                '@sm': {
-                  right: 20,
-                },
-              }}
-              as="button"
-              type="button"
-              onClick={() => {
-                setIsOpen(false);
-                setModalOpen(false);
+                margin: 'auto',
+                width: '100%',
+                maxWidth: maxWidth || 900,
+                '@sm': { margin: '0 auto', maxWidth: 'unset' },
               }}>
-              <Image
-                as={CloseIcon}
-                css={{
-                  position: 'fixed',
-                  size: 20,
-                  path: { stroke: '$main', fill: '$main' },
-                }}
-              />
+              {children}
             </Box>
-          )}
+
+            {withCloseButton && (
+              <Box
+                css={{
+                  position: 'absolute',
+                  size: 16,
+                  right: 24,
+                  top: 2,
+                  border: 'none',
+                  background: 'none',
+                  hover: {
+                    opacity: '0.7',
+                  },
+                  '@sm': {
+                    right: 20,
+                  },
+                }}
+                as="button"
+                type="button"
+                onClick={() => {
+                  setIsOpen(false);
+                }}>
+                <Image
+                  as={CloseIcon}
+                  css={{
+                    position: 'fixed',
+                    size: 16,
+                    path: { stroke: '$main', fill: '$main' },
+                  }}
+                />
+              </Box>
+            )}
+          </BoxWith3D>
         </Dialog.Panel>
       </Flex>
     </Dialog>
