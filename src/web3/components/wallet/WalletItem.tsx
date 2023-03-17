@@ -76,6 +76,10 @@ export function WalletItem({
             alignItems: 'center',
             justifyContent: 'center',
             '@lg': { size: 28 },
+            svg: {
+              size: 22,
+              '@lg': { size: 28 },
+            },
           }}
           dangerouslySetInnerHTML={{ __html: icon }}
         />
