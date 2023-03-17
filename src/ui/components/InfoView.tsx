@@ -18,8 +18,8 @@ import { textCenterEllipsis } from '../utils/text-center-ellipsis';
 import { Button } from './Button';
 import { ContentWrapper } from './ContentWrapper';
 import { FormattedNumber } from './FormattedNumber';
-import { GradientLoader } from './GradientLoader';
 import { Link } from './Link';
+import { RocketLoader } from './RocketLoader';
 import { TokenIcon } from './TokenIcon';
 
 export function InfoView() {
@@ -162,7 +162,7 @@ export function InfoView() {
                 minHeight: 180,
               },
             }}>
-            {txPending && <GradientLoader />}
+            {txPending && <RocketLoader />}
             {txSuccess && (
               <Flex
                 css={{
@@ -311,7 +311,7 @@ export function InfoView() {
             )
           }>
           {userDataLoading ? (
-            <GradientLoader />
+            <RocketLoader />
           ) : (
             <>
               {!!filteredUserData.length ? (

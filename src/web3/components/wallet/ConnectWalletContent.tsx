@@ -9,7 +9,7 @@ import { getBrowserWalletLabelAndIcon } from '../../../../packages/src';
 import { useStore } from '../../../store';
 import { Button, Typography } from '../../../ui';
 import { ContentWrapper } from '../../../ui/components/ContentWrapper';
-import { GradientLoader } from '../../../ui/components/GradientLoader';
+import { RocketLoader } from '../../../ui/components/RocketLoader';
 import { ImpersonatedForm } from './ImpersonatedForm';
 import { Wallet, WalletItem } from './WalletItem';
 
@@ -73,7 +73,7 @@ export function ConnectWalletContent() {
         )
       }>
       {walletActivating ? (
-        <GradientLoader />
+        <RocketLoader />
       ) : (
         <>
           {impersonatedFormOpen && !!setImpersonatedFormOpen ? (

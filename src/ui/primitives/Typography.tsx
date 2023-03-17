@@ -13,6 +13,16 @@ export const Typography = styled('p', {
           lineHeight: '24px',
         },
       },
+      h2: {
+        fontWeight: '500',
+        fontSize: 16,
+        lineHeight: '18px',
+        '@lg': {
+          letterSpacing: '0.03em',
+          fontSize: 17,
+          lineHeight: '20px',
+        },
+      },
       headline: {
         fontWeight: '600',
         fontSize: 13,

@@ -19,6 +19,7 @@ export interface BasicModalProps {
   withoutOverlap?: boolean;
   withoutAnimationWhenOpen?: boolean;
   contentCss?: CSS;
+  initialFocus?: any;
 }
 
 export function BasicModal({
@@ -30,6 +31,7 @@ export function BasicModal({
   withoutOverlap,
   withoutAnimationWhenOpen,
   contentCss,
+  initialFocus,
 }: BasicModalProps) {
   const modalOpen = keyframes({
     '0%': {
@@ -42,6 +44,7 @@ export function BasicModal({
 
   return (
     <Dialog
+      initialFocus={initialFocus}
       as={Box}
       css={{
         position: 'relative',

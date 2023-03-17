@@ -200,7 +200,7 @@ export const globalStyles = globalCss({
   },
 
   ul: {
-    listStyleType: 'none',
+    display: 'block',
   },
 
   'input, button': {
