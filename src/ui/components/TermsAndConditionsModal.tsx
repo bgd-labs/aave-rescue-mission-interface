@@ -40,50 +40,35 @@ export function TermsAndConditionsModal({
         variant="h1"
         ref={initialFocusRef}
         css={{ textAlign: 'center', mb: 24 }}>
-        Rescue Mission app Terms and Conditions
+        Rescue Mission interface Terms and Conditions
       </Typography>
       <Typography variant="h2" css={{ mb: 20 }}>
         1. Purpose of the Agreement
       </Typography>
-      <Text>Welcome to Rescue Mission app by BGD Labs Technologies LLC!</Text>
+      <Text>Welcome to the Rescue Mission interface!</Text>
+      <Text>Effective Date: 17 March 2023</Text>
       <Text>
-        Effective Date:{' '}
-        <Typography as="span" css={{ color: '$error' }}>
-          20
-        </Typography>{' '}
-        March 2023
-      </Text>
-      <Text>
-        The Rescue Mission app is brought to you by BGD Labs Technologies LLC
-        (“BGD Labs Technologies”, “we,” “us,” or “our”). Our platform provides
-        users with an interface to interact with the rescue mission smart
-        contracts on the Ethereum blockchain. By accessing or using our
-        platform, you agree to comply with and be bound by the following Terms
+        The Rescue Mission interface is brought to you by BGD Labs Technologies
+        LLC (“BGD Labs Technologies”, “we,” “us,” or “our”). Our interface
+        provides users with an interface to interact with the rescue mission
+        smart contracts on the Ethereum blockchain. By accessing or using our
+        interface, you agree to comply with and be bound by the following Terms
         and Conditions (the "Agreement"). Please read this Agreement carefully
-        before using our platform.
+        before using our interface.
       </Text>
       <Text>
-        The Agreement regulates the use of our platform as an interface to
-        interact with the rescue mission smart contracts on the Ethereum
-        blockchain.
-      </Text>
-      <Text>
-        ARBITRATION NOTICE: THIS AGREEMENT CONTAINS AN ARBITRATION CLAUSE BELOW.
-        EXCEPT FOR CERTAIN TYPES OF DISPUTES MENTIONED IN THAT ARBITRATION
-        CLAUSE, YOU AND WE AGREE THAT ANY DISPUTES RELATING TO THE PLATFORM WILL
-        BE RESOLVED BY MANDATORY BINDING ARBITRATION, AND YOU WAIVE ANY RIGHT TO
-        A TRIAL BY JURY OR TO PARTICIPATE IN A CLASS-ACTION LAWSUIT OR
-        CLASS-WIDE ARBITRATION.
+        The Agreement regulates the use of the interface to interact with the
+        rescue mission smart contracts on the Ethereum blockchain.
       </Text>
       <Typography variant="h2" css={{ mb: 20 }}>
         2. Acceptance of the Agreement
       </Typography>
       <Text>
-        By accessing or using the Rescue Mission app, you acknowledge that you
-        have read and agree to this Agreement, and that you have the legal
+        By accessing or using the Rescue Mission interface, you acknowledge that
+        you have read and agree to this Agreement, and that you have the legal
         capacity to enter into a binding agreement with BGD Labs Technologies
         LLC. If you do not meet the eligibility requirements to enter into a
-        binding agreement, you must not access or use our platform.
+        binding agreement, you must not access or use our interface.
       </Text>
       <Typography variant="h2" css={{ mb: 20 }}>
         3. Who We Are
@@ -94,13 +79,13 @@ export function TermsAndConditionsModal({
         decentralised protocols.
       </Text>
       <Typography variant="h2" css={{ mb: 20 }}>
-        4. Our Professional Engagement with the DAO
+        4. Our Professional Engagement with the Aave DAO
       </Typography>
       <Text>
         Our engagement with the DAO consists of building software for smart
-        contracts deployed on the Ethereum blockchain, which are subject to the
-        decision-making process of the DAO. This means that the DAO has the
-        final decision to activate or not activate the smart contract.
+        contracts to be deployed on the Ethereum blockchain, which are subject
+        to the decision-making process of the DAO. This means that the DAO has
+        the final decision to activate or not activate the smart contract.
       </Text>
       <Typography variant="h2" css={{ mb: 20 }}>
         5. Rescue Mission Smart Contracts
@@ -108,37 +93,76 @@ export function TermsAndConditionsModal({
       <Text>
         The Rescue Mission smart contracts are software deployed on the Ethereum
         blockchain designed to retrieve tokens that were mistakenly sent to the
-        Aave Protocol smart contracts. Our platform provides an interface for
-        users to interact with these smart contracts, enabling the retrieval of
-        tokens that would otherwise be lost.
+        Aave Protocol smart contracts.
       </Text>
+      <Text>The Rescue Mission smart contracts:</Text>
+      <Box as="ul" css={{ ml: 20 }}>
+        <Box as="li" css={{ mb: 12 }}>
+          <Text withMargin={false}>
+            <Link
+              inNewWindow
+              href="https://etherscan.io/address/0xa88c6D90eAe942291325f9ae3c66f3563B93FE10"
+              css={{ textDecoration: 'underline', hover: { opacity: 0.7 } }}>
+              https://etherscan.io/address/0xa88c6D90eAe942291325f9ae3c66f3563B93FE10
+            </Link>
+          </Text>
+        </Box>
+      </Box>
+      <Text>
+        AAVE holder community has to approve the activation of the smart
+        contracts:
+      </Text>
+      <Box as="ul" css={{ ml: 20 }}>
+        <Box as="li" css={{ mb: 12 }}>
+          <Text withMargin={false}>
+            Rescue Mission Phase 1 Short Executor:
+            <Link
+              inNewWindow
+              href="https://app.aave.com/governance/proposal/165/"
+              css={{ textDecoration: 'underline', hover: { opacity: 0.7 } }}>
+              https://app.aave.com/governance/proposal/165/
+            </Link>
+          </Text>
+        </Box>
+        <Box as="li" css={{ mb: 12 }}>
+          <Text withMargin={false}>
+            Rescue Mission Phase 1 Long Executor:
+            <Link
+              inNewWindow
+              href="https://app.aave.com/governance/proposal/166/"
+              css={{ textDecoration: 'underline', hover: { opacity: 0.7 } }}>
+              https://app.aave.com/governance/proposal/166/
+            </Link>
+          </Text>
+        </Box>
+      </Box>
       <Typography variant="h2" css={{ mb: 20 }}>
         6. The Aave Ecosystem
       </Typography>
       <Text>
-        The Aave ecosystem is a system of smart contracts fully controlled by
-        AAVE token holders. AAVE is a governance token that enables holders to
-        participate in the decision-making process for the Aave protocol. The
-        Aave protocol is a decentralized lending platform that enables users to
-        lend and borrow various cryptocurrencies without the need for
-        intermediaries.
+        The Aave ecosystem is a software system of smart contracts fully
+        controlled by AAVE token holders. AAVE is a governance token that
+        enables holders to participate in the decision-making process for the
+        Aave protocol. The Aave protocol is a decentralized liquidity protocol
+        that enables users to supply and borrow on-chain digital tokens.
       </Text>
       <Typography variant="h2" css={{ mb: 20 }}>
-        7. Description of Our Platform
+        7. Description of our interface
       </Typography>
       <Text>
-        Our platform is a standalone utility that provides users with a
+        Our interface is a standalone utility that provides users with a
         convenient and user-friendly interface to interact with the Rescue
         Mission smart contracts deployed on the Ethereum blockchain. It is
-        important to note that the platform is not directly related to the
-        Rescue Mission smart contracts, but serves as an intermediary layer that
-        enables users to easily access and use the smart contracts.
+        important to note that the interface is not directly related to the
+        Rescue Mission smart contracts, it simply serves as a layer to help
+        users to visualize information and build the blockchain transactions
+        that later on they submit to the Ethereum node of their choice.
       </Text>
       <Typography variant="h2" css={{ mb: 20 }}>
         8. User Acknowledgement and Acceptance
       </Typography>
       <Text>
-        By accessing or using our platform, you acknowledge that you understand
+        By accessing or using our interface, you acknowledge that you understand
         the following:
       </Text>
       <Box as="ul" css={{ ml: 20 }}>
@@ -174,13 +198,13 @@ export function TermsAndConditionsModal({
       </Typography>
       <Text>
         We reserve the right to modify these Terms and Conditions at any time
-        and for any reason at our sole discretion.Once any part of the Agreement
-        is updated and in effect, you will be bound by the Terms if you continue
-        to use the platform, including by accessing the Rescue Mission app. It
-        is your responsibility to review these Terms and Conditions periodically
-        to ensure that you are aware of any modifications and understand the
-        terms and conditions that apply to you when you access or use the Rescue
-        Mission app.
+        and for any reason at our sole discretion. Once any part of the
+        Agreement is updated and in effect, you will be bound by the Terms if
+        you continue to use the interface, including by accessing the Rescue
+        Mission interface. It is your responsibility to review these Terms and
+        Conditions periodically to ensure that you are aware of any
+        modifications and understand the terms and conditions that apply to you
+        when you access or use the Rescue Mission interface.
       </Text>
       <Typography variant="h2" css={{ mb: 20 }}>
         10. Non-Profit Declaration
@@ -190,7 +214,8 @@ export function TermsAndConditionsModal({
         way, financially or otherwise, from the Rescue Mission smart contracts
         or this interface used to interact with them. Our engagement with the
         DAO is solely focused on providing software development services for the
-        Rescue Mission smart contracts on the Ethereum blockchain.
+        Rescue Mission smart contracts on the Ethereum blockchain which are
+        completely independent from this tool.
       </Text>
       <Typography variant="h2" css={{ mb: 20 }}>
         11. No Responsibility for User Assets and Tax Obligations
@@ -203,7 +228,7 @@ export function TermsAndConditionsModal({
       </Text>
       <Text>
         The user assumes full responsibility for complying with any and all tax
-        obligations associated with their use of the Rescue Mission app,
+        obligations associated with their use of the Rescue Mission interface,
         including but not limited to taxes, duties, and assessments claimed or
         imposed by any governmental authority. This responsibility includes
         taxes payable as a result of interacting with smart contracts and
@@ -232,34 +257,36 @@ export function TermsAndConditionsModal({
       <Text>
         BGD Labs Technologies is not responsible for any third-party services
         used by users in connection with our interface, including but not
-        limited to wallets, nodes, or other services used to interact with the
-        Ethereum blockchain. We make no representations or warranties concerning
-        the security, functionality, or availability of any third-party
-        services, and users assume all risks associated with the use of such
-        services. BGD Labs Technologies is not responsible for any losses,
-        damages, or liabilities arising from the use of third-party services in
-        connection with our interface.
+        limited to wallets, nodes, or other technologies used to interact with
+        the Ethereum blockchain. We make no representations or warranties
+        concerning the security, functionality, or availability of any
+        third-party services, and users assume all risks associated with the use
+        of such services. BGD Labs Technologies is not responsible for any
+        losses, damages, or liabilities arising from the use of third-party
+        services in connection with our interface.
       </Text>
       <Typography variant="h2" css={{ mb: 20 }}>
         14. User Responsibilities
       </Typography>
       <Text>
-        To access and use the Rescue Mission app, you must comply with this
-        Agreement, applicable third-party policies, and all applicable laws,
-        rules, and regulations. The following conduct is strictly prohibited:
+        To access and use the Rescue Mission interface, you must comply with
+        this Agreement, applicable third-party policies, and all applicable
+        laws, rules, and regulations. The following conduct is strictly
+        prohibited:
       </Text>
       <Box as="ul" css={{ ml: 20 }}>
         <Box as="li" css={{ mb: 12 }}>
           <Text withMargin={false}>
-            Using the Rescue Mission app to engage in or facilitate illegal
-            activities, including but not limited to money laundering, terrorism
-            financing, tax evasion, or the buying or selling illegal drugs,
-            contraband, counterfeit goods, or illegal weapons;
+            Using the Rescue Mission interface to engage in or facilitate
+            illegal activities, including but not limited to money laundering,
+            terrorism financing, tax evasion, or the buying or selling illegal
+            drugs, contraband, counterfeit goods, or illegal weapons;
           </Text>
         </Box>
         <Box as="li" css={{ mb: 12 }}>
           <Text withMargin={false}>
-            Using the Rescue Mission app for unauthorized commercial purposes;
+            Using the Rescue Mission interface for unauthorized commercial
+            purposes;
           </Text>
         </Box>
         <Box as="li" css={{ mb: 12 }}>
@@ -267,49 +294,46 @@ export function TermsAndConditionsModal({
             Uploading or transmitting viruses, worms, Trojan horses, time bombs,
             cancel bots, spiders, malware or any other type of malicious code
             that will or may be used in any way that will affect the
-            functionality or operation of the Rescue Mission app;
+            functionality or operation of the Rescue Mission interface;
           </Text>
         </Box>
         <Box as="li" css={{ mb: 12 }}>
           <Text withMargin={false}>
             Attempting to or actually copying or making unauthorized use of all
-            or any portion of the Rescue Mission app, including by attempting to
-            reverse compile, reformatting or framing, disassemble, reverse
-            engineer any part of the Rescue Mission app;
+            or any portion of the Rescue Mission interface, including by
+            attempting to reverse compile, reformatting or framing, disassemble,
+            reverse engineer any part of the Rescue Mission interface;
           </Text>
         </Box>
         <Box as="li" css={{ mb: 12 }}>
           <Text withMargin={false}>
-            Harvesting or collecting information from the Rescue Mission app for
-            any unauthorized purpose;
+            Harvesting or collecting information from the Rescue Mission
+            interface for any unauthorized purpose;
           </Text>
         </Box>
         <Box as="li" css={{ mb: 12 }}>
           <Text withMargin={false}>
-            Using the Rescue Mission app under false or fraudulent pretenses;
+            Using the Rescue Mission interface under false or fraudulent
+            pretenses;
           </Text>
         </Box>
         <Box as="li" css={{ mb: 12 }}>
           <Text withMargin={false}>
             Interfering with other users’ access to or use of the Rescue Mission
-            app;
+            interface;
           </Text>
         </Box>
         <Box as="li" css={{ mb: 12 }}>
           <Text withMargin={false}>
             Interfering with or circumventing the security features of the
-            Rescue Mission app or any third party’s systems, networks, or
-            resources used in the provision of Rescue Mission app;
+            Rescue Mission interface or any third party’s systems, networks, or
+            resources used in the provision of Rescue Mission interface;
           </Text>
         </Box>
         <Box as="li" css={{ mb: 12 }}>
           <Text withMargin={false}>
-            Engaging in any attack, hack, denial-of-service attack,
-            interference, or exploit of any smart contract in connection with
-            use of the Rescue Mission app (and operations performed by a user
-            that are technically permitted by a smart contract may nevertheless
-            be a violation of our Agreement, including these Terms, and the
-            law); or
+            Engaging in any attack, hack or denial-of-service attempt or
+            interference in relation of the Rescue Mission interface; or
           </Text>
         </Box>
         <Box as="li" css={{ mb: 12 }}>
@@ -322,13 +346,14 @@ export function TermsAndConditionsModal({
         15. Intellectual Property Rights
       </Typography>
       <Text>
-        BGD Labs Technologies owns all intellectual property rights to
-        everything on this interface, including but not limited to its codebase
-        and visual assets, except for those referencing external parties and
-        products. You agree not to use, copy, modify, distribute, or reproduce
-        any portion of the Rescue Mission app, including but not limited to any
-        BGD intellectual property, without the express written permission of
-        BGD.
+        The Intellectual property rights clause can be accessed here:{' '}
+        <Link
+          inNewWindow
+          href="https://github.com/bgd-labs/aave-rescue-mission-interface/blob/main/LICENSE"
+          css={{ textDecoration: 'underline', hover: { opacity: 0.7 } }}>
+          https://github.com/bgd-labs/aave-rescue-mission-interface/blob/main/LICENSE
+        </Link>
+        .
       </Text>
       <Typography variant="h2" css={{ mb: 20 }}>
         16. No Investment Advice
@@ -347,10 +372,10 @@ export function TermsAndConditionsModal({
         17. NO WARRANTIES
       </Typography>
       <Text>
-        THE RESCUE MISSION APP BY BGD LABS TECHNOLOGIES IS PROVIDED "AS IS" AND
-        "AS AVAILABLE," WITHOUT ANY REPRESENTATIONS OR WARRANTIES OF ANY KIND,
-        WHETHER EXPRESS, IMPLIED, OR STATUTORY. WE SPECIFICALLY DISCLAIM ALL
-        IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+        THE RESCUE MISSION INTERFACE BY BGD LABS TECHNOLOGIES IS PROVIDED "AS
+        IS" AND "AS AVAILABLE," WITHOUT ANY REPRESENTATIONS OR WARRANTIES OF ANY
+        KIND, WHETHER EXPRESS, IMPLIED, OR STATUTORY. WE SPECIFICALLY DISCLAIM
+        ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
         PURPOSE. YOU ACKNOWLEDGE AND AGREE THAT YOUR USE OF OUR PRODUCTS IS AT
         YOUR OWN RISK. WE DO NOT GUARANTEE THAT ACCESS TO ANY OF OUR PRODUCTS
         WILL BE CONTINUOUS, UNINTERRUPTED, TIMELY, OR SECURE; THAT THE
@@ -370,16 +395,17 @@ export function TermsAndConditionsModal({
         officers, directors, employees, contractors, agents, and affiliates from
         and against all claims, damages, obligations, losses, liabilities,
         costs, and expenses arising from: (a) your access and use of of Rescue
-        Mission app; (b) your violation of any term or condition of this
+        Mission interface; (b) your violation of any term or condition of this
         Agreement, the right of any third party, or any other applicable law,
         rule, or regulation; (c) any other party's access and use of Rescue
-        Mission app with your assistance or using any device or account that you
-        own or control; (d) any dispute between you and any other user of Rescue
-        Mission app or any of your own customers or users; (e) your breach or
-        alleged breach of the Agreement (including, without limitation, these
-        Terms); (f) your violation of the rights of any third party, including
-        any intellectual property right, publicity, confidentiality, property,
-        or privacy right; (g) any misrepresentation made by you.
+        Mission interface with your assistance or using any device or account
+        that you own or control; (d) any dispute between you and any other user
+        of Rescue Mission interface or any of your own customers or users; (e)
+        your breach or alleged breach of the Agreement (including, without
+        limitation, these Terms); (f) your violation of the rights of any third
+        party, including any intellectual property right, publicity,
+        confidentiality, property, or privacy right; (g) any misrepresentation
+        made by you.
       </Text>
       <Text>
         We reserve the right to assume, at your expense, the exclusive defense
@@ -403,12 +429,6 @@ export function TermsAndConditionsModal({
       <Typography variant="h2" css={{ mb: 20 }}>
         20. Arbitration Agreement and Waiver of Rights, Including Class Actions
       </Typography>
-      <Text>
-        PLEASE READ THIS SECTION CAREFULLY AS IT MAY SIGNIFICANTLY AFFECT YOUR
-        LEGAL RIGHTS, INCLUDING YOUR RIGHT TO FILE A LAWSUIT IN COURT AND TO
-        HAVE A JURY HEAR YOUR CLAIMS. IT CONTAINS PROCEDURES FOR MANDATORY
-        BINDING ARBITRATION AND A CLASS ACTION WAIVER.
-      </Text>
       <Typography
         variant="headline"
         css={{ mb: 12, textDecoration: 'underline' }}>
@@ -422,7 +442,7 @@ export function TermsAndConditionsModal({
         “Disputes”) by engaging in good faith negotiations. The aggrieved party
         must provide a written notice to the other party specifying the nature
         and details of the Dispute. The party receiving such notice shall have
-        thirty (30) days to respond to the notice. Within sixty (60) days after
+        twenty (20) days to respond to the notice. Within sixty (60) days after
         the aggrieved party sent the initial notice, the parties shall meet and
         confer in good faith by videoconference, or by telephone, to try to
         resolve the Dispute. If the parties are unable to resolve the Dispute
