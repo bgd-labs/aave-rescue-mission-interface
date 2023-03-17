@@ -1,5 +1,5 @@
 {
-  "name": "rescue-interface",
+  "name": "aave-rescue-mission-interface",
   "version": "0.1.0",
   "private": true,
   "author": "BGD labs",
@@ -9,6 +9,7 @@
       "url": "https://github.com/Argeare5"
     }
   ],
+  "license": "ISC",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
