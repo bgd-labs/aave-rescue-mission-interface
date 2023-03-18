@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { AppGlobalStyles, MainLayout } from '../src/ui';
+import { Meta } from '../src/ui/components/Meta';
 import Web3Provider from '../src/web3/components/Web3Provider';
 
 type NextPageWithLayout = NextPage & {
@@ -28,10 +29,17 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   }, [router.pathname]);
 
   return (
-    <AppGlobalStyles>
-      <Web3Provider />
-      <MainLayout>{getLayout(<Component {...pageProps} />)}</MainLayout>
-    </AppGlobalStyles>
+    <>
+      <Meta
+        title="Rescue"
+        description="User interface connecting to the Aave Rescue Mission Phase I smart contracts, allowing addresses who sent by mistake tokens to certain contracts of the Aave ecosystem to recover them."
+      />
+
+      <AppGlobalStyles>
+        <Web3Provider />
+        <MainLayout>{getLayout(<Component {...pageProps} />)}</MainLayout>
+      </AppGlobalStyles>
+    </>
   );
 }
 

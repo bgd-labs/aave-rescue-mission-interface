@@ -1,5 +1,3 @@
-// TODO: need fix meta texts
-
 import Head from 'next/head';
 import React from 'react';
 
@@ -32,7 +30,7 @@ export function Meta({ title, description }: MetaProps) {
       <meta
         name="keywords"
         key="keywords"
-        content="Decentralized Finance, DeFi, rescue, Ethereum, assets, erc-20, smart contracts, open finance, trustless, Aave"
+        content="Decentralized Finance, DeFi, rescue, Ethereum, assets, erc-20, smart contracts, open finance, trustless, Aave, BGD"
       />
     </Head>
   );
