@@ -1,6 +1,6 @@
 {
-  "short_name": "Rescue",
-  "name": "Aave rescue",
+  "short_name": "Aave - rescue",
+  "name": "Aave - rescue",
   "description": "User interface connecting to the Aave Rescue Mission Phase I smart contracts, allowing addresses who sent by mistake tokens to certain contracts of the Aave ecosystem to recover them.",
   "iconPath": "rescue.svg",
   "icons": [

@@ -15,11 +15,19 @@ export function Meta({ title, description }: MetaProps) {
       <meta name="description" content={description} key="description" />
       <meta property="og:title" content={`Aave - ${title}`} key="title" />
       <meta
+        property="og:image"
+        content="https://raw.githubusercontent.com/bgd-labs/aave-rescue-mission-interface/main/rescue-icon.png"
+      />
+      <meta
         property="og:description"
         content={description}
         key="ogdescription"
       />
-      <meta name="twitter:site" content="@AaveAave" key="twittersite" />
+      <meta name="twitter:site" content="@bgdlabs" key="twittersite" />
+      <meta
+        name="twitter:image"
+        content="https://raw.githubusercontent.com/bgd-labs/aave-rescue-mission-interface/main/rescue-icon.png"
+      />
       <meta property="twitter:card" content="summary" key="twittercard" />
       <meta name="twitter:title" content={title} key="twittertitle" />
       <meta
