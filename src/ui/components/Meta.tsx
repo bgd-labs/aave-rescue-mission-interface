@@ -29,7 +29,11 @@ export function Meta({ title, description }: MetaProps) {
         content="https://raw.githubusercontent.com/bgd-labs/aave-rescue-mission-interface/main/rescue-icon.png"
       />
       <meta property="twitter:card" content="summary" key="twittercard" />
-      <meta name="twitter:title" content={title} key="twittertitle" />
+      <meta
+        name="twitter:title"
+        content={`Aave - ${title}`}
+        key="twittertitle"
+      />
       <meta
         name="twitter:description"
         content={description}
