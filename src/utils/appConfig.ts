@@ -11,7 +11,12 @@ export const appConfig: {
   providers: Record<number, StaticJsonRpcBatchProvider>;
   contractAddresses: Record<number, string>;
 } = {
-  chainIds: [mainnetChainId, polygonChainId],
+  chainIds: [
+    mainnetChainId,
+    polygonChainId,
+    avalancheChainId,
+    OPMainnetChainId,
+  ],
   providers: {
     [mainnetChainId]:
       chainInfoHelper.providerInstances[mainnetChainId].instance,
