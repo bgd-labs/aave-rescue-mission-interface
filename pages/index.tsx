@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 
 import { useStore } from '../src/store';
 import { GetUserDataForm } from '../src/ui/components/GetUserDataForm';
+import { GetUsersData } from '../src/ui/components/GetUsersData';
 import { InfoView } from '../src/ui/components/InfoView';
 import { InitialView } from '../src/ui/components/InitialView';
+import { RocketLoader } from '../src/ui/components/RocketLoader';
 import { ConnectWalletContent } from '../src/web3/components/wallet/ConnectWalletContent';
 
 export default function Home() {
@@ -15,6 +17,7 @@ export default function Home() {
     getUserData,
     checkedAddress,
     prevAppView,
+    usersDataLoading,
   } = useStore();
 
   useEffect(() => {
@@ -36,11 +39,17 @@ export default function Home() {
   }, [activeWallet?.isActive]);
 
   return (
-    <>
-      {appView === '' && <InitialView />}
-      {appView === 'checkAddress' && <GetUserDataForm />}
-      {appView === 'connectWallet' && <ConnectWalletContent />}
-      {appView === 'info' && <InfoView />}
-    </>
+    <GetUsersData>
+      {usersDataLoading ? (
+        <RocketLoader />
+      ) : (
+        <>
+          {appView === '' && <InitialView />}
+          {appView === 'checkAddress' && <GetUserDataForm />}
+          {appView === 'connectWallet' && <ConnectWalletContent />}
+          {appView === 'info' && <InfoView />}
+        </>
+      )}
+    </GetUsersData>
   );
 }

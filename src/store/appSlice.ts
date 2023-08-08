@@ -1,6 +1,5 @@
 import { TransactionsSlice } from '../transactions/store/transactionsSlice';
-import { appConfig } from '../utils/appConfig';
-import { UserData, usersData } from '../utils/usersMarkleTrees';
+import { UserData } from '../utils/usersMarkleTrees';
 import { IWeb3Slice } from '../web3/store/web3Slice';
 import { StoreSlice } from './types';
 
@@ -25,12 +24,21 @@ export type IAppSlice = {
   checkedAddress: string;
   setCheckedAddress: (value: string) => void;
 
+  usersData: Record<string, UserData[]>;
+  usersDataLoading: boolean;
+  setUsersDataLoading: (value: boolean) => void;
+  setUsersData: (data: Record<string, UserData[]>) => void;
+
   userDataLoading: boolean;
   userData: FormattedUserData[];
   resetUserData: () => void;
   getUserData: (address: string) => Promise<void>;
 
-  claim: (address: string, tokensToClaim: TokenToClaim[]) => Promise<void>;
+  claim: (
+    chainId: number,
+    address: string,
+    tokensToClaim: TokenToClaim[],
+  ) => Promise<void>;
 };
 
 export const createAppSlice: StoreSlice<
@@ -51,25 +59,35 @@ export const createAppSlice: StoreSlice<
     set({ checkedAddress: value });
   },
 
+  usersData: {},
+  usersDataLoading: true,
+  setUsersDataLoading: (value) => set({ usersDataLoading: value }),
+  setUsersData: (data) => {
+    if (!Object.keys(get().usersData).length) {
+      set({ usersData: data });
+    }
+  },
+
   userDataLoading: false,
   userData: [],
   resetUserData: () => {
     set({ userData: [] });
   },
   getUserData: async (address) => {
-    const userData = usersData[address];
+    const userData = get().usersData[address];
     if (userData) {
       set({ userDataLoading: true });
       const formattedUserData = await Promise.all(
         userData.map(async (data) => {
-          const isClaimed = await get().rescueService.isClaimed(
-            data.index,
-            data.distributionId,
-          );
+          // const isClaimed = await get().rescueService.isClaimed(
+          //   data.chainId,
+          //   data.index,
+          //   data.distributionId,
+          // ); // TODO: turn on after contracts addresses gets
 
           return {
             ...data,
-            isClaimed,
+            isClaimed: false, // TODO: remove false
           };
         }),
       );
@@ -81,15 +99,16 @@ export const createAppSlice: StoreSlice<
     set({ userDataLoading: false });
   },
 
-  claim: async (address, tokensToClaim) => {
+  claim: async (chainId, address, tokensToClaim) => {
     const rescueService = get().rescueService;
 
     await get().executeTx({
-      body: () => rescueService.claim(tokensToClaim),
+      body: () => rescueService.claim(chainId, tokensToClaim),
       params: {
         type: 'claim',
-        desiredChainID: appConfig.chainId,
+        desiredChainID: chainId,
         payload: {
+          chainId,
           address,
           tokensToClaim,
         },
