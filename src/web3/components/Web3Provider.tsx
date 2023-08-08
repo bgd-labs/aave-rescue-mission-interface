@@ -12,6 +12,7 @@ export default function Web3Provider() {
         chains: initialChains,
         desiredChainId: appConfig.chainId,
         urls: chainInfoHelper.urls,
+        wcProjectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID || '',
       }}
       useStore={useStore}
     />

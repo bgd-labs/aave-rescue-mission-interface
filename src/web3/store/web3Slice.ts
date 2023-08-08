@@ -33,7 +33,6 @@ export const createWeb3Slice: StoreSlice<IWeb3Slice, TransactionsSlice> = (
       get().connectSigner();
     },
     getChainParameters: chainInfoHelper.getChainParameters,
-    desiredChainID: appConfig.chainId,
   })(set, get),
   provider: appConfig.provider,
   rescueService: initRescueService(appConfig.provider),

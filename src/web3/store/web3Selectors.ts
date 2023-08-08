@@ -1,4 +1,4 @@
-import memoize from 'proxy-memoize';
+import { memoize } from 'proxy-memoize';
 
 import { appConfig } from '../../utils/appConfig';
 import { IWeb3Slice } from './web3Slice';
