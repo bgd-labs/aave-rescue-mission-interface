@@ -1,6 +1,6 @@
 import { Dialog } from '@headlessui/react';
 import { CSS } from '@stitches/react';
-import { ReactNode } from 'react';
+import { MutableRefObject, ReactNode } from 'react';
 
 import CloseIcon from '/public/images/icons/cross.svg';
 
@@ -19,7 +19,7 @@ export interface BasicModalProps {
   withoutOverlap?: boolean;
   withoutAnimationWhenOpen?: boolean;
   contentCss?: CSS;
-  initialFocus?: any;
+  initialFocus?: MutableRefObject<HTMLElement | null>;
 }
 
 export function BasicModal({
