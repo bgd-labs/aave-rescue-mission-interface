@@ -1,6 +1,13 @@
 import React, { useRef } from 'react';
 
 import { useStore } from '../../store';
+import {
+  appConfig,
+  avalancheChainId,
+  mainnetChainId,
+  OPMainnetChainId,
+  polygonChainId,
+} from '../../utils/appConfig';
 import { Box } from '../primitives/Box';
 import { Typography } from '../primitives/Typography';
 import { BasicModal } from './BasicModal';
@@ -80,9 +87,10 @@ export function AboutModal() {
               textDecoration: 'underline',
               hover: { color: '$secondary' },
             }}
-            href="https://etherscan.io/address/0xa88c6D90eAe942291325f9ae3c66f3563B93FE10"
+            href={`https://etherscan.io/address/${appConfig.contractAddresses[mainnetChainId]}`}
             inNewWindow>
-            https://etherscan.io/address/0xa88c6D90eAe942291325f9ae3c66f3563B93FE10
+            https://etherscan.io/address/
+            {appConfig.contractAddresses[mainnetChainId]}
           </Link>
         </li>
         <li>
@@ -92,9 +100,10 @@ export function AboutModal() {
               textDecoration: 'underline',
               hover: { color: '$secondary' },
             }}
-            href="https://polygonscan.com/address/0x7a9ff54a6ee4a21223036890bb8c4ea2d62c686b"
+            href={`https://polygonscan.com/address/${appConfig.contractAddresses[polygonChainId]}`}
             inNewWindow>
-            https://polygonscan.com/address/0x7a9ff54a6ee4a21223036890bb8c4ea2d62c686b
+            https://polygonscan.com/address/
+            {appConfig.contractAddresses[polygonChainId]}
           </Link>
         </li>
         {/* TODO: need Avalanche contract */}
@@ -105,9 +114,10 @@ export function AboutModal() {
               textDecoration: 'underline',
               hover: { color: '$secondary' },
             }}
-            href="https://polygonscan.com/address/0x7a9ff54a6ee4a21223036890bb8c4ea2d62c686b"
+            href={`https://snowtrace.io/address/${appConfig.contractAddresses[avalancheChainId]}`}
             inNewWindow>
-            https://polygonscan.com/address/0x7a9ff54a6ee4a21223036890bb8c4ea2d62c686b
+            https://snowtrace.io/address/
+            {appConfig.contractAddresses[avalancheChainId]}
             TODO: need address
           </Link>
         </li>
@@ -118,9 +128,10 @@ export function AboutModal() {
               textDecoration: 'underline',
               hover: { color: '$secondary' },
             }}
-            href="https://optimistic.etherscan.io/address/0x1685d81212580dd4cda287616c2f6f4794927e18"
+            href={`https://optimistic.etherscan.io/address/${appConfig.contractAddresses[OPMainnetChainId]}`}
             inNewWindow>
-            https://optimistic.etherscan.io/address/0x1685d81212580dd4cda287616c2f6f4794927e18
+            https://optimistic.etherscan.io/address/
+            {appConfig.contractAddresses[OPMainnetChainId]}
           </Link>
         </li>
       </Box>
