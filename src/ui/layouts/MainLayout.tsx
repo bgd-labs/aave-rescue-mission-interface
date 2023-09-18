@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import { useStore } from '../../store';
 import { Box, Flex } from '..';
+import { AboutModal } from '../components/AboutModal';
 import { TermsAndConditionsModal } from '../components/TermsAndConditionsModal';
 import { AppFooter } from './AppFooter';
 import { AppHeader } from './AppHeader';
@@ -157,6 +158,7 @@ export function MainLayout({ children }: MainLayoutProps) {
       </Flex>
 
       <TermsAndConditionsModal isOpen={isModalOpen} setIsOpen={setModalOpen} />
+      <AboutModal />
     </>
   );
 }
