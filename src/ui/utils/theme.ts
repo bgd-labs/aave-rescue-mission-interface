@@ -137,29 +137,6 @@ export const {
   },
 });
 
-// TODO: need change colors when dark colors will be available in design
-export const darkTheme = createTheme({
-  colors: {
-    main: '#1B2030',
-    secondary: '#5C6279',
-    gray: '#D9D9D9',
-    disabled: '#ABB1C5',
-    light: '#E2E5F0',
-    error: '#FF607B',
-    paper: '#FFFFFF',
-    backgroundOverlap: '#292E4199',
-    appBackground: '#FDF5EB',
-    whiteBackground: '#FFFDFA',
-    text: '#1B2030',
-    textSecondary: '#BDBDBD',
-    textDisabled: '#ABB1C5',
-    textWhite: '#FFFFFF',
-    // gradients
-    mainGradientFirst: '#B6509E',
-    mainGradientSecond: '#2EBAC6',
-  },
-});
-
 export const globalStyles = globalCss({
   '*': {
     m: 0,

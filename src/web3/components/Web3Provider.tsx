@@ -9,9 +9,9 @@ export default function Web3Provider() {
       connectorsInitProps={{
         appName: 'AAVE_Rescue',
         chains: internalChains,
-        desiredChainId: mainnetChainId,
+        defaultChainId: mainnetChainId,
         urls: chainInfoHelper.urls,
-        wcProjectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID || '',
+        wcProjectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID,
       }}
       useStore={useStore}
     />

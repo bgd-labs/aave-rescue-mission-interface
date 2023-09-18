@@ -29,8 +29,8 @@ export const appConfig: {
   },
   contractAddresses: {
     [mainnetChainId]: '0xa88c6D90eAe942291325f9ae3c66f3563B93FE10',
-    [polygonChainId]: '', // TODO: need add
+    [polygonChainId]: '0x7a9ff54a6ee4a21223036890bb8c4ea2d62c686b',
     [avalancheChainId]: '', // TODO: need add
-    [OPMainnetChainId]: '', // TODO: need add
+    [OPMainnetChainId]: '0x1685d81212580dd4cda287616c2f6f4794927e18',
   },
 };

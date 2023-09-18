@@ -1,7 +1,7 @@
 import { ThemeProvider } from 'next-themes';
 import React, { ReactNode } from 'react';
 
-import { darkTheme, globalStyles } from '../utils/theme';
+import { globalStyles } from '../utils/theme';
 
 /**
  * Main Layout component which wrapps around the whole app
@@ -14,10 +14,9 @@ export function AppGlobalStyles({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="system"
+      defaultTheme="light"
       value={{
         light: 'light',
-        dark: darkTheme.className,
       }}>
       {children}
     </ThemeProvider>

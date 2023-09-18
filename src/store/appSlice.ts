@@ -79,15 +79,15 @@ export const createAppSlice: StoreSlice<
       set({ userDataLoading: true });
       const formattedUserData = await Promise.all(
         userData.map(async (data) => {
-          // const isClaimed = await get().rescueService.isClaimed(
-          //   data.chainId,
-          //   data.index,
-          //   data.distributionId,
-          // ); // TODO: turn on after contracts addresses gets
+          const isClaimed = await get().rescueService.isClaimed(
+            data.chainId,
+            data.index,
+            data.distributionId,
+          );
 
           return {
             ...data,
-            isClaimed: false, // TODO: remove false
+            isClaimed,
           };
         }),
       );
