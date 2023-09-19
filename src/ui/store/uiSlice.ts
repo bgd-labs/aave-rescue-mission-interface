@@ -6,6 +6,10 @@ export interface IUISlice {
 
   isAboutModalOpen: boolean;
   setIsAboutModalOpen: (value: boolean) => void;
+
+  isAppBlockedByTerms: boolean;
+  checkIsAppBlockedByTerms: () => void;
+  setIsTermsAccept: (value: boolean) => void;
 }
 
 export const createUISlice: StoreSlice<IUISlice> = (set, get) => ({
@@ -17,5 +21,20 @@ export const createUISlice: StoreSlice<IUISlice> = (set, get) => ({
   isAboutModalOpen: false,
   setIsAboutModalOpen: (value) => {
     set({ isAboutModalOpen: value });
+  },
+
+  isAppBlockedByTerms: false,
+  checkIsAppBlockedByTerms: () => {
+    if (localStorage?.getItem('termsAccept') !== 'true') {
+      set({ isAppBlockedByTerms: true });
+    } else {
+      set({ isAppBlockedByTerms: false });
+    }
+  },
+  setIsTermsAccept: (value: boolean) => {
+    if (value) {
+      localStorage?.setItem('termsAccept', 'true');
+      set({ isAppBlockedByTerms: false });
+    }
   },
 });

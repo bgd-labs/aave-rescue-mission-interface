@@ -195,8 +195,13 @@ export const globalStyles = globalCss({
     },
   },
 
-  // only for storybooks
-  '#story--components-spinner--default': {
-    background: '$paper',
+  '#headlessui-portal-root': {
+    '> div': {
+      position: 'relative',
+      zIndex: 4,
+      '&:last-of-type': {
+        zIndex: 3,
+      },
+    },
   },
 });

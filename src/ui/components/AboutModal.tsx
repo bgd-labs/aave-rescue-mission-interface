@@ -24,7 +24,10 @@ export function AboutModal() {
       setIsOpen={setIsAboutModalOpen}
       maxWidth={600}
       withCloseButton>
-      <Typography variant="h1" css={{ mb: 28, textAlign: 'center' }}>
+      <Typography
+        ref={initialFocusRef}
+        variant="h1"
+        css={{ mb: 28, textAlign: 'center' }}>
         About
       </Typography>
       <Typography

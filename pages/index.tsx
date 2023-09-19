@@ -18,7 +18,12 @@ export default function Home() {
     checkedAddress,
     prevAppView,
     usersDataLoading,
+    checkIsAppBlockedByTerms,
   } = useStore();
+
+  useEffect(() => {
+    checkIsAppBlockedByTerms();
+  }, []);
 
   useEffect(() => {
     if (activeWallet) {
