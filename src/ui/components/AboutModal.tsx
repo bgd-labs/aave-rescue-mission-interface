@@ -109,7 +109,6 @@ export function AboutModal() {
             {appConfig.contractAddresses[polygonChainId]}
           </Link>
         </li>
-        {/* TODO: need Avalanche contract */}
         <li>
           Avalanche -{' '}
           <Link
@@ -121,7 +120,6 @@ export function AboutModal() {
             inNewWindow>
             https://snowtrace.io/address/
             {appConfig.contractAddresses[avalancheChainId]}
-            TODO: need address
           </Link>
         </li>
         <li>

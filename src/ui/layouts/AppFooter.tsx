@@ -1,9 +1,7 @@
 import { useStore } from '../../store';
-import { Link } from '../components/Link';
 import { Box } from '../primitives/Box';
 import { Flex } from '../primitives/Flex';
 import { Typography } from '../primitives/Typography';
-import { ROUTES } from '../utils/routes';
 
 export function AppFooter() {
   const { setModalOpen, setIsAboutModalOpen } = useStore();
