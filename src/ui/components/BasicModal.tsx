@@ -78,23 +78,23 @@ export function BasicModal({
           top: 12,
           left: 0,
           right: 0,
-          bottom: 0,
+          bottom: 12,
           alignItems: 'center',
           justifyContent: 'center',
           '@sm': {
             top: 0,
+            bottom: 0,
           },
         }}>
         <Dialog.Panel
           as={Box}
           css={{
             width: '100%',
-            height: '100%',
             m: 8,
             '@media (hover: hover) and (pointer: fine)': {
               animation: `${modalOpen} 0.3s`,
             },
-            '@sm': { maxWidth: maxWidth || 900, height: 'unset' },
+            '@sm': { maxWidth: maxWidth || 900 },
           }}>
           <BoxWith3D
             borderSize={20}
@@ -102,25 +102,19 @@ export function BasicModal({
             wrapperCss={{
               display: 'flex',
               width: '100%',
-              height: 'calc(100% - 8px)',
-              '@sm': {
-                height: '100%',
-              },
+              height: '100%',
               '> div': { width: '100%', height: '100%', display: 'flex' },
             }}
             css={{
+              display: 'block',
               position: 'relative',
               overflowX: 'hidden',
               overflowY: 'auto',
               width: '100%',
-              height: '100%',
-              display: 'flex',
+              maxHeight: 'calc(100vh - 20px)',
               p: '30px 15px 15px',
               ...contentCss,
               '@sm': {
-                display: 'block',
-                maxHeight: 'calc(100vh - 20px)',
-                height: 'unset',
                 maxWidth: maxWidth || 900,
                 p: '50px 30px 30px',
               },
