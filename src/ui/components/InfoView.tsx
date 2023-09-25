@@ -8,7 +8,7 @@ import TxSuccessImage from '/public/images/txSuccess.svg';
 import { selectTxExplorerLink } from '../../../packages/src';
 import { useStore } from '../../store';
 import { useLastTxLocalStatus } from '../../transactions/hooks/useLastTxLocalStatus';
-import { appConfig } from '../../utils/appConfig';
+import { mainnetChainId } from '../../utils/appConfig';
 import { chainInfoHelper } from '../../utils/chains';
 import { Box } from '../primitives/Box';
 import { Flex } from '../primitives/Flex';
@@ -20,7 +20,7 @@ import { ContentWrapper } from './ContentWrapper';
 import { FormattedNumber } from './FormattedNumber';
 import { Link } from './Link';
 import { RocketLoader } from './RocketLoader';
-import { TokenIcon } from './TokenIcon';
+import { symbols, TokenIcon } from './TokenIcon';
 
 export function InfoView() {
   const state = useStore();
@@ -33,10 +33,10 @@ export function InfoView() {
     setCheckedAddress,
     userDataLoading,
     claim,
-    prevAppView,
   } = useStore();
 
   const [wrongAddressError, setWrongAddressError] = useState('');
+  const [txChainId, setTxChainId] = useState(mainnetChainId);
 
   useEffect(() => {
     if (!activeWallet?.isActive) {
@@ -45,6 +45,7 @@ export function InfoView() {
   }, [activeWallet]);
 
   const handleCheckAnotherClick = () => {
+    setTxChainId(mainnetChainId);
     setWrongAddressError('');
     resetUserData();
     setAppView('checkAddress');
@@ -61,6 +62,7 @@ export function InfoView() {
   });
 
   const {
+    txChainId: txChain,
     error,
     setError,
     loading,
@@ -75,12 +77,14 @@ export function InfoView() {
   } = useLastTxLocalStatus({
     type: 'claim',
     payload: {
+      chainId: txChainId,
       address: checkedAddress,
       tokensToClaim,
     },
   });
 
-  const handleClaimClick = async () => {
+  const handleClaimClick = async (chainId: number) => {
+    setTxChainId(chainId);
     if (activeWallet) {
       if (
         activeWallet.accounts[0].toLowerCase() === checkedAddress.toLowerCase()
@@ -90,7 +94,7 @@ export function InfoView() {
           errorMessage:
             'Error during the claim assets, check console for more details',
           callbackFunction: async () =>
-            await claim(checkedAddress, tokensToClaim),
+            await claim(chainId, checkedAddress, tokensToClaim),
         });
       } else {
         setWrongAddressError(
@@ -104,8 +108,11 @@ export function InfoView() {
   };
 
   const filteredUserData = userData.filter((data) => !data.isClaimed);
-  const isCheckAnotherButtonAvailable =
-    prevAppView === 'checkAddress' || !filteredUserData.length;
+  const isMultipleChains =
+    filteredUserData.length &&
+    filteredUserData
+      .map((data) => data.chainId)
+      .filter((value, index, self) => self.indexOf(value) === index).length > 1;
 
   return (
     <>
@@ -124,6 +131,7 @@ export function InfoView() {
                 <Button
                   onClick={() => {
                     setIsTxStart(false);
+                    setTxChainId(mainnetChainId);
                     handleCheckAnotherClick();
                   }}>
                   Close
@@ -138,6 +146,7 @@ export function InfoView() {
                       setIsTxStart(false);
                       setError('');
                       handleCheckAnotherClick();
+                      setTxChainId(mainnetChainId);
                     }}>
                     Close
                   </Button>
@@ -145,6 +154,7 @@ export function InfoView() {
                     onClick={() => {
                       setIsTxStart(false);
                       setError('');
+                      setTxChainId(mainnetChainId);
                     }}>
                     Try again
                   </Button>
@@ -186,7 +196,7 @@ export function InfoView() {
                             ml: index > 0 ? -30 : 0,
                           },
                         }}
-                        key={`${data.index}-${data.distributionId}`}
+                        key={`${data.chainId}-${data.index}-${data.distributionId}`}
                       />
                     );
                   })}
@@ -269,7 +279,7 @@ export function InfoView() {
                 href={`${
                   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                   // @ts-ignore
-                  chainInfoHelper.getChainParameters(appConfig.chainId)
+                  chainInfoHelper.getChainParameters(mainnetChainId)
                     .blockExplorerUrls[0]
                 }/address/${checkedAddress}`}
                 inNewWindow>
@@ -291,17 +301,15 @@ export function InfoView() {
           bottomBlock={
             !userDataLoading && (
               <Flex css={{ alignItems: 'center' }}>
-                {isCheckAnotherButtonAvailable && (
-                  <Button onClick={handleCheckAnotherClick}>
-                    Check another
-                  </Button>
-                )}
-                {!!filteredUserData.length && (
+                <Button onClick={handleCheckAnotherClick}>Check another</Button>
+                {!!filteredUserData.length && !isMultipleChains && (
                   <Button
-                    onClick={handleClaimClick}
+                    onClick={() =>
+                      handleClaimClick(filteredUserData[0].chainId)
+                    }
                     css={{
-                      ml: isCheckAnotherButtonAvailable ? 14 : 0,
-                      '@lg': { ml: isCheckAnotherButtonAvailable ? 24 : 0 },
+                      ml: 14,
+                      '@lg': { ml: 24 },
                     }}
                     loading={loading}>
                     Claim
@@ -322,14 +330,16 @@ export function InfoView() {
                       justifyContent: 'space-between',
                       width: '100%',
                       px: 12,
-                      mb: 8,
+                      mb: 12,
                       '@lg': {
                         px: 18,
-                        mb: 12,
+                        mb: 16,
                       },
                     }}>
                     <Typography>Asset</Typography>
-                    <Typography>Amount to claim</Typography>
+                    <Typography css={{ position: 'relative' }}>
+                      Amount to claim
+                    </Typography>
                   </Flex>
                   <Box
                     css={{
@@ -338,48 +348,118 @@ export function InfoView() {
                       '@lg': { minHeight: 160 },
                     }}>
                     {filteredUserData.map((data) => {
-                      const assetSymbol = data.tokenAmount.split(' ')[1];
+                      const assetSymbolInitial = data.tokenAmount.split(' ')[1];
                       const assetAmount = data.tokenAmount.split(' ')[0];
+                      const splitSymbolByDash = assetSymbolInitial.split('_');
+                      const assetSymbol =
+                        splitSymbolByDash[splitSymbolByDash.length - 1];
+                      const splitSymbolByDot = assetSymbol.split('.');
+                      const finalAssetSymbol = splitSymbolByDot[0];
+
+                      const isAToken = !symbols.find(
+                        (sym) =>
+                          sym.toLowerCase() === finalAssetSymbol.toLowerCase(),
+                      );
 
                       return (
                         <Flex
+                          key={`${data.chainId}-${data.index}-${data.distributionId}`}
                           css={{
-                            background: '$paper',
-                            borderRadius: '$1',
-                            border: '1px solid $main',
-                            alignItems: 'center',
+                            alignItems: 'stretch',
                             justifyContent: 'space-between',
-                            mb: 5,
-                            px: 12,
-                            py: 6,
+                            mb: 12,
                             '@sm': {
-                              mb: 6,
-                              py: 7,
+                              mb: 16,
                             },
                             '@lg': {
-                              mb: 7,
-                              px: 18,
-                              py: 8,
+                              mb: 20,
                             },
-                          }}
-                          key={`${data.index}-${data.distributionId}`}>
-                          <Flex css={{ alignItems: 'center' }}>
-                            <TokenIcon
-                              symbol={assetSymbol}
+                          }}>
+                          <Flex
+                            css={{
+                              width: '100%',
+                              position: 'relative',
+                              background: '$paper',
+                              borderRadius: '$1',
+                              border: '1px solid $main',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              px: 12,
+                              py: 6,
+                              '@sm': {
+                                py: 7,
+                              },
+                              '@lg': {
+                                px: 18,
+                                py: 8,
+                              },
+                            }}>
+                            <Flex
                               css={{
-                                mr: 8,
-                                size: 24,
-                                '@sm': { mr: 12 },
-                                '@lg': { size: 30 },
-                              }}
+                                px: 5,
+                                py: 2,
+                                background: '$main',
+                                position: 'absolute',
+                                right: -1,
+                                bottom: 'calc(100% - 7px)',
+                                zIndex: 2,
+                                borderTopRightRadius: '$1',
+                                color: '$textWhite',
+                              }}>
+                              <Typography variant="descriptor">
+                                {
+                                  chainInfoHelper.getChainParameters(
+                                    data.chainId,
+                                  ).chainName
+                                }
+                              </Typography>
+                            </Flex>
+
+                            <Flex css={{ alignItems: 'center' }}>
+                              <TokenIcon
+                                symbol={finalAssetSymbol}
+                                css={{
+                                  mr: 8,
+                                  size: 24,
+                                  '@sm': { mr: 12 },
+                                  '@lg': { size: 30 },
+                                }}
+                              />
+                              <Typography>
+                                {isAToken
+                                  ? 'a' +
+                                    finalAssetSymbol.substring(1).toUpperCase()
+                                  : finalAssetSymbol.toUpperCase()}
+                              </Typography>
+                            </Flex>
+                            <FormattedNumber
+                              value={assetAmount}
+                              variant="h1"
+                              visibleDecimals={4}
                             />
-                            <Typography>{assetSymbol}</Typography>
                           </Flex>
-                          <FormattedNumber
-                            value={assetAmount}
-                            variant="h1"
-                            visibleDecimals={4}
-                          />
+
+                          {isMultipleChains && (
+                            <Button
+                              onClick={() => handleClaimClick(data.chainId)}
+                              css={{
+                                minWidth: 70,
+                                height: 'auto',
+                                ml: 5,
+                                '.Button__title': {
+                                  fontWeight: '500',
+                                  fontSize: 12,
+                                  lineHeight: '15px',
+                                },
+                              }}
+                              loading={
+                                (data.chainId === (txChain || txChainId) &&
+                                  loading) ||
+                                false
+                              }>
+                              Claim
+                            </Button>
+                          )}
                         </Flex>
                       );
                     })}

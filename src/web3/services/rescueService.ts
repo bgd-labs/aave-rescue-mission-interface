@@ -13,31 +13,34 @@ export type TokenClaimStruct = {
 };
 
 export class RescueService {
-  private rpcProvider: providers.JsonRpcBatchProvider;
   private signer?: providers.JsonRpcSigner;
 
-  private rescueContract: IAaveMerkleDistributor;
+  private rescueContracts: Record<number, IAaveMerkleDistributor> = {};
 
-  constructor(rpcProvider: providers.JsonRpcBatchProvider) {
-    this.rpcProvider = rpcProvider;
+  constructor() {
+    const initialRescueContracts: Record<number, IAaveMerkleDistributor> = {};
+    appConfig.chainIds.forEach((chainId) => {
+      const contractAddress = appConfig.contractAddresses[chainId];
+      initialRescueContracts[chainId] = IAaveMerkleDistributor__factory.connect(
+        contractAddress,
+        appConfig.providers[chainId],
+      );
+    });
 
-    this.rescueContract = IAaveMerkleDistributor__factory.connect(
-      appConfig.contractAddress,
-      this.rpcProvider,
-    );
+    this.rescueContracts = initialRescueContracts;
   }
   connectSigner(signer: providers.JsonRpcSigner) {
     this.signer = signer;
   }
 
-  async isClaimed(index: number, distributionId: number) {
-    return await this.rescueContract.isClaimed(index, distributionId);
+  async isClaimed(chainId: number, index: number, distributionId: number) {
+    return await this.rescueContracts[chainId].isClaimed(index, distributionId);
   }
 
-  async claim(tokensForClaim: TokenClaimStruct[]) {
-    let connectedRescue = this.rescueContract;
+  async claim(chainId: number, tokensForClaim: TokenClaimStruct[]) {
+    let connectedRescue = this.rescueContracts[chainId];
     if (this.signer) {
-      connectedRescue = this.rescueContract.connect(this.signer);
+      connectedRescue = this.rescueContracts[chainId].connect(this.signer);
     }
     return connectedRescue.claim(tokensForClaim);
   }

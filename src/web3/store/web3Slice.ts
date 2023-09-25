@@ -1,9 +1,6 @@
-import { providers } from 'ethers';
-
 import { createWalletSlice, IWalletSlice } from '../../../packages/src';
 import { StoreSlice } from '../../store/types';
 import { TransactionsSlice } from '../../transactions/store/transactionsSlice';
-import { appConfig } from '../../utils/appConfig';
 import { chainInfoHelper } from '../../utils/chains';
 import { RescueService } from '../services/rescueService';
 
@@ -12,16 +9,8 @@ import { RescueService } from '../services/rescueService';
  * change provider, trigger data refetch if provider changed and have globally available instances of rpcs and data providers
  */
 export type IWeb3Slice = IWalletSlice & {
-  provider: providers.JsonRpcBatchProvider;
   rescueService: RescueService;
-
   connectSigner: () => void;
-};
-
-export const initRescueService = (
-  govCoreProvider: providers.JsonRpcBatchProvider,
-) => {
-  return new RescueService(govCoreProvider);
 };
 
 export const createWeb3Slice: StoreSlice<IWeb3Slice, TransactionsSlice> = (
@@ -33,11 +22,8 @@ export const createWeb3Slice: StoreSlice<IWeb3Slice, TransactionsSlice> = (
       get().connectSigner();
     },
     getChainParameters: chainInfoHelper.getChainParameters,
-    desiredChainID: appConfig.chainId,
   })(set, get),
-  provider: appConfig.provider,
-  rescueService: initRescueService(appConfig.provider),
-
+  rescueService: new RescueService(),
   connectSigner() {
     const activeWallet = get().activeWallet;
     if (activeWallet?.signer) {

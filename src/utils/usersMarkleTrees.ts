@@ -6,6 +6,17 @@ export type UserData = {
   proof: string[];
   index: number;
   distributionId: number;
+  chainId: number;
 };
 
-export const usersData: Record<string, UserData[]> = usersMerkleTrees;
+export const usersDataV1: Record<string, UserData[]> = Object.entries(
+  usersMerkleTrees,
+).reduce(
+  (a, v) => ({
+    ...a,
+    [v[0]]: v[1].map((d) => {
+      return { ...d, chainId: 1 };
+    }),
+  }),
+  {},
+);

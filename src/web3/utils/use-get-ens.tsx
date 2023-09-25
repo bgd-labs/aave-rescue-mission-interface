@@ -2,9 +2,9 @@ import makeBlockie from 'ethereum-blockies-base64';
 import { utils } from 'ethers';
 import { useEffect, useState } from 'react';
 
-import { appConfig } from '../../utils/appConfig';
+import { appConfig, mainnetChainId } from '../../utils/appConfig';
 
-const mainnetProvider = appConfig.provider;
+const mainnetProvider = appConfig.providers[mainnetChainId];
 
 interface EnsResponse {
   name?: string;

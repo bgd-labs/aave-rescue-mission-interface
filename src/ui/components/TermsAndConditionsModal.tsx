@@ -1,5 +1,12 @@
-import { ReactNode, useRef } from 'react';
+import React, { ReactNode, useRef } from 'react';
 
+import {
+  appConfig,
+  avalancheChainId,
+  mainnetChainId,
+  OPMainnetChainId,
+  polygonChainId,
+} from '../../utils/appConfig';
 import { Box, Link, Typography } from '..';
 import { BasicModal } from './BasicModal';
 
@@ -46,7 +53,7 @@ export function TermsAndConditionsModal({
         1. Purpose of the Agreement
       </Typography>
       <Text>Welcome to the Rescue Mission interface!</Text>
-      <Text>Effective Date: 17 March 2023</Text>
+      <Text>Effective Date: 20 September 2023</Text>
       <Text>
         The Rescue Mission interface is brought to you by BGD Labs Technologies
         LLC (“BGD Labs Technologies”, “we,” “us,” or “our”). Our interface
@@ -96,17 +103,59 @@ export function TermsAndConditionsModal({
         Aave Protocol smart contracts.
       </Text>
       <Text>The Rescue Mission smart contracts:</Text>
-      <Box as="ul" css={{ ml: 20 }}>
-        <Box as="li" css={{ mb: 12 }}>
-          <Text withMargin={false}>
-            <Link
-              inNewWindow
-              href="https://etherscan.io/address/0xa88c6D90eAe942291325f9ae3c66f3563B93FE10"
-              css={{ textDecoration: 'underline', hover: { opacity: 0.7 } }}>
-              https://etherscan.io/address/0xa88c6D90eAe942291325f9ae3c66f3563B93FE10
-            </Link>
-          </Text>
-        </Box>
+      <Box as="ul" css={{ ml: 20, li: { mb: 12 } }}>
+        <li>
+          Ethereum -{' '}
+          <Link
+            css={{
+              textDecoration: 'underline',
+              hover: { color: '$secondary' },
+            }}
+            href={`https://etherscan.io/address/${appConfig.contractAddresses[mainnetChainId]}`}
+            inNewWindow>
+            https://etherscan.io/address/
+            {appConfig.contractAddresses[mainnetChainId]}
+          </Link>
+        </li>
+        <li>
+          Polygon -{' '}
+          <Link
+            css={{
+              textDecoration: 'underline',
+              hover: { color: '$secondary' },
+            }}
+            href={`https://polygonscan.com/address/${appConfig.contractAddresses[polygonChainId]}`}
+            inNewWindow>
+            https://polygonscan.com/address/
+            {appConfig.contractAddresses[polygonChainId]}
+          </Link>
+        </li>
+        <li>
+          Avalanche -{' '}
+          <Link
+            css={{
+              textDecoration: 'underline',
+              hover: { color: '$secondary' },
+            }}
+            href={`https://snowtrace.io/address/${appConfig.contractAddresses[avalancheChainId]}`}
+            inNewWindow>
+            https://snowtrace.io/address/
+            {appConfig.contractAddresses[avalancheChainId]}
+          </Link>
+        </li>
+        <li>
+          Optimism -{' '}
+          <Link
+            css={{
+              textDecoration: 'underline',
+              hover: { color: '$secondary' },
+            }}
+            href={`https://optimistic.etherscan.io/address/${appConfig.contractAddresses[OPMainnetChainId]}`}
+            inNewWindow>
+            https://optimistic.etherscan.io/address/
+            {appConfig.contractAddresses[OPMainnetChainId]}
+          </Link>
+        </li>
       </Box>
       <Text>
         AAVE holder community has to approve the activation of the smart
@@ -115,7 +164,7 @@ export function TermsAndConditionsModal({
       <Box as="ul" css={{ ml: 20 }}>
         <Box as="li" css={{ mb: 12 }}>
           <Text withMargin={false}>
-            Rescue Mission Phase 1 Short Executor:
+            Rescue Mission Phase 1 Short Executor:{' '}
             <Link
               inNewWindow
               href="https://app.aave.com/governance/proposal/165/"
@@ -124,14 +173,26 @@ export function TermsAndConditionsModal({
             </Link>
           </Text>
         </Box>
+
         <Box as="li" css={{ mb: 12 }}>
           <Text withMargin={false}>
-            Rescue Mission Phase 1 Long Executor:
+            Rescue Mission Phase 1 Long Executor:{' '}
             <Link
               inNewWindow
               href="https://app.aave.com/governance/proposal/166/"
               css={{ textDecoration: 'underline', hover: { opacity: 0.7 } }}>
               https://app.aave.com/governance/proposal/166/
+            </Link>
+          </Text>
+        </Box>
+        <Box as="li" css={{ mb: 12 }}>
+          <Text withMargin={false}>
+            Rescue Mission Phase 2, 3 Short Executor:{' '}
+            <Link
+              inNewWindow
+              href="https://app.aave.com/governance/proposal/324/"
+              css={{ textDecoration: 'underline', hover: { opacity: 0.7 } }}>
+              https://app.aave.com/governance/proposal/324/
             </Link>
           </Text>
         </Box>

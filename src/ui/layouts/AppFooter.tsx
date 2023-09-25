@@ -1,11 +1,10 @@
 import { useStore } from '../../store';
-import { Link } from '../components/Link';
+import { Box } from '../primitives/Box';
 import { Flex } from '../primitives/Flex';
 import { Typography } from '../primitives/Typography';
-import { ROUTES } from '../utils/routes';
 
 export function AppFooter() {
-  const { setModalOpen } = useStore();
+  const { setModalOpen, setIsAboutModalOpen } = useStore();
 
   return (
     <Flex
@@ -16,23 +15,17 @@ export function AppFooter() {
         justifyContent: 'center',
         '@lg': { mt: 37 },
       }}>
-      <Link href={ROUTES.about} css={{ hover: { opacity: 0.7 } }} inNewWindow>
+      <Box
+        as="button"
+        type="button"
+        onClick={() => setIsAboutModalOpen(true)}
+        css={{ hover: { opacity: 0.7 } }}>
         <Typography
           variant="descriptorAccent"
           css={{ color: '$textSecondary' }}>
           About
         </Typography>
-      </Link>
-      <Link
-        href={ROUTES.gitHub}
-        css={{ ml: 15, hover: { opacity: 0.7 } }}
-        inNewWindow>
-        <Typography
-          variant="descriptorAccent"
-          css={{ color: '$textSecondary' }}>
-          Github
-        </Typography>
-      </Link>
+      </Box>
       <Typography
         as="button"
         type="button"

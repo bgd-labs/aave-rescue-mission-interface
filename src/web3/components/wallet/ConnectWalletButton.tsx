@@ -6,9 +6,8 @@ import { useStore } from '../../../store';
 import { Box, Button, Flex, Image, Link, Typography } from '../../../ui';
 import { CustomSkeleton } from '../../../ui/components/CustomSkeleton';
 import { textCenterEllipsis } from '../../../ui/utils/text-center-ellipsis';
-import { appConfig } from '../../../utils/appConfig';
+import { mainnetChainId } from '../../../utils/appConfig';
 import { chainInfoHelper } from '../../../utils/chains';
-import { selectActiveWallet } from '../../store/web3Selectors';
 import { useGetEns } from '../../utils/use-get-ens';
 
 interface ConnectWalletButtonProps {
@@ -16,12 +15,14 @@ interface ConnectWalletButtonProps {
 }
 
 export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
-  const { walletActivating, getActiveAddress, disconnectActiveWallet } =
-    useStore();
+  const {
+    activeWallet,
+    walletActivating,
+    getActiveAddress,
+    disconnectActiveWallet,
+  } = useStore();
 
   const [loading, setLoading] = useState(true);
-
-  const activeWallet = useStore(selectActiveWallet);
 
   const isActive = activeWallet?.isActive;
   const activeAddress = getActiveAddress() || '';
@@ -99,8 +100,9 @@ export function ConnectWalletButton({ onClick }: ConnectWalletButtonProps) {
                   href={`${
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
-                    chainInfoHelper.getChainParameters(appConfig.chainId)
-                      .blockExplorerUrls[0]
+                    chainInfoHelper.getChainParameters(
+                      activeWallet?.chainId || mainnetChainId,
+                    ).blockExplorerUrls[0]
                   }/address/${activeAddress}`}
                   inNewWindow>
                   <Typography

@@ -8,16 +8,13 @@ import { IAppSlice, TokenToClaim } from '../../store/appSlice';
 import { appConfig } from '../../utils/appConfig';
 import { IWeb3Slice } from '../../web3/store/web3Slice';
 
-const providers = {
-  [appConfig.chainId]: appConfig.provider,
-};
-
 type ClaimTx = BaseTx & {
   type: 'claim';
   status?: number;
   pending: boolean;
   walletType: WalletType;
   payload: {
+    chainId: number;
     address: string;
     tokensToClaim: TokenToClaim[];
   };
@@ -39,6 +36,6 @@ export const createTransactionsSlice: StoreSlice<
           break;
       }
     },
-    defaultProviders: providers,
+    defaultProviders: appConfig.providers,
   })(set, get),
 });
