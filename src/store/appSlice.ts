@@ -60,7 +60,7 @@ export const createAppSlice: StoreSlice<
   },
 
   usersData: {},
-  usersDataLoading: true,
+  usersDataLoading: false,
   setUsersDataLoading: (value) => set({ usersDataLoading: value }),
   setUsersData: (data) => {
     if (!Object.keys(get().usersData).length) {
