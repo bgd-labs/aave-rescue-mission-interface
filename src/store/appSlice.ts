@@ -78,7 +78,7 @@ export const createAppSlice: StoreSlice<
     if (userData) {
       set({ userDataLoading: true });
       const formattedUserData = await Promise.all(
-        userData.map(async (data) => {
+        userData.map(async (data: UserData) => {
           const isClaimed = await get().rescueService.isClaimed(
             data.chainId,
             data.index,
